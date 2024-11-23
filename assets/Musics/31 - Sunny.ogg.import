@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d0k4ebqjvqfu1"
+path="res://.godot/imported/31 - Sunny.ogg-f0976a0399dbbbe80ae5109f9408848b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Musics/31 - Sunny.ogg"
+dest_files=["res://.godot/imported/31 - Sunny.ogg-f0976a0399dbbbe80ae5109f9408848b.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

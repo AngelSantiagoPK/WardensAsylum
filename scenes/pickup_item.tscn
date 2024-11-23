@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpgmorog7pln8"]
+
+[ext_resource type="Script" path="res://scripts/pickup_item.gd" id="1_fcatf"]
+[ext_resource type="Texture2D" uid="uid://vrhcfbb6sut1" path="res://assets/Items/Weapons/Shield/shield_front_view.png" id="2_bp7xg"]
+[ext_resource type="Shape2D" uid="uid://lbh86pchjjsj" path="res://resources/weapons/shield/shield_collision_detection_shape.tres" id="3_wmhg5"]
+
+[node name="PickupItem" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_fcatf")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_bp7xg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = ExtResource("3_wmhg5")

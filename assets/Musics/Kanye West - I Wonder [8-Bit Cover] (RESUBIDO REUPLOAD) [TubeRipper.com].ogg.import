@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dp6frrospemi0"
+path="res://.godot/imported/Kanye West - I Wonder [8-Bit Cover] (RESUBIDO REUPLOAD) [TubeRipper.com].ogg-163bf141a00e257961c911334079ebe5.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Musics/Kanye West - I Wonder [8-Bit Cover] (RESUBIDO REUPLOAD) [TubeRipper.com].ogg"
+dest_files=["res://.godot/imported/Kanye West - I Wonder [8-Bit Cover] (RESUBIDO REUPLOAD) [TubeRipper.com].ogg-163bf141a00e257961c911334079ebe5.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

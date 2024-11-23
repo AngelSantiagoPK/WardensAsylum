@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bnh4lo7qt8vhh"
+path="res://.godot/imported/10 - Dark Castle.ogg-32ac1889a209c3f0ebb36e87d954528c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Musics/10 - Dark Castle.ogg"
+dest_files=["res://.godot/imported/10 - Dark Castle.ogg-32ac1889a209c3f0ebb36e87d954528c.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
