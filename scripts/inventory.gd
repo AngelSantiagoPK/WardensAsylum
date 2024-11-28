@@ -6,6 +6,8 @@ class_name Inventory
 @onready var on_screen_ui: OnScreenUI = $"../OnScreenUi"
 @onready var combat_system: CombatSystem = $"../CombatSystem"
 @onready var animated_sprite_2d: AnimationController = $"../AnimatedSprite2D"
+signal jutsu_activated(index: int)
+
 
 const PICKUP_ITEM_SCENE = preload("res://scenes/pickup_item.tscn")
 
@@ -13,18 +15,17 @@ const PICKUP_ITEM_SCENE = preload("res://scenes/pickup_item.tscn")
 @export var items: Array[InventoryItem] = []
 
 var taken_inventory_slots_count: int = 0
-
+var selected_jutsu_index = -1
 
 func _ready() -> void:
 	inventory_ui.equip_item.connect(on_item_equipped)
 	inventory_ui.drop_item_on_the_ground.connect(on_item_dropped)
-
+	inventory_ui.jutsu_slot_clicked.connect(on_jutsu_slot_clicked)
 
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("inventory_toggle"):
 		inventory_ui.toggle()
-
 
 
 
@@ -74,13 +75,13 @@ func on_item_equipped(index: int, slot_to_equip):
 	on_screen_ui.equip_item(item_to_equip, slot_to_equip)
 	combat_system.set_active_weapon(item_to_equip.weapon_item, slot_to_equip)
 
-
+	check_jutsu_ui_visibility()
 
 func on_item_dropped(index: int):
 	clear_inventory_slot(index)
 	eject_item_to_ground(index)
 
-
+	check_jutsu_ui_visibility()
 
 func clear_inventory_slot(index: int):
 	# prevents players from dropping their cakes and eating them too (weapon drops)
@@ -126,3 +127,23 @@ func eject_item_to_ground(index):
 		on_screen_ui.left_hand_slot.set_equipment_texture(null)
 	
 	items[index] = null
+
+
+
+func on_jutsu_slot_clicked(index: int):
+	selected_jutsu_index = index
+	inventory_ui.set_selected_jutsu_slot(selected_jutsu_index)
+	jutsu_activated.emit(index)
+	
+	
+	
+func check_jutsu_ui_visibility():
+	var should_show_magic_ui = (combat_system.left_weapon != null and \
+	combat_system.left_weapon.attack_type == "Magic") or \
+	(combat_system.right_weapon != null and \
+	combat_system.right_weapon.attack_type == "Magic")
+	inventory_ui.toggle_jutsu_ui(should_show_magic_ui)
+	if should_show_magic_ui == false:
+		on_screen_ui.toggle_jutsu_slot(false, null)
+	
+	

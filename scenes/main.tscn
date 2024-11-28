@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://p7ypnpjv67gl"]
+[gd_scene load_steps=9 format=4 uid="uid://p7ypnpjv67gl"]
 
 [ext_resource type="TileSet" uid="uid://ch8cmv46bdq6i" path="res://tiles/tileset.tres" id="1_nbxoa"]
 [ext_resource type="PackedScene" uid="uid://rw8y3keu1b2i" path="res://resources/player/player.tscn" id="2_k51nj"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://drsgh8m1qfebx" path="res://resources/gold_coin/gold_coin.tres" id="4_yqsue"]
 [ext_resource type="Resource" uid="uid://bxx2oc55jb6fj" path="res://resources/weapons/sword/sword_inventory_item.tres" id="5_4r8c2"]
 [ext_resource type="AudioStream" uid="uid://dp6frrospemi0" path="res://assets/Musics/Kanye West - I Wonder [8-Bit Cover] (RESUBIDO REUPLOAD) [TubeRipper.com].ogg" id="5_5te1x"]
+[ext_resource type="Resource" uid="uid://b5uobfteat2td" path="res://resources/weapons/scroll/scroll_inventory_item.tres" id="5_kvpmq"]
 
 [node name="main" type="Node"]
 
@@ -36,7 +37,7 @@ stacks = 88
 
 [node name="PickupItem2" parent="PickUpItems" instance=ExtResource("3_kbvg0")]
 position = Vector2(215, -359)
-inventory_item = ExtResource("4_yqsue")
+inventory_item = ExtResource("5_kvpmq")
 stacks = 12
 
 [node name="PickupItem3" parent="PickUpItems" instance=ExtResource("3_kbvg0")]

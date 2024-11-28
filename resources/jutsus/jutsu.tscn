@@ -1,0 +1,99 @@
+[gd_scene load_steps=16 format=3 uid="uid://cwnf22onaerju"]
+
+[ext_resource type="Script" path="res://resources/jutsus/jutsu.gd" id="1_iavq2"]
+[ext_resource type="Texture2D" uid="uid://b653yfscrv4f7" path="res://assets/FX/Magic/Aura/SpriteSheetPurple.png" id="2_r8osl"]
+[ext_resource type="Texture2D" uid="uid://dbl3621vn0svb" path="res://assets/FX/Projectile/Fireball.png" id="3_61vkq"]
+[ext_resource type="Texture2D" uid="uid://b5rlb57njnkkg" path="res://assets/FX/Projectile/Kunai.png" id="4_r8j8c"]
+[ext_resource type="Shape2D" uid="uid://cfofap03t5nmr" path="res://resources/jutsus/heal/heal_collision_shape.tres" id="5_5i0qx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qq7x0"]
+atlas = ExtResource("3_61vkq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7ld3"]
+atlas = ExtResource("3_61vkq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4klp0"]
+atlas = ExtResource("3_61vkq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skom6"]
+atlas = ExtResource("3_61vkq")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eln81"]
+atlas = ExtResource("2_r8osl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f82yy"]
+atlas = ExtResource("2_r8osl")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qoq66"]
+atlas = ExtResource("2_r8osl")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05asa"]
+atlas = ExtResource("2_r8osl")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x10lb"]
+atlas = ExtResource("4_r8j8c")
+region = Rect2(0, 0, 14, 5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b3cre"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qq7x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7ld3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4klp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skom6")
+}],
+"loop": true,
+"name": &"fireball",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eln81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f82yy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qoq66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05asa")
+}],
+"loop": false,
+"name": &"heal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x10lb")
+}],
+"loop": true,
+"name": &"kunai",
+"speed": 5.0
+}]
+
+[node name="Spell" type="Area2D"]
+script = ExtResource("1_iavq2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_b3cre")
+animation = &"heal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = ExtResource("5_5i0qx")

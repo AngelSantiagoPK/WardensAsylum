@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://bux5o3y3lygfj"]
+[gd_scene load_steps=6 format=3 uid="uid://bux5o3y3lygfj"]
 
 [ext_resource type="Script" path="res://scripts/inventory_slot.gd" id="1_wsdlo"]
 [ext_resource type="Texture2D" uid="uid://clfe1ycef186g" path="res://assets/Ui/Dialog/FacesetBox.png" id="2_xawot"]
 [ext_resource type="Theme" uid="uid://d7ptudjtc0c7" path="res://themes/text_theme.tres" id="3_3k1l1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_husp3"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.0313726, 0.14902, 1)
+
+[sub_resource type="Theme" id="Theme_saak4"]
+selected/base_type = &"Button"
+selected/styles/normal = SubResource("StyleBoxFlat_husp3")
 
 [node name="InventorySlot" type="VBoxContainer"]
 script = ExtResource("1_wsdlo")
@@ -45,6 +57,7 @@ custom_minimum_size = Vector2(60, 60)
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
+theme = SubResource("Theme_saak4")
 
 [node name="StacksLabel" type="Label" parent="NinePatchRect"]
 layout_mode = 2
@@ -68,3 +81,5 @@ theme_override_font_sizes/font_size = 16
 [node name="PriceLabel" type="Label" parent="."]
 visible = false
 layout_mode = 2
+
+[connection signal="pressed" from="NinePatchRect/onClickButton" to="." method="_on_on_click_button_pressed"]

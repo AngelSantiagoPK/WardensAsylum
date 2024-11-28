@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://rw8y3keu1b2i"]
+[gd_scene load_steps=35 format=3 uid="uid://rw8y3keu1b2i"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ncqe7"]
 [ext_resource type="Texture2D" uid="uid://crkdiyxx2khl0" path="res://assets/Actor/Characters/Knight/SpriteSheet.png" id="1_qxfs4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/inventory.gd" id="6_7c11i"]
 [ext_resource type="PackedScene" uid="uid://mqcaccn11ief" path="res://resources/UI/on_screen_ui.tscn" id="7_r5k04"]
 [ext_resource type="Script" path="res://resources/player/combat_system.gd" id="8_x7ohc"]
+[ext_resource type="Script" path="res://resources/player/jutsu_system.gd" id="9_eglbx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iabce"]
 atlas = ExtResource("1_qxfs4")
@@ -305,6 +306,9 @@ collision_layer = 16
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CombatSystem/LeftHandWeaponSprite/Area2D"]
+
+[node name="JutsuSystem" type="Node" parent="."]
+script = ExtResource("9_eglbx")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -40,7 +40,7 @@ visible = false
 layout_mode = 2
 slot_name = "POTION"
 
-[node name="SpellSlot" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_8olpk")]
+[node name="JutsuSlot" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_8olpk")]
 visible = false
 layout_mode = 2
-slot_name = "SPELL"
+slot_name = "JUTSU"

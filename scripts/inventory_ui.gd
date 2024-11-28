@@ -4,8 +4,17 @@ class_name Inventory_UI
 
 signal equip_item(index: int, slot_to_equip)
 signal drop_item_on_the_ground(index: int)
+signal jutsu_slot_clicked(index: int)
 
 @onready var grid_container: GridContainer = $MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/GridContainer
+@onready var jutsu_slots: Array[InventorySlot] = [
+	$"%FireballSlot",
+	$"%KunaiSlot",
+	$"%HealSlot"
+]
+@onready var jutsu_ui: VBoxContainer = %"Jutsu Ui"
+
+
 const INVENTORY_SLOT_SCENE = preload("res://resources/UI/inventory_slot.tscn")
 
 @export var size = 8
@@ -23,6 +32,9 @@ func _ready():
 		inventory_slot.equip_item.connect(func(slot_to_equip: String): equip_item.emit(i, slot_to_equip))
 		inventory_slot.drop_item.connect(func (): drop_item_on_the_ground.emit(i))
 
+	for i in jutsu_slots.size():
+		# bind is an alternative to writing an inline func()
+		jutsu_slots[i].slot_clicked.connect(on_jutsu_slot_clicked.bind(i))
 
 
 
@@ -59,3 +71,18 @@ func clear_slot_at_index(index: int):
 	grid_container.add_child(empty_inventory_slot)
 	grid_container.move_child(empty_inventory_slot, index)
 	
+
+
+func on_jutsu_slot_clicked(index: int):
+	jutsu_slot_clicked.emit(index)
+	
+	
+	
+func set_selected_jutsu_slot(index: int):
+	for i in jutsu_slots.size():
+		jutsu_slots[i].toggle_button_selected_variation(index == i)
+
+
+
+func toggle_jutsu_ui(is_visible: bool):
+	jutsu_ui.visible = is_visible

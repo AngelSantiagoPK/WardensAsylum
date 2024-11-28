@@ -19,7 +19,8 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/mode=2
+window/size/always_on_top=true
+window/size/extend_to_title=true
 window/stretch/scale=2.0
 
 [editor]
