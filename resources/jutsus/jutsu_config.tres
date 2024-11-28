@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="Spell_Config" load_steps=2 format=3 uid="uid://c80q6ho5jrmcq"]
+
+[ext_resource type="Script" path="res://scripts/jutsu_config.gd" id="1_aungx"]
+
+[resource]
+script = ExtResource("1_aungx")

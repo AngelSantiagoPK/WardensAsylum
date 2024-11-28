@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=5 format=3 uid="uid://b5uobfteat2td"]
+
+[ext_resource type="Shape2D" uid="uid://dc7kgtv3vngj7" path="res://resources/weapons/scroll/scroll_collision_shape.tres" id="1_01wmu"]
+[ext_resource type="Script" path="res://scripts/inventory_item.gd" id="1_wqqvq"]
+[ext_resource type="Texture2D" uid="uid://dud0sktbqm7mo" path="res://assets/Items/Scroll/ScrollEmpty.png" id="3_5v6wx"]
+[ext_resource type="Resource" uid="uid://dry5fqehyryly" path="res://resources/weapons/scroll/scroll_weapon_item.tres" id="4_kjqwt"]
+
+[resource]
+script = ExtResource("1_wqqvq")
+slot_type = "Left_Hand"
+ground_collision_shape = ExtResource("1_01wmu")
+name = "Scroll"
+texture = ExtResource("3_5v6wx")
+max_stacks = 1
+price = 666
+weapon_item = ExtResource("4_kjqwt")

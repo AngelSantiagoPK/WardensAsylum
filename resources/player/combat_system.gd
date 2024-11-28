@@ -2,6 +2,8 @@ extends Node2D
 
 class_name CombatSystem
 
+signal cast_active_jutsu
+
 @onready var animated_sprite_2d: AnimationController = $"../AnimatedSprite2D"
 @onready var right_hand_weapon_sprite: Sprite2D = $RightHandWeaponSprite
 @onready var right_hand_collision_shape_2d: CollisionShape2D = $RightHandWeaponSprite/Area2D/CollisionShape2D
@@ -17,6 +19,8 @@ var can_attack = true
 func _ready() -> void:
 	animated_sprite_2d.attack_animation_finished.connect(on_attack_animation_finished)
 
+
+
 func _input(event: InputEvent) -> void:
 	# without this the game doesn't check for attack button inputs
 	if Input.is_action_just_pressed("right_hand_action"):
@@ -24,6 +28,8 @@ func _input(event: InputEvent) -> void:
 		
 	if Input.is_action_just_pressed("left_hand_action"):
 		perform_action(left_weapon, left_hand_weapon_sprite)
+
+
 
 func perform_action(weapon: WeaponItem, sprite: Sprite2D):
 	# this prevents attacking before the attack cooldown ends
@@ -50,6 +56,9 @@ func perform_action(weapon: WeaponItem, sprite: Sprite2D):
 		sprite.z_index = attack_data.get("z_index")
 		sprite.show()
 	
+		if weapon.attack_type == "Magic":
+			cast_active_jutsu.emit()
+		
 	
 	
 func set_active_weapon(weapon: WeaponItem, slot_to_equip: String):
@@ -67,6 +76,8 @@ func set_active_weapon(weapon: WeaponItem, slot_to_equip: String):
 			
 		right_hand_weapon_sprite.texture = weapon.in_hand_texture
 		right_weapon = weapon
+
+
 
 func on_attack_animation_finished():
 	can_attack = true

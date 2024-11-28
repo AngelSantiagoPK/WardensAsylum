@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://dat8ni22r6ob3"]
+[gd_scene load_steps=8 format=3 uid="uid://dat8ni22r6ob3"]
 
 [ext_resource type="Script" path="res://scripts/inventory_ui.gd" id="1_83pbg"]
 [ext_resource type="Texture2D" uid="uid://bf8x8mhy4fcu5" path="res://assets/Ui/Dialog/DialogueBoxSimple.png" id="2_h17yc"]
 [ext_resource type="Theme" uid="uid://d7ptudjtc0c7" path="res://themes/text_theme.tres" id="3_y6bcf"]
+[ext_resource type="PackedScene" uid="uid://bux5o3y3lygfj" path="res://resources/UI/inventory_slot.tscn" id="4_itcou"]
+[ext_resource type="Texture2D" uid="uid://qd1rqkioq0i1" path="res://assets/Ui/Icon/Spell/Fireball.png" id="5_cg4y1"]
+[ext_resource type="Texture2D" uid="uid://c1qnmtt7aavpg" path="res://assets/Ui/Icon/Items&Weapon/Kunai.png" id="6_8byja"]
+[ext_resource type="Texture2D" uid="uid://0nwd44ho5i3k" path="res://assets/Ui/Icon/Spell/Heal.png" id="7_1876t"]
 
 [node name="InventoryUi" type="CanvasLayer"]
 script = ExtResource("1_83pbg")
@@ -36,6 +40,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 64
@@ -60,3 +66,47 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 3
+
+[node name="Jutsu Ui" type="VBoxContainer" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Jutsu Label" type="Label" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Jutsu Ui"]
+layout_mode = 2
+theme = ExtResource("3_y6bcf")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Jutsu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Jutsu Ui"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="FireballSlot" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Jutsu Ui/HBoxContainer" instance=ExtResource("4_itcou")]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+single_button_press = true
+starting_texture = ExtResource("5_cg4y1")
+start_label = "Fireball"
+
+[node name="KunaiSlot" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Jutsu Ui/HBoxContainer" instance=ExtResource("4_itcou")]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+single_button_press = true
+starting_texture = ExtResource("6_8byja")
+start_label = "Kunai"
+
+[node name="HealSlot" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Jutsu Ui/HBoxContainer" instance=ExtResource("4_itcou")]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+single_button_press = true
+starting_texture = ExtResource("7_1876t")
+start_label = "Heal"

@@ -28,6 +28,12 @@ const DIRECTION_TO_ATTACK_VECTOR = {
 var attack_direction = null
 var item_eject_direction = Vector2.DOWN
 
+var attack_vector:
+	get:
+		return DIRECTION_TO_ATTACK_VECTOR[attack_direction]
+
+
+
 func play_movement_animation(velocity: Vector2):
 	if velocity.x > 0:
 		item_eject_direction = Vector2.RIGHT
@@ -43,14 +49,19 @@ func play_movement_animation(velocity: Vector2):
 		item_eject_direction = Vector2.UP
 		play("back_walk")
 
+
+
 func play_idle_animation(velocity: Vector2):
 	if MOVEMENT_TO_IDLE.keys().has(animation):
 		play(MOVEMENT_TO_IDLE[animation])
+
+
 
 func play_attack_animation():
 	var direction = animation.split("_")[0]
 	attack_direction = direction
 	play(DIRECTION_TO_ATTACK_ANIMATION[direction])
+
 
 
 func _on_animation_finished() -> void:

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="JutsuConfig" load_steps=4 format=3 uid="uid://b1mrvhttodx0v"]
+
+[ext_resource type="Shape2D" uid="uid://cmfv2l3qe4mca" path="res://resources/jutsus/kunai/kunai_collision_shape.tres" id="1_xl82e"]
+[ext_resource type="Script" path="res://scripts/jutsu_config.gd" id="2_s65yl"]
+[ext_resource type="Texture2D" uid="uid://c1qnmtt7aavpg" path="res://assets/Ui/Icon/Items&Weapon/Kunai.png" id="3_vo5br"]
+
+[resource]
+script = ExtResource("2_s65yl")
+speed = 70
+collision_shape = ExtResource("1_xl82e")
+jutsu_name = "Kunai"
+initial_rotation = 0
+ui_texture = ExtResource("3_vo5br")
+initial_cooldown = 2.0
+damage = 10

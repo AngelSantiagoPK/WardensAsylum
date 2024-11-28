@@ -6,7 +6,6 @@
 
 [node name="OnScreenEquipmentSlot" type="VBoxContainer"]
 script = ExtResource("1_tymku")
-metadata/_edit_group_ = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(60, 60)
@@ -49,6 +48,15 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 expand_mode = 2
 stretch_mode = 5
+
+[node name="CooldownRect" type="ColorRect" parent="NinePatchRect"]
+visible = false
+layout_mode = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 50.0
+offset_bottom = 6.0
+color = Color(1, 0.254902, 0.427451, 0.513726)
 
 [node name="SlotLabel" type="Label" parent="."]
 layout_mode = 2
