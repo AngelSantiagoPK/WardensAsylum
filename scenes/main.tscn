@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://p7ypnpjv67gl"]
+[gd_scene load_steps=10 format=4 uid="uid://p7ypnpjv67gl"]
 
 [ext_resource type="TileSet" uid="uid://ch8cmv46bdq6i" path="res://tiles/tileset.tres" id="1_nbxoa"]
 [ext_resource type="PackedScene" uid="uid://rw8y3keu1b2i" path="res://resources/player/player.tscn" id="2_k51nj"]
@@ -6,8 +6,9 @@
 [ext_resource type="Resource" uid="uid://c4ptw8nr6mbk4" path="res://resources/weapons/shield/shield_inventory_item.tres" id="4_6umyj"]
 [ext_resource type="Resource" uid="uid://drsgh8m1qfebx" path="res://resources/gold_coin/gold_coin.tres" id="4_yqsue"]
 [ext_resource type="Resource" uid="uid://bxx2oc55jb6fj" path="res://resources/weapons/sword/sword_inventory_item.tres" id="5_4r8c2"]
-[ext_resource type="AudioStream" uid="uid://dp6frrospemi0" path="res://assets/Musics/Kanye West - I Wonder [8-Bit Cover] (RESUBIDO REUPLOAD) [TubeRipper.com].ogg" id="5_5te1x"]
 [ext_resource type="Resource" uid="uid://b5uobfteat2td" path="res://resources/weapons/scroll/scroll_inventory_item.tres" id="5_kvpmq"]
+[ext_resource type="Script" path="res://scenes/game_music.gd" id="9_4evfm"]
+[ext_resource type="PackedScene" uid="uid://bp2jqcx2omu4p" path="res://scenes/enemy.tscn" id="9_jesbr"]
 
 [node name="main" type="Node"]
 
@@ -24,6 +25,8 @@ metadata/_edit_group_ = true
 tile_map_data = PackedByteArray("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AAAgAPH/AwALAAQAAAAgAPD/AwALAAQAAAAgAO//AwALAAQAAAAlAPL/AwALAAQAAADn/w4AAwANAAAAAADn/w8AAwANAAEAAADn/xAAAwANAAIAAADo/w4AAwAOAAAAAADo/w8AAwAOAAEAAADo/xAAAwAOAAIAAADp/w4AAwAPAAAAAADp/w8AAwAPAAEAAADp/xAAAwAPAAIAAAD4/+b/AwAIABUAAAD4/+f/AwAIABYAAAD4/+v/AwAIABUAAAD4/+z/AwAIABYAAAAIAOr/AQACAA4AAAAIAOv/AwAIABUAAAAIAOz/AwAIABYAAAAIAOb/AwAIABUAAAAIAOf/AwAIABYAAADi/xMABAAMAAMAAADi/xQABAAMAAQAAADj/xIABAANAAIAAADj/xMABAANAAMAAADj/xQABAANAAQAAADk/xIABAAOAAIAAADk/xMABAAOAAMAAADk/xQABAAOAAQAAADl/xMABAAPAAMAAADl/xQABAAPAAQAAADy/w8ABAAQAAAAAADy/xAABAAQAAEAAADz/w8ABAARAAAAAADz/xAABAARAAEAAAD2/xMABAAQAAAAAAD2/xQABAAQAAEAAAD3/xMABAARAAAAAAD3/xQABAARAAEAAADv/xMABAAQAAAAAADv/xQABAAQAAEAAADw/xMABAARAAAAAADw/xQABAARAAEAAAD6/xEABAACAAgAAAD6/xIABAACAAkAAAD7/xEABAADAAgAAAD7/xIABAADAAkAAAALAA0ABAARAAoAAAALAA4ABAARAAsAAAALAA8ABAARAAwAAAAMAA0ABAASAAoAAAAMAA4ABAASAAsAAAAMAA8ABAASAAwAAAANAA0ABAATAAoAAAANAA4ABAATAAsAAAANAA8ABAATAAwAAAAOAA4ABAAUAAsAAAAOAA8ABAAUAAwAAAAnABIABAAVAAoAAAAnABMABAAVAAsAAAAnABQABAAVAAwAAAAoABIABAAWAAoAAAAoABMABAAWAAsAAAAoABQABAAWAAwAAAD+//H/BAAPAAoAAAD+//L/BAAPAAsAAAD///H/BAAQAAoAAAD///L/BAAQAAsAAADm/xAAAwAMAAIAAADm/w4AAwAMAAAAAADm/w8AAwAMAAEAAADo/xIAAwAEAAQAAADp/xIAAwAFAAQAAAA=")
 tile_set = ExtResource("1_nbxoa")
 metadata/_edit_group_ = true
+
+[node name="ShopLayer" type="TileMapLayer" parent="TileLayers"]
 
 [node name="Player" parent="." instance=ExtResource("2_k51nj")]
 position = Vector2(244, -362)
@@ -51,7 +54,29 @@ inventory_item = ExtResource("5_4r8c2")
 stacks = 2
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_5te1x")
 volume_db = -16.333
 autoplay = true
 playback_type = 1
+script = ExtResource("9_4evfm")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("patrol_path") instance=ExtResource("9_jesbr")]
+position = Vector2(197, -318)
+patrol_path = [NodePath("../EnemyPatrolPath/Marker2D"), NodePath("../EnemyPatrolPath/Marker2D2"), NodePath("../EnemyPatrolPath/Marker2D3"), NodePath("../EnemyPatrolPath/Marker2D4")]
+item_to_drop = ExtResource("4_yqsue")
+loot_stacks = 15
+
+[node name="EnemyPatrolPath" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="EnemyPatrolPath"]
+position = Vector2(293, -404)
+
+[node name="Marker2D2" type="Marker2D" parent="EnemyPatrolPath"]
+position = Vector2(331, -403)
+
+[node name="Marker2D3" type="Marker2D" parent="EnemyPatrolPath"]
+position = Vector2(333, -333)
+
+[node name="Marker2D4" type="Marker2D" parent="EnemyPatrolPath"]
+position = Vector2(291, -333)
+
+[connection signal="finished" from="AudioStreamPlayer2D" to="AudioStreamPlayer2D" method="_on_finished"]
