@@ -87,7 +87,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Spell" type="Area2D"]
+[node name="Jutsu" type="Area2D"]
+collision_mask = 33
 script = ExtResource("1_iavq2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -97,3 +98,5 @@ animation = &"heal"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
 shape = ExtResource("5_5i0qx")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

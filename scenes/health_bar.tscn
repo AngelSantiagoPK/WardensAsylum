@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://djlr8l3go4n1t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsgv0"]
+bg_color = Color(0.232324, 2.18092e-07, 4.21144e-08, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qoxbu"]
+bg_color = Color(0.788621, 0, 0.171259, 1)
+
+[node name="HealthBar" type="ProgressBar"]
+offset_left = -10.0
+offset_top = -14.0
+offset_right = 10.0
+offset_bottom = -10.0
+theme_override_styles/background = SubResource("StyleBoxFlat_wsgv0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qoxbu")
+step = 1.0
+rounded = true
+fill_mode = 1
+show_percentage = false

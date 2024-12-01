@@ -6,10 +6,11 @@
 
 [resource]
 script = ExtResource("2_s65yl")
-speed = 70
+speed = 200
 collision_shape = ExtResource("1_xl82e")
 jutsu_name = "Kunai"
 initial_rotation = 0
 ui_texture = ExtResource("3_vo5br")
 initial_cooldown = 2.0
 damage = 10
+target_self = false

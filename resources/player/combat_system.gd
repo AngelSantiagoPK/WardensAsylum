@@ -3,6 +3,7 @@ extends Node2D
 class_name CombatSystem
 
 signal cast_active_jutsu
+signal enemy_hit
 
 @onready var animated_sprite_2d: AnimationController = $"../AnimatedSprite2D"
 @onready var right_hand_weapon_sprite: Sprite2D = $RightHandWeaponSprite
@@ -24,14 +25,14 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	# without this the game doesn't check for attack button inputs
 	if Input.is_action_just_pressed("right_hand_action"):
-		perform_action(right_weapon, right_hand_weapon_sprite)
+		perform_action(right_weapon, right_hand_weapon_sprite, right_hand_collision_shape_2d)
 		
 	if Input.is_action_just_pressed("left_hand_action"):
-		perform_action(left_weapon, left_hand_weapon_sprite)
+		perform_action(left_weapon, left_hand_weapon_sprite, left_hand_collision_shape_2d)
 
 
 
-func perform_action(weapon: WeaponItem, sprite: Sprite2D):
+func perform_action(weapon: WeaponItem, sprite: Sprite2D, collision_shape: CollisionShape2D):
 	# this prevents attacking before the attack cooldown ends
 		if !can_attack:
 			return
@@ -55,6 +56,7 @@ func perform_action(weapon: WeaponItem, sprite: Sprite2D):
 		sprite.rotation_degrees = attack_data.get("rotation")
 		sprite.z_index = attack_data.get("z_index")
 		sprite.show()
+		collision_shape.disabled = false
 	
 		if weapon.attack_type == "Magic":
 			cast_active_jutsu.emit()
@@ -83,3 +85,12 @@ func on_attack_animation_finished():
 	can_attack = true
 	right_hand_weapon_sprite.hide()
 	left_hand_weapon_sprite.hide()
+	left_hand_collision_shape_2d.disabled = true
+	right_hand_collision_shape_2d.disabled = true
+	#end
+
+
+func _on_area_2d_body_entered(body: Node2D, hand_type) -> void:
+	if body.has_node("HealthSystem") and hand_type == "right":
+		(body.find_child("HealthSystem") as HealthSystem).apply_damage(right_weapon.damage)
+		enemy_hit.emit()
