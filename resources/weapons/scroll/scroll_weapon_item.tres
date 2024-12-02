@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("2_121k4")
+damage = 15
 attack_type = "Magic"
 left_attachment_position = Vector2(-11, 2)
 right_attachment_position = Vector2(11, 2)

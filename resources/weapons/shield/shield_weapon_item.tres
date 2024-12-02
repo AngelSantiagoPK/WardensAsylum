@@ -7,6 +7,7 @@
 
 [resource]
 script = ExtResource("3_mwelc")
+damage = 15
 in_hand_texture = ExtResource("2_kg55y")
 side_in_hand_texture = ExtResource("4_edopj")
 collision_shape = ExtResource("1_0p6hf")
