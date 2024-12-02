@@ -17,6 +17,10 @@ config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
 config/icon="res://icon.svg"
 
+[autoload]
+
+TransitionChangeManager="*res://scenes/transition_manager.tscn"
+
 [display]
 
 window/size/always_on_top=true
@@ -83,14 +87,18 @@ previous_track={
 2d_render/layer_2="Ground"
 2d_render/layer_3="Decoration"
 2d_render/layer_4="Pickups"
-2d_render/layer_5="Weapons"
+2d_render/layer_5="Weapon"
 2d_render/layer_6="Enemy"
+2d_render/layer_7="Entrance"
+2d_render/layer_8="Merchant"
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Ground"
 2d_physics/layer_3="Decoration"
 2d_physics/layer_4="Pickups"
 2d_physics/layer_5="Weapon"
 2d_physics/layer_6="Enemy"
+2d_physics/layer_7="Entrance"
+2d_physics/layer_8="Merchant"
 
 [rendering]
 

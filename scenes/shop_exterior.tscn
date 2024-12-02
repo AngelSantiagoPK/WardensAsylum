@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=4 uid="uid://be515o0vy8f1l"]
+
+[ext_resource type="Script" path="res://scenes/shop_door_area_2D.gd" id="1_qjwkx"]
+[ext_resource type="TileSet" uid="uid://ch8cmv46bdq6i" path="res://tiles/tileset.tres" id="2_ffr33"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6oy5n"]
+size = Vector2(12, 12)
+
+[node name="ShopExterior" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, -5)
+collision_layer = 64
+script = ExtResource("1_qjwkx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-11, 23)
+shape = SubResource("RectangleShape2D_6oy5n")
+
+[node name="ShopLayer" type="TileMapLayer" parent="."]
+position = Vector2(380, -232)
+tile_map_data = PackedByteArray("AADm/w0AAwAMAAAAAADm/w4AAwAMAAEAAADm/w8AAwAMAAIAAADn/w0AAwANAAAAAADn/w4AAwANAAEAAADn/w8AAwANAAIAAADo/w0AAwAOAAAAAADo/w4AAwAOAAEAAADo/w8AAwAOAAIAAADp/w0AAwAPAAAAAADp/w4AAwAPAAEAAADp/w8AAwAPAAIAAADl/wwAAwAXABQAAADl/w0AAwAXABUAAADl/w4AAwAXABQAAADl/w8AAwAXABUAAADq/wwAAwAXABQAAADq/w0AAwAXABUAAADq/w4AAwAXABQAAADq/w8AAwAXABUAAADo/xEAAwAEAAQAAADp/xEAAwAFAAQAAAA=")
+tile_set = ExtResource("2_ffr33")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

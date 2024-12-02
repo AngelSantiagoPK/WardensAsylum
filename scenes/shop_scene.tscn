@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=4 uid="uid://8fw2lvlg35y8"]
+
+[ext_resource type="TileSet" uid="uid://ch8cmv46bdq6i" path="res://tiles/tileset.tres" id="1_mgig6"]
+[ext_resource type="Script" path="res://scenes/shop_scene_interior.gd" id="1_xx7lk"]
+[ext_resource type="Texture2D" uid="uid://d1j3csw08q5v0" path="res://assets/Actor/Characters/OldMan3/SpriteSheet.png" id="2_wlb66"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rwfc3"]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1qrl2"]
+size = Vector2(20, 8)
+
+[node name="ShopScene" type="Node"]
+script = ExtResource("1_xx7lk")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD9//7/BQALAAYAAAD9////BQALAAcAAAD9/wAABQALAAcAAAD9/wEABQALAAcAAAD9/wIABQALAAcAAAD9/wMABQALAAgAAAD+//7/BQAMAAYAAAD+////BQAMAAcAAAD+/wAABQAMAAcAAAD+/wEABQAMAAcAAAD+/wIABQAMAAcAAAD+/wMABQAMAAgAAAD///7/BQAMAAYAAAD/////BQAMAAcAAAD//wAABQAMAAcAAAD//wEABQAMAAcAAAD//wIABQAMAAcAAAD//wMABQAMAAgAAAAAAP7/BQAMAAYAAAAAAP//BQAMAAcAAAAAAAAABQAMAAcAAAAAAAEABQAMAAcAAAAAAAIABQAMAAcAAAAAAAMABQAMAAgAAAABAP7/BQAMAAYAAAABAP//BQAMAAcAAAABAAAABQAMAAcAAAABAAEABQAMAAcAAAABAAIABQAMAAcAAAABAAMABQAMAAgAAAACAP7/BQAMAAYAAAACAP//BQAMAAcAAAACAAAABQAMAAcAAAACAAEABQAMAAcAAAACAAIABQAMAAcAAAACAAMABQAMAAgAAAADAP7/BQANAAYAAAADAP//BQANAAcAAAADAAAABQANAAcAAAADAAEABQANAAcAAAADAAIABQANAAcAAAADAAMABQANAAgAAAD8//7/BgAAAAcAAAD8////BgAAAAcAAAD8/wAABgAAAAcAAAD8/wEABgAAAAcAAAD8/wIABgAAAAcAAAD8/wMABgAAAAcAAAAEAP7/BgAEAAcAAAAEAP//BgAEAAcAAAAEAAAABgAEAAcAAAAEAAEABgAEAAcAAAAEAAIABgAEAAcAAAAEAAMABgAEAAcAAAD9//3/BgADAAYAAAD+//3/BgADAAYAAAD///3/BgABAAYAAAAAAP3/BgABAAcAAAABAP3/BgACAAYAAAACAP3/BgADAAYAAAADAP3/BgADAAYAAAD8//3/BgAAAAYAAAAEAP3/BgAEAAYAAAAEAAQABgAEAAoAAAD8/wQABgAAAAoAAAABAAQABgABAAoAAAD9/wQABgADAAoAAAD+/wQABgADAAoAAAD//wQABgADAAoAAAAAAAQABgADAAoAAAADAAQABgACAAoAAAACAAQABQAMAAcAAAA=")
+tile_set = ExtResource("1_mgig6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, -16)
+texture = ExtResource("2_wlb66")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+collision_layer = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("CircleShape2D_rwfc3")
+
+[node name="ExitArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea2D"]
+position = Vector2(40, 76)
+shape = SubResource("RectangleShape2D_1qrl2")
+
+[node name="PlayerSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(40, 56)
+
+[connection signal="body_entered" from="ExitArea2D" to="." method="_on_exit_area_2d_body_entered"]
