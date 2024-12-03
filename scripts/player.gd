@@ -74,3 +74,11 @@ func frame_freeze(timeScale: float, duration: float):
 	hit_stop_timer.start()
 	await hit_stop_timer.is_stopped()
 	Engine.time_scale = 1.0
+
+
+func setup_test_inventory():
+	const SWORD_INVENTORY_ITEM = preload("res://resources/weapons/sword/sword_inventory_item.tres")
+	const GOLD_COIN = preload("res://resources/gold_coin/gold_coin.tres")
+	
+	inventory.add_item(SWORD_INVENTORY_ITEM, 1)
+	inventory.add_item(GOLD_COIN, 100)
