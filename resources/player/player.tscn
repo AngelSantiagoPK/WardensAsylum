@@ -255,7 +255,7 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(0, 1)
 collision_mask = 70
 script = ExtResource("1_ncqe7")
@@ -288,7 +288,7 @@ collision_mask = 40
 position = Vector2(0, 1)
 shape = ExtResource("4_ogu7s")
 
-[node name="InventoryToggler" type="Node" parent="."]
+[node name="InventoryToggler" type="Node" parent="." groups=["Player"]]
 script = ExtResource("6_7c11i")
 
 [node name="OnScreenUi" parent="." instance=ExtResource("7_r5k04")]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://76uoputgaoja"]
+
+[ext_resource type="Texture2D" uid="uid://d1j3csw08q5v0" path="res://assets/Actor/Characters/OldMan3/SpriteSheet.png" id="1_mx6eg"]
+[ext_resource type="Script" path="res://scenes/merchant.gd" id="2_x0543"]
+[ext_resource type="Theme" uid="uid://d7ptudjtc0c7" path="res://themes/text_theme.tres" id="3_5twfa"]
+[ext_resource type="PackedScene" uid="uid://c07iqroufcybg" path="res://resources/UI/merchant_ui.tscn" id="4_al6ya"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rwfc3"]
+radius = 16.0
+
+[node name="Merchant" type="Sprite2D"]
+position = Vector2(8, -16)
+texture = ExtResource("1_mx6eg")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+script = ExtResource("2_x0543")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_rwfc3")
+
+[node name="MerchantLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.0
+offset_top = -22.0
+offset_right = 30.0
+offset_bottom = 1.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("3_5twfa")
+theme_override_font_sizes/font_size = 10
+text = "Press M to Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MerchantUi" parent="." instance=ExtResource("4_al6ya")]
+visible = false
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

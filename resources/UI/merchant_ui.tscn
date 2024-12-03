@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://c07iqroufcybg"]
+
+[ext_resource type="Script" path="res://resources/UI/merchant_ui.gd" id="1_10w7i"]
+[ext_resource type="Theme" uid="uid://d7ptudjtc0c7" path="res://themes/text_theme.tres" id="2_dsbhe"]
+
+[node name="MerchantUi" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_10w7i")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dsbhe")
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+color = Color(0.300173, 0.413225, 0.406167, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="MerchantColumn" type="VBoxContainer" parent="MarginContainer/ColorRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/ColorRect/MarginContainer/HBoxContainer/MerchantColumn"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Merchant"
+
+[node name="BuyingGridContainer" type="GridContainer" parent="MarginContainer/ColorRect/MarginContainer/HBoxContainer/MerchantColumn"]
+layout_mode = 2
+
+[node name="BuyButton" type="Button" parent="MarginContainer/ColorRect/MarginContainer/HBoxContainer/MerchantColumn"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Buy"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/ColorRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PlayerColumn" type="VBoxContainer" parent="MarginContainer/ColorRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/ColorRect/MarginContainer/HBoxContainer/PlayerColumn"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Inventory"
+
+[node name="SellingGridContainer" type="GridContainer" parent="MarginContainer/ColorRect/MarginContainer/HBoxContainer/PlayerColumn"]
+layout_mode = 2
+
+[node name="SellButton" type="Button" parent="MarginContainer/ColorRect/MarginContainer/HBoxContainer/PlayerColumn"]
+layout_mode = 2
+text = "Sell
+"
+
+[connection signal="pressed" from="MarginContainer/ColorRect/MarginContainer/HBoxContainer/MerchantColumn/BuyButton" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ColorRect/MarginContainer/HBoxContainer/PlayerColumn/SellButton" to="." method="_on_sell_button_pressed"]
