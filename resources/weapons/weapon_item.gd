@@ -2,11 +2,15 @@ extends Resource
 
 class_name WeaponItem
 
+@export_group("Weapon Props")
 @export var damage = 15
+@export var stamina_cost = 10
 @export var in_hand_texture: Texture
 @export var side_in_hand_texture: Texture
 @export var collision_shape: RectangleShape2D
 @export_enum("Melee", "Ranged", "Magic") var attack_type: String
+@export var prefered_weapon_sound: AudioStream = preload("res://assets/Sounds/Game/Hit.wav")
+@export_group("")
 
 @export_group("Attachment Postion")
 @export var left_attachment_position: Vector2

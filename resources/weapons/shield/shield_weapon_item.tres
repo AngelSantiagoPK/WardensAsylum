@@ -1,17 +1,20 @@
-[gd_resource type="Resource" script_class="WeaponItem" load_steps=5 format=3 uid="uid://c1n0n37o4a04w"]
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=6 format=3 uid="uid://c1n0n37o4a04w"]
 
 [ext_resource type="Shape2D" uid="uid://lbh86pchjjsj" path="res://resources/weapons/shield/shield_collision_detection_shape.tres" id="1_0p6hf"]
 [ext_resource type="Texture2D" uid="uid://vrhcfbb6sut1" path="res://assets/Items/Weapons/Shield/shield_front_view.png" id="2_kg55y"]
+[ext_resource type="AudioStream" uid="uid://5u5ybrvf8f3m" path="res://assets/Sounds/Game/Voice3.wav" id="3_grje8"]
 [ext_resource type="Script" path="res://resources/weapons/weapon_item.gd" id="3_mwelc"]
 [ext_resource type="Texture2D" uid="uid://p2f4tdei8oym" path="res://assets/Items/Weapons/Shield/shield_side_view.png" id="4_edopj"]
 
 [resource]
 script = ExtResource("3_mwelc")
 damage = 15
+stamina_cost = 5
 in_hand_texture = ExtResource("2_kg55y")
 side_in_hand_texture = ExtResource("4_edopj")
 collision_shape = ExtResource("1_0p6hf")
 attack_type = "Melee"
+prefered_weapon_sound = ExtResource("3_grje8")
 left_attachment_position = Vector2(0, 13)
 right_attachment_position = Vector2(0, -7)
 front_attachment_position = Vector2(-8, -2)

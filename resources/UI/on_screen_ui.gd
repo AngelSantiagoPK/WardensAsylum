@@ -7,7 +7,8 @@ class_name OnScreenUI
 @onready var potion_slot: OnScreenEquipmentSlot = $MarginContainer/HBoxContainer/PotionSlot
 @onready var jutsu_slot: OnScreenEquipmentSlot = $MarginContainer/HBoxContainer/JutsuSlot
 
-@onready var player_health_bar: ProgressBar = $MarginContainer/PlayerHealthBar
+@onready var player_health_bar: ProgressBar = $MarginContainer/PlayerHealthStaminaContainer/PlayerHealthBar
+@onready var player_stamina_bar: ProgressBar = $MarginContainer/PlayerHealthStaminaContainer/PlayerStaminaBar
 
 @onready var slots_dictionary = {
 	"Right_Hand": right_hand_slot,
@@ -40,4 +41,15 @@ func init_health_bar(max_health: int):
 
 
 func apply_damage_to_health(damage:int):
-	player_health_bar.value -= damage
+	var tween = create_tween()
+	tween.tween_property(player_health_bar, "value", player_health_bar.value - damage, 0.5)
+
+
+func init_stamina_bar(max_stamina: int):
+	player_stamina_bar.max_value = max_stamina
+
+
+func update_stamina_bar(new_value:int):
+	var tween = create_tween()
+	tween.tween_property(player_stamina_bar, "value", new_value, 0.4)
+	

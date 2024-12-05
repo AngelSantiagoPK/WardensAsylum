@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tt4l61nx6snd"
-path="res://.godot/imported/Sprite.png-fefd7577092294543b6def9864d89638.ctex"
+uid="uid://jvixwfkpw4hd"
+path="res://.godot/imported/SpriteInHand.png-ac2d32094d16da2ece07ab40748930c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Items/Weapons/Stick/Sprite.png"
-dest_files=["res://.godot/imported/Sprite.png-fefd7577092294543b6def9864d89638.ctex"]
+source_file="res://resources/weapons/stick/SpriteInHand.png"
+dest_files=["res://.godot/imported/SpriteInHand.png-ac2d32094d16da2ece07ab40748930c9.ctex"]
 
 [params]
 

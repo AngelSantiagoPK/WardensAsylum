@@ -12,7 +12,7 @@ config_version=5
 
 config/name="ZeldaGame"
 config/tags=PackedStringArray("game", "project", "tutorial")
-run/main_scene="res://scenes/shop_scene.tscn"
+run/main_scene="res://scenes/levels/starting_area.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -23,14 +23,19 @@ TransitionChangeManager="*res://scenes/transition_manager.tscn"
 
 [display]
 
+window/size/viewport_height=1152
 window/size/always_on_top=true
 window/size/extend_to_title=true
-window/stretch/scale=2.0
+window/stretch/scale=1.5
 
 [editor]
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[gui]
+
+theme/custom="res://themes/text_theme.tres"
 
 [input]
 
@@ -97,6 +102,7 @@ shop_toggle={
 2d_render/layer_6="Enemy"
 2d_render/layer_7="Entrance"
 2d_render/layer_8="Merchant"
+2d_render/layer_9="Vision"
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Ground"
 2d_physics/layer_3="Decoration"
@@ -105,9 +111,11 @@ shop_toggle={
 2d_physics/layer_6="Enemy"
 2d_physics/layer_7="Entrance"
 2d_physics/layer_8="Merchant"
+2d_physics/layer_9="Vision"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 textures/decals/filter=1
 textures/light_projectors/filter=1
+environment/defaults/default_clear_color=Color(0.00787389, 0.0597691, 0.0535584, 1)

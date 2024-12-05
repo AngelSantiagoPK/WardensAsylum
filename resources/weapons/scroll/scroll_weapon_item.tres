@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="WeaponItem" load_steps=2 format=3 uid="uid://dry5fqehyryly"]
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://dry5fqehyryly"]
 
+[ext_resource type="AudioStream" uid="uid://c8oxvs8dds5gh" path="res://assets/Sounds/Game/Magic1.wav" id="1_jcpkx"]
 [ext_resource type="Script" path="res://resources/weapons/weapon_item.gd" id="2_121k4"]
 
 [resource]
 script = ExtResource("2_121k4")
 damage = 15
+stamina_cost = 5
 attack_type = "Magic"
+prefered_weapon_sound = ExtResource("1_jcpkx")
 left_attachment_position = Vector2(-11, 2)
 right_attachment_position = Vector2(11, 2)
 front_attachment_position = Vector2(0, 11)

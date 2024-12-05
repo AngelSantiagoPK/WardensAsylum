@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://8fw2lvlg35y8"]
 
 [ext_resource type="TileSet" uid="uid://ch8cmv46bdq6i" path="res://tiles/tileset.tres" id="1_mgig6"]
-[ext_resource type="Script" path="res://scenes/shop_scene_interior.gd" id="1_xx7lk"]
+[ext_resource type="Script" path="res://scripts/shop_scene_interior.gd" id="1_xx7lk"]
 [ext_resource type="PackedScene" uid="uid://76uoputgaoja" path="res://scenes/merchant.tscn" id="3_t7s6d"]
 [ext_resource type="Script" path="res://scripts/inventory_item.gd" id="4_ubbvp"]
 [ext_resource type="Resource" uid="uid://c4ptw8nr6mbk4" path="res://resources/weapons/shield/shield_inventory_item.tres" id="6_nfh6n"]

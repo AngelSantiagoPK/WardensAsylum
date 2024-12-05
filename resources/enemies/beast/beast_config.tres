@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyConfig" load_steps=5 format=3 uid="uid://o0u0uxmet5vm"]
+
+[ext_resource type="Resource" uid="uid://drsgh8m1qfebx" path="res://resources/gold_coin/gold_coin.tres" id="1_8b1tu"]
+[ext_resource type="Shape2D" uid="uid://b6nj1uixicmk4" path="res://resources/enemies/beast/beast_collision_shape.tres" id="1_807jo"]
+[ext_resource type="Script" path="res://resources/enemies/enemy_config.gd" id="2_t8ur5"]
+[ext_resource type="SpriteFrames" uid="uid://cds31o2osa1eo" path="res://resources/enemies/beast/enemy_beast_sprite.tres" id="3_gm3vt"]
+
+[resource]
+script = ExtResource("2_t8ur5")
+speed = 100.0
+patrol_wait_time = 3.0
+damage_to_player = 8
+health = 30
+item_to_drop = ExtResource("1_8b1tu")
+loot_stacks = 10
+sprite_frames = ExtResource("3_gm3vt")
+collision_shape = ExtResource("1_807jo")

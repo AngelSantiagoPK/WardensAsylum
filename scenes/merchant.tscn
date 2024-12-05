@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://76uoputgaoja"]
 
 [ext_resource type="Texture2D" uid="uid://d1j3csw08q5v0" path="res://assets/Actor/Characters/OldMan3/SpriteSheet.png" id="1_mx6eg"]
-[ext_resource type="Script" path="res://scenes/merchant.gd" id="2_x0543"]
+[ext_resource type="Script" path="res://scripts/merchant.gd" id="2_x0543"]
 [ext_resource type="Theme" uid="uid://d7ptudjtc0c7" path="res://themes/text_theme.tres" id="3_5twfa"]
 [ext_resource type="PackedScene" uid="uid://c07iqroufcybg" path="res://resources/UI/merchant_ui.tscn" id="4_al6ya"]
 

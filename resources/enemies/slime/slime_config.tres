@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyConfig" load_steps=5 format=3 uid="uid://n4n3gsgybldw"]
+
+[ext_resource type="Shape2D" uid="uid://cwjgy2rc7e8w0" path="res://resources/enemies/slime/slime_collision_shape.tres" id="1_6o2s8"]
+[ext_resource type="Resource" uid="uid://drsgh8m1qfebx" path="res://resources/gold_coin/gold_coin.tres" id="1_h15lh"]
+[ext_resource type="Script" path="res://resources/enemies/enemy_config.gd" id="1_igtfn"]
+[ext_resource type="SpriteFrames" uid="uid://c6vnk2pfkuq5d" path="res://resources/enemies/slime/enemy_slime_sprite.tres" id="2_hmlrd"]
+
+[resource]
+script = ExtResource("1_igtfn")
+speed = 120.0
+patrol_wait_time = 4.0
+damage_to_player = 2
+health = 10
+item_to_drop = ExtResource("1_h15lh")
+loot_stacks = 2
+sprite_frames = ExtResource("2_hmlrd")
+collision_shape = ExtResource("1_6o2s8")

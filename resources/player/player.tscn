@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ncqe7"]
 [ext_resource type="Texture2D" uid="uid://crkdiyxx2khl0" path="res://assets/Actor/Characters/Knight/SpriteSheet.png" id="1_qxfs4"]
 [ext_resource type="Script" path="res://scripts/animation_controller.gd" id="3_2l827"]
-[ext_resource type="Texture2D" uid="uid://cpqsaqqu5tthn" path="res://assets/Actor/Characters/FighterWhite/SpriteSheet.png" id="3_ieceb"]
 [ext_resource type="Shape2D" uid="uid://ba0jkrn22c6jf" path="res://resources/player/player_collision_shape.tres" id="4_ogu7s"]
 [ext_resource type="PackedScene" uid="uid://dat8ni22r6ob3" path="res://resources/UI/inventory_ui.tscn" id="5_0d4te"]
 [ext_resource type="Script" path="res://scripts/inventory.gd" id="6_7c11i"]
@@ -11,6 +10,7 @@
 [ext_resource type="Script" path="res://resources/player/combat_system.gd" id="8_x7ohc"]
 [ext_resource type="Script" path="res://resources/player/jutsu_system.gd" id="9_eglbx"]
 [ext_resource type="PackedScene" uid="uid://b5e3dgothl2hh" path="res://scenes/HealthSystem.tscn" id="10_wymv7"]
+[ext_resource type="PackedScene" uid="uid://dleumm4tcc3im" path="res://scenes/stamina_system.tscn" id="11_4th3k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iabce"]
 atlas = ExtResource("1_qxfs4")
@@ -36,8 +36,8 @@ region = Rect2(16, 32, 16, 16)
 atlas = ExtResource("1_qxfs4")
 region = Rect2(16, 48, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rmb54"]
-atlas = ExtResource("3_ieceb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kx3d"]
+atlas = ExtResource("1_qxfs4")
 region = Rect2(0, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aep6v"]
@@ -149,7 +149,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rmb54")
+"texture": SubResource("AtlasTexture_4kx3d")
 }],
 "loop": false,
 "name": &"dead",
@@ -256,18 +256,20 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+y_sort_enabled = true
 position = Vector2(0, 1)
 collision_mask = 70
 script = ExtResource("1_ncqe7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_6txn0")
 animation = &"dead"
 autoplay = "front_idle"
 script = ExtResource("3_2l827")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(0, -8)
 shape = ExtResource("4_ogu7s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -282,6 +284,7 @@ drag_right_margin = 0.0
 drag_bottom_margin = 0.0
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -9)
 collision_mask = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -326,11 +329,16 @@ script = ExtResource("9_eglbx")
 
 [node name="HealthSystem" parent="." instance=ExtResource("10_wymv7")]
 
+[node name="StaminaSystem" parent="." instance=ExtResource("11_4th3k")]
+
 [node name="Timers" type="Node" parent="."]
 
 [node name="HitStopTimer" type="Timer" parent="Timers"]
 wait_time = 0.5
 one_shot = true
+
+[node name="PlayerAudio" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

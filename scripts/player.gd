@@ -7,21 +7,32 @@ class_name Player
 @onready var animated_sprite_2D: AnimationController = $AnimatedSprite2D
 @onready var inventory: Inventory = $InventoryToggler
 @onready var health_system: HealthSystem = $HealthSystem
+@onready var stamina_system: StaminaSystem = $StaminaSystem
 @onready var on_screen_ui: OnScreenUI = $OnScreenUi
 @onready var combat_system: CombatSystem = $CombatSystem
 @onready var hit_stop_timer: Timer = $Timers/HitStopTimer
+@onready var player_audio: AudioStreamPlayer2D = $PlayerAudio
 
-const SPEED = 5000.0
-
+@export_group("Player Stats")
+@export var SPEED = 4000.0
 @export var health = 100
+@export var stamina = 100
+@export_group("")
 
 # FUNCTIONS
 func _ready() -> void:
+	# init health system
 	health_system.init(health)
 	health_system.died.connect(on_player_dead)
 	health_system.damage_taken.connect(on_damage_taken)
+	# init stamina system
+	stamina_system.init(stamina)
+	stamina_system.drained.connect(on_stamina_drained)
+	stamina_system.stamina_updated.connect(on_update_stamina)
+	stamina_system.on_regen.connect(on_regen)
+	# init ui bars
 	on_screen_ui.init_health_bar(health)
-	combat_system.enemy_hit.connect(func (): await frame_freeze(0.5, 1.0))
+	on_screen_ui.init_stamina_bar(stamina)
 	#end
 
 func _physics_process(delta: float) -> void:
@@ -39,6 +50,9 @@ func _physics_process(delta: float) -> void:
 	
 	if velocity != Vector2.ZERO:
 		animated_sprite_2D.play_movement_animation(velocity)
+		if player_audio.playing == false:
+			player_audio.stream =preload ("res://assets/Sounds/Game/footsteps/step_metal (2).ogg") 
+			player_audio.play()
 	else:
 		animated_sprite_2D.play_idle_animation(velocity)
 	
@@ -49,6 +63,10 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is PickupItem:
 		inventory.add_item(area.inventory_item, area.stacks)
+		
+		player_audio.stream = preload("res://assets/Sounds/Game/Gold2.wav")
+		player_audio.play()
+			
 		area.queue_free()
 	
 	if area.get_parent() is Enemy:
@@ -59,6 +77,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 func on_damage_taken(damage: int):
 	on_screen_ui.apply_damage_to_health(damage)
+	player_audio.stream = preload("res://assets/Sounds/Game/Hit.wav")
+	player_audio.play()
 	#end
 
 
@@ -66,14 +86,12 @@ func on_player_dead():
 	set_physics_process(false)
 	combat_system.set_process_input(false)
 	animated_sprite_2D.play('dead')
+	await player_audio.finished
+	player_audio.stream = preload("res://assets/Sounds/Game/GameOver.wav")
+	player_audio.play()
+	await player_audio.finished
+	get_tree().reload_current_scene()
 	#end
-
-
-func frame_freeze(timeScale: float, duration: float):
-	Engine.time_scale = timeScale
-	hit_stop_timer.start()
-	await hit_stop_timer.is_stopped()
-	Engine.time_scale = 1.0
 
 
 func setup_test_inventory():
@@ -82,3 +100,15 @@ func setup_test_inventory():
 	
 	inventory.add_item(SWORD_INVENTORY_ITEM, 1)
 	inventory.add_item(GOLD_COIN, 100)
+
+
+func on_update_stamina(current_stamina: int):
+	on_screen_ui.update_stamina_bar(current_stamina)
+
+
+func on_stamina_drained():
+	on_screen_ui.update_stamina_bar(0)
+
+
+func on_regen():
+	on_screen_ui.update_stamina_bar(stamina)
