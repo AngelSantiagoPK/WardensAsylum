@@ -12,12 +12,15 @@ class_name Player
 @onready var combat_system: CombatSystem = $CombatSystem
 @onready var hit_stop_timer: Timer = $Timers/HitStopTimer
 @onready var player_audio: AudioStreamPlayer2D = $PlayerAudio
+@onready var bread_crumb_timer: Timer = $BreadCrumbTimer
 
 @export_group("Player Stats")
 @export var SPEED = 4000.0
 @export var health = 100
 @export var stamina = 100
 @export_group("")
+
+const PLAYER_BREADCRUMB_SCENE = preload("res://resources/player/player_breadcrumb.tscn")
 
 # FUNCTIONS
 func _ready() -> void:
@@ -112,3 +115,15 @@ func on_stamina_drained():
 
 func on_regen():
 	on_screen_ui.update_stamina_bar(stamina)
+
+
+func drop_player_breadcrumb():
+	var crumb = PLAYER_BREADCRUMB_SCENE.instantiate()
+	get_tree().root.add_child(crumb)
+	crumb.global_position = position
+	#end
+
+
+func _on_bread_crumb_timer_timeout() -> void:
+	drop_player_breadcrumb()
+	#end

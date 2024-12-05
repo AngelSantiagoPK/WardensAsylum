@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 TransitionChangeManager="*res://scenes/transition_manager.tscn"
+FreezeEngineManager="*res://singletons/freeze_engine.gd"
 
 [display]
 

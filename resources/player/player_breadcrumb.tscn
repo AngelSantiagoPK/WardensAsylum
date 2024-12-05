@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwdstttii7fi2"]
+
+[ext_resource type="Script" path="res://resources/player/player_breadcrumb.gd" id="1_111f3"]
+[ext_resource type="Shape2D" uid="uid://kjxdgq36mp8r" path="res://resources/player/player_breadcrumb_collision_shape.tres" id="1_vkwf2"]
+[ext_resource type="Texture2D" uid="uid://ctxa3fca6tg8i" path="res://icon.svg" id="2_k5jlt"]
+
+[node name="PlayerBreadcrumb" type="StaticBody2D" groups=["PlayerBreadcrumb"]]
+collision_mask = 0
+script = ExtResource("1_111f3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("1_vkwf2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.15625, 0.171875)
+texture = ExtResource("2_k5jlt")

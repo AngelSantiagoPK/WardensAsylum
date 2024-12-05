@@ -8,15 +8,15 @@
 [resource]
 script = ExtResource("2_f1lpc")
 damage = 15
-stamina_cost = 15
+stamina_cost = 2
 in_hand_texture = ExtResource("1_xrork")
 collision_shape = ExtResource("1_coear")
 attack_type = "Melee"
 prefered_weapon_sound = ExtResource("3_1hrl3")
-left_attachment_position = Vector2(-8, 1)
-right_attachment_position = Vector2(8, 7)
-front_attachment_position = Vector2(-5, 8)
-back_attachment_position = Vector2(0, -8)
+left_attachment_position = Vector2(-8, -8)
+right_attachment_position = Vector2(8, -2)
+front_attachment_position = Vector2(-5, 0)
+back_attachment_position = Vector2(0, -16)
 left_rotation = 90
 right_rotation = -90
 front_rotation = 0

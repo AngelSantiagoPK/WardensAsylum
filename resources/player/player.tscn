@@ -340,7 +340,12 @@ one_shot = true
 [node name="PlayerAudio" type="AudioStreamPlayer2D" parent="."]
 bus = &"SFX"
 
+[node name="BreadCrumbTimer" type="Timer" parent="." groups=["Player"]]
+wait_time = 0.2
+autostart = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="CombatSystem/RightHandWeaponSprite/Area2D" to="CombatSystem" method="_on_area_2d_body_entered" binds= ["right"]]
 [connection signal="body_entered" from="CombatSystem/LeftHandWeaponSprite/Area2D" to="CombatSystem" method="_on_area_2d_body_entered" binds= ["left"]]
+[connection signal="timeout" from="BreadCrumbTimer" to="." method="_on_bread_crumb_timer_timeout"]

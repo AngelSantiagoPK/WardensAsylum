@@ -107,4 +107,5 @@ func on_attack_animation_finished():
 func _on_area_2d_body_entered(body: Node2D, hand_type) -> void:
 	if body.has_node("HealthSystem") and hand_type == "right":
 		(body.find_child("HealthSystem") as HealthSystem).apply_damage(right_weapon.damage)
+		FreezeEngineManager.frameFreeze()
 		enemy_hit.emit()

@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("1_igtfn")
-speed = 120.0
+speed = 20.0
 patrol_wait_time = 4.0
 damage_to_player = 2
 health = 10
