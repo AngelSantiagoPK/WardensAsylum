@@ -16,6 +16,9 @@ func init(health: int):
 
 
 func apply_damage(damage: int):
+	var tween = create_tween()
+	tween.tween_property(self, "value", current_health - damage, 0.5)
+	
 	current_health = current_health - damage
 	damage_taken.emit(damage)
 	if current_health <= 0:

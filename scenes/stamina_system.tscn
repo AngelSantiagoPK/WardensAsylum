@@ -1,6 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://dleumm4tcc3im"]
 
-[ext_resource type="Script" path="res://scenes/stamina_system.gd" id="1_reeww"]
+[ext_resource type="Script" path="res://scripts/stamina_system.gd" id="1_reeww"]
 
 [node name="StaminaSystem" type="Node"]
 script = ExtResource("1_reeww")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.5
+one_shot = true
+
+[node name="stamina_audio" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

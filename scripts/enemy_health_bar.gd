@@ -5,6 +5,7 @@ class_name EnemyHealthBar
 
 #VARIABLES
 @onready var health_system: HealthSystem = $"../HealthSystem"
+@onready var enemy_audio: AudioStreamPlayer2D = $"../EnemyAudio"
 
 #FUNCTIONS
 func _ready() -> void:
@@ -18,5 +19,12 @@ func _ready() -> void:
 func on_damage_taken(damage: int):
 	if !visible:
 		visible = true
-	value -= damage
+	
+	# animates the health bar for enemies
+	var tween = create_tween()
+	tween.tween_property(self, "value", value - damage, 0.3)
+	
+	#value -= damage
+	enemy_audio.stream = preload("res://assets/Sounds/Game/Hit6.wav")
+	enemy_audio.play()
 	#end

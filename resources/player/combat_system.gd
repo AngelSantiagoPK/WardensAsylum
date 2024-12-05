@@ -11,6 +11,9 @@ signal enemy_hit
 
 @onready var left_hand_weapon_sprite: Sprite2D = $LeftHandWeaponSprite
 @onready var left_hand_collision_shape_2d: CollisionShape2D = $LeftHandWeaponSprite/Area2D/CollisionShape2D
+@onready var player_audio: AudioStreamPlayer2D = $"../PlayerAudio"
+@onready var stamina_system: StaminaSystem = $"../StaminaSystem"
+@onready var on_screen_ui: OnScreenUI = $"../OnScreenUi"
 
 @export var right_weapon: WeaponItem
 @export var left_weapon: WeaponItem
@@ -33,10 +36,11 @@ func _input(event: InputEvent) -> void:
 
 
 func perform_action(weapon: WeaponItem, sprite: Sprite2D, collision_shape: CollisionShape2D):
-	# this prevents attacking before the attack cooldown ends
+		# this prevents attacking before the attack cooldown ends
 		if !can_attack:
 			return
 		can_attack = false
+		
 		# this plays the desired 
 		animated_sprite_2d.play_attack_animation()
 		
@@ -44,6 +48,17 @@ func perform_action(weapon: WeaponItem, sprite: Sprite2D, collision_shape: Colli
 		
 		if weapon == null: 
 			return
+		
+			
+		if stamina_system.current_stamina < weapon.stamina_cost:
+			stamina_system.stamina_regen()
+			on_screen_ui.update_stamina_bar(stamina_system.current_stamina)
+			return
+		stamina_system.use_stamina(weapon.stamina_cost)
+		
+		if weapon.prefered_weapon_sound != null:
+			player_audio.stream = weapon.prefered_weapon_sound
+			player_audio.play()
 			
 		var attack_data = weapon.get_data_for_direction(attack_direction)
 		
@@ -78,7 +93,6 @@ func set_active_weapon(weapon: WeaponItem, slot_to_equip: String):
 			
 		right_hand_weapon_sprite.texture = weapon.in_hand_texture
 		right_weapon = weapon
-
 
 
 func on_attack_animation_finished():
