@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("2_t8ur5")
-speed = 100.0
+speed = 40.0
 patrol_wait_time = 3.0
 damage_to_player = 8
 health = 30

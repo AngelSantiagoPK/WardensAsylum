@@ -1,0 +1,5 @@
+[gd_resource type="RectangleShape2D" format=3 uid="uid://cid3dgqfd3ahg"]
+
+[resource]
+custom_solver_bias = 0.698
+size = Vector2(6, 23)

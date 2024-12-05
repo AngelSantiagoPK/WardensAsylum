@@ -137,7 +137,7 @@ inventory_item = ExtResource("10_oh8by")
 
 [node name="ScrollPickUp2" parent="Pickups" instance=ExtResource("3_unowp")]
 position = Vector2(39, 20)
-inventory_item = ExtResource("10_oh8by")
+inventory_item = ExtResource("4_tq020")
 
 [node name="POI" type="Node" parent="."]
 

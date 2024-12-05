@@ -241,7 +241,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy2" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 32
 collision_mask = 22

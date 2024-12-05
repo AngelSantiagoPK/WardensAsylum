@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponItem" load_steps=5 format=3 uid="uid://brucm6wxvb5ju"]
 
-[ext_resource type="Shape2D" uid="uid://bto764y8c8kam" path="res://resources/weapons/stick/stick_ground_collision_shape.tres" id="1_5j073"]
 [ext_resource type="Texture2D" uid="uid://jvixwfkpw4hd" path="res://resources/weapons/stick/SpriteInHand.png" id="1_30gsf"]
+[ext_resource type="Shape2D" uid="uid://cid3dgqfd3ahg" path="res://resources/weapons/stick/stick_weapon_collision_shape.tres" id="1_sh4oh"]
 [ext_resource type="Script" path="res://resources/weapons/weapon_item.gd" id="2_2r6m5"]
 [ext_resource type="AudioStream" uid="uid://dywrt6rua33i8" path="res://assets/Sounds/Game/Hit.wav" id="3_pealv"]
 
@@ -10,13 +10,13 @@ script = ExtResource("2_2r6m5")
 damage = 8
 stamina_cost = 5
 in_hand_texture = ExtResource("1_30gsf")
-collision_shape = ExtResource("1_5j073")
+collision_shape = ExtResource("1_sh4oh")
 attack_type = "Melee"
 prefered_weapon_sound = ExtResource("3_pealv")
-left_attachment_position = Vector2(-8, 2)
-right_attachment_position = Vector2(8, 5)
-front_attachment_position = Vector2(-3, 8)
-back_attachment_position = Vector2(-1, -8)
+left_attachment_position = Vector2(-8, -7)
+right_attachment_position = Vector2(8, -4)
+front_attachment_position = Vector2(-3, -1)
+back_attachment_position = Vector2(-1, -17)
 left_rotation = 90
 right_rotation = -90
 front_rotation = 0
