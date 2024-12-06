@@ -89,12 +89,14 @@ func clear_inventory_slot(index: int):
 	taken_inventory_slots_count -= 1
 	inventory_ui.clear_slot_at_index(index)
 	pass
-	
-	
-func remove_item_from_inventory(index):
-	items.remove_at(index)
-	
 
+func eject_item(index):
+	if index == null || index == -1:
+		return
+		
+	items[index] = null
+	clear_inventory_slot(index)
+	
 func eject_item_to_ground(index):
 	# adds dropped weapon to world so things don't just dissapear into oblivion when you drop them
 	var inventory_item_to_ejected = items[index]
