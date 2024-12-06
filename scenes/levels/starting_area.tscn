@@ -47,7 +47,7 @@ stamina = 30
 
 [node name="Slime01" parent="Enemies" node_paths=PackedStringArray("patrol_path") instance=ExtResource("3_hk1e1")]
 position = Vector2(-202, -8)
-enemy_config = ExtResource("5_7gvrk")
+enemy_config = ExtResource("6_3ludt")
 patrol_path = [NodePath("../Slime01Marker01"), NodePath("../Slime01Marker02")]
 
 [node name="Slime01Marker01" type="Marker2D" parent="Enemies"]
@@ -135,21 +135,19 @@ inventory_item = ExtResource("4_tq020")
 position = Vector2(-535, -402)
 inventory_item = ExtResource("10_oh8by")
 
-[node name="ScrollPickUp2" parent="Pickups" instance=ExtResource("3_unowp")]
-position = Vector2(39, 20)
-inventory_item = ExtResource("4_tq020")
-
 [node name="POI" type="Node" parent="."]
 
 [node name="PlayerSpawnPoint" type="Marker2D" parent="POI"]
 position = Vector2(39, -8)
 
-[node name="LockedDoor" parent="POI" instance=ExtResource("12_f5aq3")]
+[node name="LockedDoor" parent="POI" node_paths=PackedStringArray("player") instance=ExtResource("12_f5aq3")]
 position = Vector2(-86, 0)
+player = NodePath("../../Player")
 key_name = "cell key"
 
-[node name="LockedDoor2" parent="POI" instance=ExtResource("12_f5aq3")]
+[node name="LockedDoor2" parent="POI" node_paths=PackedStringArray("player") instance=ExtResource("12_f5aq3")]
 position = Vector2(-432, -272)
+player = NodePath("../../Player")
 key_name = "small key"
 
 [node name="LevelAudio" type="AudioStreamPlayer2D" parent="."]
