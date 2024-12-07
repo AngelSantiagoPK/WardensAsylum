@@ -1,11 +1,10 @@
 # AUTHOR: ANGEL SANTIAGO - DEC 1, 2024
 extends ProgressBar
-
 class_name EnemyHealthBar
 
 #VARIABLES
-@onready var health_system: HealthSystem = $"../HealthSystem"
-@onready var enemy_audio: AudioStreamPlayer2D = $"../EnemyAudio"
+@export var health_system: HealthSystem
+@export var enemy_audio: AudioStreamPlayer2D
 
 #FUNCTIONS
 func _ready() -> void:

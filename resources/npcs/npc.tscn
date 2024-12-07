@@ -1,0 +1,288 @@
+[gd_scene load_steps=33 format=3 uid="uid://byow7guunuf21"]
+
+[ext_resource type="Texture2D" uid="uid://bcffpadrx3or7" path="res://assets/Actor/Characters/NinjaMageOrange/SpriteSheet.png" id="1_3sdno"]
+[ext_resource type="Script" path="res://resources/npcs/npc.gd" id="1_smya3"]
+[ext_resource type="Script" path="res://resources/npcs/npc_state_machine.gd" id="3_8hs02"]
+[ext_resource type="Texture2D" uid="uid://c6q0xkhijlqgh" path="res://assets/FX/Smoke/Smoke/SpriteSheet.png" id="3_cqu16"]
+[ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="3_naa0r"]
+[ext_resource type="Script" path="res://resources/npcs/idle_state.gd" id="4_q1x1t"]
+[ext_resource type="Script" path="res://resources/npcs/wander_state.gd" id="6_hu82k"]
+[ext_resource type="Script" path="res://resources/npcs/chase_state.gd" id="7_p1pkw"]
+[ext_resource type="Shape2D" uid="uid://b0ry53d8ookm5" path="res://resources/npcs/npc_detection_collision_area.tres" id="8_c1wgh"]
+[ext_resource type="Texture2D" uid="uid://mbc4i6rendfs" path="res://assets/Ui/Emote/emote22.png" id="9_4sdyu"]
+[ext_resource type="Script" path="res://resources/npcs/dead_state.gd" id="9_hh0cc"]
+[ext_resource type="PackedScene" uid="uid://b5e3dgothl2hh" path="res://scenes/HealthSystem.tscn" id="10_dm4td"]
+[ext_resource type="Script" path="res://resources/npcs/hit_state.gd" id="10_vieks"]
+[ext_resource type="StyleBox" uid="uid://da27g4e1qgsos" path="res://resources/UI/health_bar_background.tres" id="11_cda1a"]
+[ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="11_yfq8g"]
+[ext_resource type="StyleBox" uid="uid://23ibews3ucw1" path="res://resources/UI/health_bar_fill.tres" id="12_bucqw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6lcm"]
+atlas = ExtResource("1_3sdno")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6tt5"]
+atlas = ExtResource("1_3sdno")
+region = Rect2(16, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ivr4"]
+atlas = ExtResource("3_cqu16")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3vry"]
+atlas = ExtResource("3_cqu16")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uktej"]
+atlas = ExtResource("3_cqu16")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bstcc"]
+atlas = ExtResource("3_cqu16")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm7vi"]
+atlas = ExtResource("3_cqu16")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8xik"]
+atlas = ExtResource("3_cqu16")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnq1t"]
+atlas = ExtResource("1_3sdno")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocav7"]
+atlas = ExtResource("1_3sdno")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vk57u"]
+atlas = ExtResource("1_3sdno")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2guw6"]
+atlas = ExtResource("1_3sdno")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjx7r"]
+atlas = ExtResource("1_3sdno")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2piij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6lcm")
+}],
+"loop": true,
+"name": &"chase",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6tt5")
+}],
+"loop": true,
+"name": &"close_to",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ivr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3vry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uktej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bstcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm7vi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8xik")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lnq1t")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocav7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vk57u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2guw6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjx7r")
+}],
+"loop": true,
+"name": &"wander",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uufo3"]
+radius = 5.0
+height = 14.0
+
+[sub_resource type="GDScript" id="GDScript_4drdd"]
+resource_name = "close_to_state"
+script/source = "class_name CloseToState
+extends State
+
+@export var animator: AnimatedSprite2D
+@export var actor: NPC
+@export var active_range: int = 30
+@export var audio: AudioStreamPlayer2D
+@export var emoter: Sprite2D
+
+@onready var target: Node2D = actor.target
+
+signal left_close_range
+
+func _ready() -> void:
+	set_physics_process(false)
+
+
+func enter():
+	set_physics_process(true)
+	emoter.texture = preload(\"res://assets/Ui/Emote/emote2.png\")
+	emoter.visible = true
+	animator.play(\"close_to\")
+	audio.stream = preload(\"res://assets/Sounds/Game/Voice2.wav\")
+	audio.pitch_scale = randf_range(1, 1.2)
+	audio.play()
+	
+
+func exit():
+	emoter.visible = false
+	set_physics_process(false)
+
+
+func _physics_process(delta: float) -> void:
+	if actor.global_position.distance_to(target.global_position) > active_range:
+		left_close_range.emit()
+	else:
+		var velocity = actor.global_position.direction_to(target.global_position)
+		actor.move_and_collide(velocity * actor.max_speed * delta)
+	
+"
+
+[node name="NPC" type="CharacterBody2D" groups=["NPC"]]
+y_sort_enabled = true
+position = Vector2(0, -8)
+collision_layer = 166
+collision_mask = 39
+script = ExtResource("1_smya3")
+max_health = 30
+acceleration = 2.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_2piij")
+animation = &"chase"
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.560784)
+position = Vector2(0, 7)
+texture = ExtResource("3_naa0r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_uufo3")
+
+[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("3_8hs02")
+state = NodePath("chase")
+
+[node name="idle" type="Node" parent="FSM" node_paths=PackedStringArray("animator", "actor", "emoter")]
+script = ExtResource("4_q1x1t")
+animator = NodePath("../../AnimatedSprite2D")
+actor = NodePath("../..")
+emoter = NodePath("../../EmoteSprite")
+
+[node name="wander" type="Node" parent="FSM" node_paths=PackedStringArray("animator", "actor", "emoter")]
+script = ExtResource("6_hu82k")
+animator = NodePath("../../AnimatedSprite2D")
+actor = NodePath("../..")
+emoter = NodePath("../../EmoteSprite")
+
+[node name="chase" type="Node" parent="FSM" node_paths=PackedStringArray("actor", "animator", "audio", "emoter")]
+script = ExtResource("7_p1pkw")
+actor = NodePath("../..")
+animator = NodePath("../../AnimatedSprite2D")
+audio = NodePath("../../NPCAudioStream")
+emoter = NodePath("../../EmoteSprite")
+
+[node name="close_to" type="Node" parent="FSM" node_paths=PackedStringArray("animator", "actor", "audio", "emoter")]
+script = SubResource("GDScript_4drdd")
+animator = NodePath("../../AnimatedSprite2D")
+actor = NodePath("../..")
+audio = NodePath("../../NPCAudioStream")
+emoter = NodePath("../../EmoteSprite")
+
+[node name="dead" type="Node" parent="FSM" node_paths=PackedStringArray("animator", "actor", "audio")]
+script = ExtResource("9_hh0cc")
+animator = NodePath("../../AnimatedSprite2D")
+actor = NodePath("../..")
+audio = NodePath("../../NPCAudioStream")
+
+[node name="hit" type="Node" parent="FSM" node_paths=PackedStringArray("animator", "actor", "health_system", "audio")]
+script = ExtResource("10_vieks")
+animator = NodePath("../../AnimatedSprite2D")
+actor = NodePath("../..")
+health_system = NodePath("../../HealthSystem")
+audio = NodePath("../../NPCAudioStream")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 160
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+rotation = -1.5708
+shape = ExtResource("8_c1wgh")
+
+[node name="NPCAudioStream" type="AudioStreamPlayer2D" parent="."]
+
+[node name="EmoteSprite" type="Sprite2D" parent="."]
+visible = false
+z_index = 2
+position = Vector2(-1, -9)
+texture = ExtResource("9_4sdyu")
+
+[node name="HealthSystem" parent="." instance=ExtResource("10_dm4td")]
+max_health = 30
+
+[node name="EnemyHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio")]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(40, 5)
+offset_left = -14.0
+offset_top = -17.0
+offset_right = 26.0
+offset_bottom = 5.0
+scale = Vector2(0.720002, 0.24)
+theme_override_styles/background = ExtResource("11_cda1a")
+theme_override_styles/fill = ExtResource("12_bucqw")
+step = 1.0
+show_percentage = false
+script = ExtResource("11_yfq8g")
+health_system = NodePath("../HealthSystem")
+enemy_audio = NodePath("../NPCAudioStream")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

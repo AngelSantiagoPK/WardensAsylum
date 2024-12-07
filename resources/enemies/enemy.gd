@@ -11,7 +11,7 @@ var speed: float
 var patrol_wait_time
 var damage_to_player: int
 
-var health: int = 0
+@export var max_health: int = 0
 var item_to_drop: InventoryItem
 var loot_stacks: int = 1
 var sprite_frames: SpriteFrames
@@ -40,9 +40,9 @@ const PICKUP_ITEM = preload("res://scenes/pickup_item.tscn")
 func _ready() -> void:
 	config()
 	
-	health_system.init(health)
-	health_bar.max_value = health
-	health_bar.value = health
+	health_system.init(max_health)
+	health_bar.max_value = max_health
+	health_bar.value = max_health
 	
 	
 	if sprite_frames != null:
@@ -71,7 +71,7 @@ func config():
 		speed = enemy_config.speed
 		patrol_wait_time = enemy_config.patrol_wait_time
 		damage_to_player = enemy_config.damage_to_player
-		health = enemy_config.health
+		max_health = enemy_config.health
 		item_to_drop = enemy_config.item_to_drop
 		loot_stacks = enemy_config.loot_stacks
 		sprite_frames = enemy_config.sprite_frames
