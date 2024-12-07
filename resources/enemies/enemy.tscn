@@ -88,12 +88,14 @@ shape = ExtResource("4_rni5g")
 
 [node name="HealthSystem" parent="." instance=ExtResource("5_4hnxt")]
 
-[node name="HealthBar" parent="." instance=ExtResource("6_akvb5")]
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio") instance=ExtResource("6_akvb5")]
 offset_top = -23.0
 offset_bottom = -19.0
 theme_override_styles/background = ExtResource("8_m1nov")
 theme_override_styles/fill = ExtResource("9_5twsh")
 script = ExtResource("10_hm3ep")
+health_system = NodePath("../HealthSystem")
+enemy_audio = NodePath("../EnemyAudio")
 
 [node name="EnemyAudio" type="AudioStreamPlayer2D" parent="."]
 bus = &"SFX"

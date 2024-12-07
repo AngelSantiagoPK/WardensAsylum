@@ -115,15 +115,3 @@ func on_stamina_drained():
 
 func on_regen():
 	on_screen_ui.update_stamina_bar(stamina)
-
-
-func drop_player_breadcrumb():
-	var crumb = PLAYER_BREADCRUMB_SCENE.instantiate()
-	get_tree().root.add_child(crumb)
-	crumb.global_position = position
-	#end
-
-
-func _on_bread_crumb_timer_timeout() -> void:
-	drop_player_breadcrumb()
-	#end
