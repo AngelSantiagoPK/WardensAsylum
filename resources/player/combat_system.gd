@@ -3,7 +3,6 @@ extends Node2D
 class_name CombatSystem
 
 signal cast_active_jutsu
-signal enemy_hit
 
 @onready var animated_sprite_2d: AnimationController = $"../AnimatedSprite2D"
 @onready var right_hand_weapon_sprite: Sprite2D = $RightHandWeaponSprite
@@ -23,10 +22,11 @@ var can_attack = true
 func _ready() -> void:
 	animated_sprite_2d.attack_animation_finished.connect(on_attack_animation_finished)
 
+func _physics_process(delta: float) -> void:
+	check_input()
 
 
-func _input(event: InputEvent) -> void:
-	# without this the game doesn't check for attack button inputs
+func check_input():
 	if Input.is_action_just_pressed("right_hand_action"):
 		perform_action(right_weapon, right_hand_weapon_sprite, right_hand_collision_shape_2d)
 		

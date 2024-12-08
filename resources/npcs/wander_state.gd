@@ -12,7 +12,7 @@ func _ready() -> void:
 func enter():
 	set_physics_process(true)
 	emoter.texture = preload("res://assets/Ui/Emote/emote19.png")
-	emoter.visible = true
+	emoter.visible = false
 	animator.play("wander")
 	
 	if actor.velocity == Vector2.ZERO:

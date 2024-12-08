@@ -19,12 +19,12 @@ func enter():
 
 
 func exit():
-	emoter.visible = true
+	emoter.visible = false
 	set_physics_process(false)
 
 
 func _physics_process(delta: float) -> void:
-	await get_tree().create_timer(2.5).timeout
+	await get_tree().create_timer(1).timeout
 	idle_finished.emit()
 	pass
 	

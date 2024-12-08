@@ -14,10 +14,13 @@ func _ready() -> void:
 func enter():
 	set_physics_process(true)
 	animator.play("dead")
-	await animator.animation_finished
-	death_complete.emit()
-	
+	Global.score += 50
 
 func exit():
 	set_physics_process(false)
-	
+
+
+func _physics_process(delta: float) -> void:
+	await animator.animation_finished
+	death_complete.emit()
+	pass

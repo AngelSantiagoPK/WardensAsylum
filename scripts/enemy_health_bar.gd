@@ -15,13 +15,13 @@ func _ready() -> void:
 	#end
 
 
-func on_damage_taken(damage: int):
+func on_damage_taken(current_health: int):
 	if !visible:
 		visible = true
 	
 	# animates the health bar for enemies
 	var tween = create_tween()
-	tween.tween_property(self, "value", value - damage, 0.3)
+	tween.tween_property(self, "value", current_health, 0.3)
 	
 	#value -= damage
 	enemy_audio.stream = preload("res://assets/Sounds/Game/Hit6.wav")

@@ -14,7 +14,7 @@ var is_open: bool = false
 
 
 func _input(event: InputEvent) -> void: 
-	if Input.is_action_just_pressed("shop_toggle") and is_unlockable and has_key:
+	if event.is_action_pressed("shop_toggle") and is_unlockable and has_key:
 		unlock_door()
 
 
@@ -48,7 +48,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func check_inventory():
-	var index = -1
 	if player.inventory.items.size() < 0:
 		return
 		

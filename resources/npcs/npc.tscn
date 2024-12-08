@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://byow7guunuf21"]
+[gd_scene load_steps=35 format=3 uid="uid://byow7guunuf21"]
 
 [ext_resource type="Texture2D" uid="uid://bcffpadrx3or7" path="res://assets/Actor/Characters/NinjaMageOrange/SpriteSheet.png" id="1_3sdno"]
 [ext_resource type="Script" path="res://resources/npcs/npc.gd" id="1_smya3"]
@@ -16,6 +16,7 @@
 [ext_resource type="StyleBox" uid="uid://da27g4e1qgsos" path="res://resources/UI/health_bar_background.tres" id="11_cda1a"]
 [ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="11_yfq8g"]
 [ext_resource type="StyleBox" uid="uid://23ibews3ucw1" path="res://resources/UI/health_bar_fill.tres" id="12_bucqw"]
+[ext_resource type="Shape2D" uid="uid://br63607noeyf4" path="res://resources/npcs/npc_hurt_box_collision_shape.tres" id="17_2r6fw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6lcm"]
 atlas = ExtResource("1_3sdno")
@@ -48,6 +49,10 @@ region = Rect2(128, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_p8xik"]
 atlas = ExtResource("3_cqu16")
 region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhi4k"]
+atlas = ExtResource("1_3sdno")
+region = Rect2(48, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lnq1t"]
 atlas = ExtResource("1_3sdno")
@@ -109,6 +114,14 @@ animations = [{
 "loop": false,
 "name": &"dead",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhi4k")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -183,19 +196,21 @@ func _physics_process(delta: float) -> void:
 	
 "
 
-[node name="NPC" type="CharacterBody2D" groups=["NPC"]]
+[node name="NPC" type="CharacterBody2D" groups=["Enemy", "NPC"]]
 y_sort_enabled = true
 position = Vector2(0, -8)
-collision_layer = 166
-collision_mask = 39
+collision_layer = 39
+collision_mask = 7
 script = ExtResource("1_smya3")
-max_health = 30
+max_health = 50
+damage_to_player = 20
 acceleration = 2.0
+loot_stacks = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_2piij")
-animation = &"chase"
+animation = &"hit"
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.560784)
@@ -250,7 +265,8 @@ health_system = NodePath("../../HealthSystem")
 audio = NodePath("../../NPCAudioStream")
 
 [node name="DetectionArea" type="Area2D" parent="."]
-collision_layer = 160
+visible = false
+collision_layer = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 rotation = -1.5708
@@ -264,10 +280,10 @@ z_index = 2
 position = Vector2(-1, -9)
 texture = ExtResource("9_4sdyu")
 
-[node name="HealthSystem" parent="." instance=ExtResource("10_dm4td")]
-max_health = 30
+[node name="HealthSystem" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("10_dm4td")]
+actor = NodePath("..")
 
-[node name="EnemyHealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio")]
+[node name="HealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio")]
 visible = false
 z_index = 1
 custom_minimum_size = Vector2(40, 5)
@@ -283,6 +299,13 @@ show_percentage = false
 script = ExtResource("11_yfq8g")
 health_system = NodePath("../HealthSystem")
 enemy_audio = NodePath("../NPCAudioStream")
+
+[node name="HurtBox" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 6.5)
+shape = ExtResource("17_2r6fw")
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

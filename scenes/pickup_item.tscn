@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bpgmorog7pln8"]
 
 [ext_resource type="Script" path="res://scripts/pickup_item.gd" id="1_fcatf"]
-[ext_resource type="Texture2D" uid="uid://jvixwfkpw4hd" path="res://resources/weapons/stick/SpriteInHand.png" id="2_m2k04"]
-[ext_resource type="Shape2D" uid="uid://cid3dgqfd3ahg" path="res://resources/weapons/stick/stick_weapon_collision_shape.tres" id="3_s0vnv"]
+[ext_resource type="Texture2D" uid="uid://c0ddm7c6yggso" path="res://assets/Items/Treasure/GoldCoin.png" id="2_r30q4"]
+[ext_resource type="Shape2D" uid="uid://d1t0ce2q6gmyj" path="res://resources/souls/souls_ground_collision_shape.tres" id="3_nq35e"]
 
 [node name="PickupItem" type="Area2D"]
 y_sort_enabled = true
@@ -11,8 +11,9 @@ script = ExtResource("1_fcatf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 6)
-texture = ExtResource("2_m2k04")
+texture = ExtResource("2_r30q4")
+region_rect = Rect2(0, 0, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10.5)
-shape = ExtResource("3_s0vnv")
+position = Vector2(0, 6)
+shape = ExtResource("3_nq35e")

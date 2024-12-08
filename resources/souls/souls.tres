@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://bca88hk1myjti"]
+
+[ext_resource type="Script" path="res://scripts/inventory_item.gd" id="1_5o4j4"]
+[ext_resource type="Shape2D" uid="uid://d1t0ce2q6gmyj" path="res://resources/souls/souls_ground_collision_shape.tres" id="1_wysva"]
+[ext_resource type="Texture2D" uid="uid://dp43605obt8ux" path="res://assets/Actor/Monsters/Spirit/SpriteSheet.png" id="2_j5stc"]
+
+[resource]
+script = ExtResource("1_5o4j4")
+slot_type = "NotEquipable"
+ground_collision_shape = ExtResource("1_wysva")
+name = ""
+texture = ExtResource("2_j5stc")
+max_stacks = 9999
+price = 1

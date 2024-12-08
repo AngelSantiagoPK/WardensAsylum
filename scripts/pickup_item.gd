@@ -13,12 +13,6 @@ func _ready() -> void:
 	collision_shape_2D.shape = inventory_item.ground_collision_shape
 
 
-
-func _process(delta: float) -> void:
-	pass
-
-
-
 func _disable_collision():
 	collision_shape_2D.disabled = true
 	

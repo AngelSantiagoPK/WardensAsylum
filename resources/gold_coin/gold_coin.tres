@@ -10,5 +10,5 @@ slot_type = "NotEquipable"
 ground_collision_shape = ExtResource("1_6v0x1")
 name = "Gold"
 texture = ExtResource("3_4deb4")
-max_stacks = 100
+max_stacks = 1
 price = 1
