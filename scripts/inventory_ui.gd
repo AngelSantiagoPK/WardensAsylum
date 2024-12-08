@@ -83,5 +83,5 @@ func set_selected_jutsu_slot(index: int):
 
 
 
-func toggle_jutsu_ui(is_visible: bool):
-	jutsu_ui.visible = is_visible
+func toggle_jutsu_ui(ui_is_visible: bool):
+	jutsu_ui.visible = ui_is_visible

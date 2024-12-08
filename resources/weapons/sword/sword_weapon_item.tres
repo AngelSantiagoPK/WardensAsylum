@@ -7,8 +7,8 @@
 
 [resource]
 script = ExtResource("2_f1lpc")
-damage = 15
-stamina_cost = 2
+damage = 25
+stamina_cost = 30
 in_hand_texture = ExtResource("1_xrork")
 collision_shape = ExtResource("1_coear")
 attack_type = "Melee"

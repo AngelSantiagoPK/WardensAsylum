@@ -14,12 +14,13 @@ func _ready() -> void:
 
 func enter():
 	set_physics_process(true)
-	audio.stream = preload("res://assets/Sounds/Game/Strange.wav")
-	audio.play()
-	await audio.finished
-	hit_finished.emit()
+	animator.play('hit')
+	Global.score += 10
 
 
 func exit():
 	set_physics_process(false)
-	
+
+func _physics_process(delta: float) -> void:
+	await animator.animation_finished
+	hit_finished.emit()

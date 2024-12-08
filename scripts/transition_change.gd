@@ -6,6 +6,8 @@ class_name TransitionManager
 signal transition_done
 
 # VARIABLES
+@export var fade_in_time = 1.0
+@export var fade_out_time = 1.0
 @export var transition_time = 1.0
 
 @onready var color_rect: ColorRect = $ColorRect
@@ -26,8 +28,9 @@ func fade_out():
 	color_rect.visible = true
 	
 	var tween = get_tree().create_tween()
-	tween.tween_property(color_rect, "modulate:a", 1, transition_time)
+	tween.tween_property(color_rect, "modulate:a", 1, fade_out_time)
 	tween.finished.connect(on_fade_out_completed)
+	
 	#end
 
 
@@ -40,9 +43,10 @@ func on_fade_out_completed():
 func fade_in():
 	color_rect.modulate.a = 1
 	var tween = get_tree().create_tween()
-	tween.tween_property(color_rect, "modulate:a", 0, transition_time)
+	tween.tween_property(color_rect, "modulate:a", 0, fade_in_time)
 	
 	tween.finished.connect(on_fade_in_finished)
+	
 	#end
 
 
@@ -52,10 +56,10 @@ func on_fade_in_finished():
 	#end
 
 
-func change_scene(next_scene_path: String):
+func change_scene(scene_path: String):
 	if is_transitioning:
 		return
 	
-	self.next_scene_path = next_scene_path
+	self.next_scene_path = scene_path
 	fade_out()
 	#end

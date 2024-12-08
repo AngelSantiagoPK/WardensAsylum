@@ -4,8 +4,10 @@ class_name HealthSystem
 
 signal died
 signal damage_taken(current_health: int)
+signal hit
 
-@export var max_health: int
+@export var actor: Node2D
+@onready var max_health: int = actor.max_health
 var current_health: int
 
 
@@ -15,11 +17,9 @@ func init(health: int):
 
 
 func apply_damage(damage: int):
-	var tween = create_tween()
-	tween.tween_property(self, "value", current_health - damage, 0.5)
-	
 	current_health = current_health - damage
-	damage_taken.emit(damage)
+	damage_taken.emit(current_health)
+	hit.emit()
 	
 	if current_health <= 0:
 		died.emit()

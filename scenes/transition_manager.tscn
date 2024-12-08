@@ -4,6 +4,8 @@
 
 [node name="TransitionManager" type="CanvasLayer"]
 script = ExtResource("1_bkxn5")
+fade_in_time = 3.0
+fade_out_time = 2.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

@@ -133,7 +133,7 @@ func chase_target(delta: float):
 	if target == null:
 		return
 		
-	velocity = position.direction_to(target.global_position) * speed
+	velocity = position.direction_to(target.global_position) * speed * delta
 	
 	if position.distance_to(target.global_position) > 1:
 		move_and_slide()

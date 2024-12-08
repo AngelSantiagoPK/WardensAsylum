@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://rw8y3keu1b2i"]
+[gd_scene load_steps=40 format=3 uid="uid://rw8y3keu1b2i"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ncqe7"]
 [ext_resource type="Texture2D" uid="uid://crkdiyxx2khl0" path="res://assets/Actor/Characters/Knight/SpriteSheet.png" id="1_qxfs4"]
@@ -63,6 +63,14 @@ region = Rect2(0, 32, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_atys3"]
 atlas = ExtResource("1_qxfs4")
 region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukyn8"]
+atlas = ExtResource("1_qxfs4")
+region = Rect2(16, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0h5yi"]
+atlas = ExtResource("1_qxfs4")
+region = Rect2(32, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_smwhh"]
 atlas = ExtResource("1_qxfs4")
@@ -190,6 +198,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ukyn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0h5yi")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 0.5
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_smwhh")
 }],
 "loop": false,
@@ -258,7 +277,7 @@ animations = [{
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 y_sort_enabled = true
 position = Vector2(0, 1)
-collision_mask = 70
+collision_mask = 326
 script = ExtResource("1_ncqe7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -268,7 +287,7 @@ animation = &"dead"
 autoplay = "front_idle"
 script = ExtResource("3_2l827")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
 position = Vector2(0, -8)
 shape = ExtResource("4_ogu7s")
 
@@ -283,11 +302,11 @@ drag_top_margin = 0.0
 drag_right_margin = 0.0
 drag_bottom_margin = 0.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["Player"]]
 position = Vector2(0, -9)
 collision_mask = 40
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Player"]]
 position = Vector2(0, 1)
 shape = ExtResource("4_ogu7s")
 
@@ -327,15 +346,10 @@ collision_mask = 32
 [node name="JutsuSystem" type="Node" parent="."]
 script = ExtResource("9_eglbx")
 
-[node name="HealthSystem" parent="." instance=ExtResource("10_wymv7")]
+[node name="HealthSystem" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("10_wymv7")]
+actor = NodePath("..")
 
 [node name="StaminaSystem" parent="." instance=ExtResource("11_4th3k")]
-
-[node name="Timers" type="Node" parent="."]
-
-[node name="HitStopTimer" type="Timer" parent="Timers"]
-wait_time = 0.5
-one_shot = true
 
 [node name="PlayerAudio" type="AudioStreamPlayer2D" parent="."]
 bus = &"SFX"

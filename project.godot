@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="ZeldaGame"
+config/name="Wardens Asylum"
 config/tags=PackedStringArray("game", "project", "tutorial")
-run/main_scene="res://scenes/levels/starting_area.tscn"
+run/main_scene="res://resources/UI/start_screen/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 
 TransitionChangeManager="*res://scenes/transition_manager.tscn"
 FreezeEngineManager="*res://singletons/freeze_engine.gd"
+Global="*res://singletons/Global.gd"
 
 [display]
 

@@ -20,7 +20,7 @@ func _ready() -> void:
 func enter():
 	set_physics_process(true)
 	emoter.texture = preload("res://assets/Ui/Emote/emote22.png")
-	emoter.visible = true
+	emoter.visible = false
 	animator.play("chase")
 	audio.stream = preload("res://assets/Sounds/Game/Voice1.wav")
 	audio.pitch_scale = randf_range(1, 1.2)

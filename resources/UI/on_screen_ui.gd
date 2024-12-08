@@ -23,8 +23,8 @@ func equip_item(item: InventoryItem, slot_to_equip: String):
 
 
 
-func toggle_jutsu_slot(is_visible: bool, ui_texture: Texture):
-	jutsu_slot.visible = is_visible
+func toggle_jutsu_slot(slot_is_visible: bool, ui_texture: Texture):
+	jutsu_slot.visible = slot_is_visible
 	if is_visible:
 		jutsu_slot.set_equipment_texture(ui_texture)
 
@@ -40,9 +40,9 @@ func init_health_bar(max_health: int):
 
 
 
-func apply_damage_to_health(damage:int):
+func apply_damage(current_health:int):
 	var tween = create_tween()
-	tween.tween_property(player_health_bar, "value", player_health_bar.value - damage, 0.5)
+	tween.tween_property(player_health_bar, "value", current_health, 0.5)
 
 
 func init_stamina_bar(max_stamina: int):
