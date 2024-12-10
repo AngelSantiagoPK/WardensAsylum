@@ -3,7 +3,6 @@ extends State
 
 @export var animator: AnimatedSprite2D
 @export var actor: NPC
-@export var emoter: Sprite2D
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -11,16 +10,12 @@ func _ready() -> void:
 
 func enter():
 	set_physics_process(true)
-	emoter.texture = preload("res://assets/Ui/Emote/emote19.png")
-	emoter.visible = false
 	animator.play("wander")
 	
 	if actor.velocity == Vector2.ZERO:
 		actor.velocity = Vector2.RIGHT.rotated(randf_range(0, TAU)) * actor.max_speed
 
-
 func exit():
-	emoter.visible = false
 	set_physics_process(false)
 
 func _physics_process(delta: float) -> void:

@@ -11,11 +11,11 @@ func _ready() -> void:
 	visible = false
 	max_value = health_system.max_health
 	value = max_value
-	health_system.damage_taken.connect(on_damage_taken)
+	health_system.update_health.connect(hit_and_update)
 	#end
 
 
-func on_damage_taken(current_health: int):
+func hit_and_update(current_health: int):
 	if !visible:
 		visible = true
 	

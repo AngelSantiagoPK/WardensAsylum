@@ -60,7 +60,10 @@ func play_idle_animation():
 func play_attack_animation():
 	var direction = animation.split("_")[0]
 	attack_direction = direction
+	if attack_direction == "hit":
+		return
 	play(DIRECTION_TO_ATTACK_ANIMATION[direction])
+	await animation_finished
 
 
 

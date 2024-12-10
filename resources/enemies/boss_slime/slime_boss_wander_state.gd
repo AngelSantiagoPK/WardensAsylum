@@ -5,8 +5,6 @@ extends State
 @export var actor: CharacterBody2D
 @onready var test_label: Label = $"../../TestLabel"
 
-signal target_found
-
 func _ready() -> void:
 	set_physics_process(false)
 

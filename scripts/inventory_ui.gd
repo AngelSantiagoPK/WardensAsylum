@@ -61,7 +61,6 @@ func update_stack_at_slot_index(stacks_value: int, inventory_slot_index: int):
 func clear_slot_at_index(index: int):
 	# clear the ui so that inventory ui matches the actual data
 	var empty_inventory_slot = INVENTORY_SLOT_SCENE.instantiate()
-	toggle()
 	empty_inventory_slot.drop_item.connect(func (): drop_item_on_the_ground.emit(index))
 	empty_inventory_slot.equip_item.connect(func (slot_to_equip: String): equip_item.emit(index, slot_to_equip))
 	

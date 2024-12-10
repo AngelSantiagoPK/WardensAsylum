@@ -1,9 +1,11 @@
-[gd_scene load_steps=22 format=4 uid="uid://d4lpcwk7x6u0r"]
+[gd_scene load_steps=20 format=4 uid="uid://d4lpcwk7x6u0r"]
 
 [ext_resource type="Script" path="res://scenes/levels/starting_area.gd" id="1_5205f"]
 [ext_resource type="TileSet" uid="uid://ch8cmv46bdq6i" path="res://tiles/tileset.tres" id="1_c24xd"]
 [ext_resource type="PackedScene" uid="uid://rw8y3keu1b2i" path="res://resources/player/player.tscn" id="2_5svqh"]
+[ext_resource type="Texture2D" uid="uid://4yr1a7t4plm4" path="res://resources/npcs/key_light.tres" id="3_grmtc"]
 [ext_resource type="PackedScene" uid="uid://byow7guunuf21" path="res://resources/npcs/npc.tscn" id="3_o8hkm"]
+[ext_resource type="Texture2D" uid="uid://fjfddd6xkm1t" path="res://resources/npcs/npc_light.tres" id="3_rl7tl"]
 [ext_resource type="PackedScene" uid="uid://bpgmorog7pln8" path="res://scenes/pickup_item.tscn" id="3_unowp"]
 [ext_resource type="Resource" uid="uid://bxx2oc55jb6fj" path="res://resources/weapons/sword/sword_inventory_item.tres" id="4_tq020"]
 [ext_resource type="PackedScene" uid="uid://x2gm3mi7q80i" path="res://resources/enemies/boss_slime/boss_slime.tscn" id="6_cn6id"]
@@ -14,26 +16,6 @@
 [ext_resource type="AudioStream" uid="uid://dx2arga7lv4wy" path="res://assets/Musics/21 - Dungeon.ogg" id="13_woraq"]
 [ext_resource type="PackedScene" uid="uid://ckpvefjc8e5bd" path="res://resources/weather/weather_system.tscn" id="18_5ygrw"]
 [ext_resource type="Resource" uid="uid://drsgh8m1qfebx" path="res://resources/gold_coin/gold_coin.tres" id="18_eltrx"]
-
-[sub_resource type="Gradient" id="Gradient_uupke"]
-offsets = PackedFloat32Array(0, 0.766268)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_w3c1a"]
-gradient = SubResource("Gradient_uupke")
-fill = 1
-fill_from = Vector2(0.512821, 0.459402)
-
-[sub_resource type="Gradient" id="Gradient_hcqgd"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_clxiw"]
-gradient = SubResource("Gradient_hcqgd")
-width = 200
-height = 200
-fill = 1
-fill_from = Vector2(0.470085, 0.472222)
-fill_to = Vector2(0.8, 0)
 
 [sub_resource type="Animation" id="Animation_k0e4l"]
 length = 0.001
@@ -53,6 +35,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_acv10"]
 resource_name = "drop_key"
 length = 5.0
+step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -60,10 +43,24 @@ tracks/0/path = NodePath("Pickups/CellKeyPickUp:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 4.03333, 4.6, 4.8, 5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 4.03333, 4.6, 4.7, 4.8, 4.88, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(3, -134), Vector2(3, -134), Vector2(3, -17), Vector2(3, -24), Vector2(3, -17)]
+"values": [Vector2(3, -134), Vector2(3, -134), Vector2(3, -12), Vector2(3, -20), Vector2(3, -12), Vector2(3, -18), Vector2(3, -17)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_key_drop"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0vxo1"]
@@ -96,117 +93,99 @@ tile_set = ExtResource("1_c24xd")
 
 [node name="Lights" type="Node" parent="MapLayers"]
 
-[node name="PointLight2D" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-134, -131)
+[node name="CellLight" type="PointLight2D" parent="MapLayers/Lights"]
+z_index = -1
+position = Vector2(8, -7)
 color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
+texture = ExtResource("3_grmtc")
 
 [node name="PointLight2D2" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-134, -211)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
+position = Vector2(-136, -128)
+texture = ExtResource("3_rl7tl")
 
 [node name="PointLight2D3" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-6, -211)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
+position = Vector2(-326, 63)
+texture = ExtResource("3_rl7tl")
 
 [node name="PointLight2D4" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-6, -307)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
+position = Vector2(-422, 62)
+texture = ExtResource("3_rl7tl")
 
 [node name="PointLight2D5" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-134, -307)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
-
-[node name="PointLight2D6" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-262, -307)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
-
-[node name="PointLight2D7" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-262, -212)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
-
-[node name="PointLight2D8" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-326, 61)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
+position = Vector2(-534, -162)
+texture = ExtResource("3_rl7tl")
 
 [node name="PointLight2D9" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-422, 61)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
+position = Vector2(-502, -162)
+texture = ExtResource("3_rl7tl")
+
+[node name="PointLight2D6" type="PointLight2D" parent="MapLayers/Lights"]
+position = Vector2(-487, -303)
+texture = ExtResource("3_rl7tl")
 
 [node name="PointLight2D10" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-539, -163)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
+position = Vector2(-582, -255)
+texture = ExtResource("3_rl7tl")
 
-[node name="PointLight2D12" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-582, -260)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
-
-[node name="PointLight2D13" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-486, -307)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
-
-[node name="PointLight2D14" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-373, -307)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
-
-[node name="PointLight2D15" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-373, -211)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
-
-[node name="PointLight2D16" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-134, -420)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
-
-[node name="PointLight2D17" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-22, -420)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
-
-[node name="PointLight2D18" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(0, -7)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
+[node name="PointLight2D7" type="PointLight2D" parent="MapLayers/Lights"]
+position = Vector2(-134, -417)
+texture = ExtResource("3_rl7tl")
 
 [node name="PointLight2D11" type="PointLight2D" parent="MapLayers/Lights"]
-position = Vector2(-484, -163)
-color = Color(0.8, 0.8, 0.8, 1)
-texture = SubResource("GradientTexture2D_w3c1a")
+position = Vector2(-22, -416)
+texture = ExtResource("3_rl7tl")
+
+[node name="PointLight2D8" type="PointLight2D" parent="MapLayers/Lights"]
+position = Vector2(-374, -305)
+texture = ExtResource("3_rl7tl")
+
+[node name="PointLight2D13" type="PointLight2D" parent="MapLayers/Lights"]
+position = Vector2(-262, -305)
+texture = ExtResource("3_rl7tl")
+
+[node name="PointLight2D14" type="PointLight2D" parent="MapLayers/Lights"]
+position = Vector2(-134, -305)
+texture = ExtResource("3_rl7tl")
+
+[node name="PointLight2D15" type="PointLight2D" parent="MapLayers/Lights"]
+position = Vector2(-8, -304)
+texture = ExtResource("3_rl7tl")
+
+[node name="PointLight2D12" type="PointLight2D" parent="MapLayers/Lights"]
+position = Vector2(-374, -208)
+texture = ExtResource("3_rl7tl")
+
+[node name="PointLight2D16" type="PointLight2D" parent="MapLayers/Lights"]
+position = Vector2(-262, -209)
+texture = ExtResource("3_rl7tl")
+
+[node name="PointLight2D17" type="PointLight2D" parent="MapLayers/Lights"]
+position = Vector2(-135, -208)
+texture = ExtResource("3_rl7tl")
+
+[node name="PointLight2D18" type="PointLight2D" parent="MapLayers/Lights"]
+position = Vector2(-7, -208)
+texture = ExtResource("3_rl7tl")
 
 [node name="Player" parent="." instance=ExtResource("2_5svqh")]
-position = Vector2(38, -27)
+position = Vector2(-40, -27)
+knockback_power = 500
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
-visible = false
-position = Vector2(0, -7)
-color = Color(0.835294, 0.835294, 0.835294, 1)
-texture = SubResource("GradientTexture2D_clxiw")
+texture = ExtResource("3_rl7tl")
 
 [node name="Enemies" type="Node" parent="."]
 
 [node name="NPC3" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("3_o8hkm")]
-position = Vector2(-292, -17)
+position = Vector2(-303, 79)
 target = NodePath("../../Player")
 
 [node name="NPC4" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("3_o8hkm")]
-position = Vector2(-396, -17)
+position = Vector2(-398, 79)
 target = NodePath("../../Player")
 
 [node name="NPC5" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("3_o8hkm")]
-position = Vector2(-516, -156)
+position = Vector2(-518, -138)
 target = NodePath("../../Player")
 
 [node name="NPC6" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("3_o8hkm")]
@@ -239,8 +218,7 @@ target = NodePath("../../Player")
 
 [node name="BossSlime" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("6_cn6id")]
 position = Vector2(-148, -253)
-max_health = 350
-max_speed = 50.0
+collision_mask = 39
 damage_to_player = 10
 target = NodePath("../../Player")
 item_to_drop = ExtResource("18_eltrx")
@@ -250,7 +228,7 @@ loot_stacks = 100
 
 [node name="StickPickUp" parent="Pickups" instance=ExtResource("3_unowp")]
 z_index = 1
-position = Vector2(-160, -112)
+position = Vector2(-160, -102)
 inventory_item = ExtResource("7_d7ejl")
 
 [node name="CellKeyPickUp" parent="Pickups" instance=ExtResource("3_unowp")]
@@ -270,7 +248,7 @@ inventory_item = ExtResource("4_tq020")
 [node name="POI" type="Node" parent="."]
 
 [node name="PlayerSpawnPoint" type="Marker2D" parent="POI"]
-position = Vector2(41, -4)
+position = Vector2(-38, 19)
 
 [node name="LockedDoor" parent="POI" node_paths=PackedStringArray("player") instance=ExtResource("12_f5aq3")]
 position = Vector2(-86, 0)
@@ -295,5 +273,7 @@ libraries = {
 }
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-color = Color(0.648078, 0.648078, 0.648078, 1)
+color = Color(0.544975, 0.544974, 0.544974, 1)
 blend_mode = 1
+
+[node name="LevelSFX" type="AudioStreamPlayer2D" parent="."]

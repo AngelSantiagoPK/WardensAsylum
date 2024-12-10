@@ -22,15 +22,12 @@ var can_attack = true
 func _ready() -> void:
 	animated_sprite_2d.attack_animation_finished.connect(on_attack_animation_finished)
 
-func _physics_process(delta: float) -> void:
-	check_input()
 
-
-func check_input():
-	if Input.is_action_just_pressed("right_hand_action"):
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
 		perform_action(right_weapon, right_hand_weapon_sprite, right_hand_collision_shape_2d)
 		
-	if Input.is_action_just_pressed("left_hand_action"):
+	if event.is_action_pressed("ui_cancel"):
 		perform_action(left_weapon, left_hand_weapon_sprite, left_hand_collision_shape_2d)
 
 
@@ -46,15 +43,16 @@ func perform_action(weapon: WeaponItem, sprite: Sprite2D, collision_shape: Colli
 		
 		var attack_direction = animated_sprite_2d.attack_direction
 		
-		if weapon == null: 
+		if weapon == null || stamina_system.is_stunned: 
 			return
 		
-			
-		if stamina_system.current_stamina < weapon.stamina_cost:
-			stamina_system.stamina_regen()
-			on_screen_ui.update_stamina_bar(stamina_system.current_stamina)
-			return
-		stamina_system.use_stamina(weapon.stamina_cost)
+		
+		if stamina_system.current_stamina > 0:
+			stamina_system.use_stamina(weapon.stamina_cost)
+		else:
+			stamina_system.set_stunned()
+			#on_screen_ui.update_stamina_bar(stamina_system.current_stamina)
+
 		
 		if weapon.prefered_weapon_sound != null:
 			player_audio.stream = weapon.prefered_weapon_sound

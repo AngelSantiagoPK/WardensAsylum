@@ -11,12 +11,17 @@ class_name Player
 @onready var on_screen_ui: OnScreenUI = $OnScreenUi
 @onready var combat_system: CombatSystem = $CombatSystem
 @onready var player_audio: AudioStreamPlayer2D = $PlayerAudio
+@onready var area_2d: Area2D = $Area2D
+@onready var invincibility_timer: Timer = $InvincibilityTimer
+@onready var hit_animator: AnimationPlayer = $HitAnimator
 
 @export_group("Player Stats")
 @export var SPEED = 4000.0
 @export var max_health = 100
 @export var stamina = 100
+@export var knockback_power = 100
 @export_group("")
+var is_invincible = false
 
 const PLAYER_BREADCRUMB_SCENE = preload("res://resources/player/player_breadcrumb.tscn")
 
@@ -25,7 +30,7 @@ func _ready() -> void:
 	# init health system
 	health_system.init(max_health)
 	health_system.died.connect(on_player_dead)
-	health_system.damage_taken.connect(on_damage_taken)
+	health_system.update_health.connect(on_damage_taken)
 	# init stamina system
 	stamina_system.init(stamina)
 	stamina_system.drained.connect(on_stamina_drained)
@@ -70,20 +75,23 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			
 		area.queue_free()
 	
+	# check for invincibility frame
+	if is_invincible == true:
+		return
+	
 	if area.get_parent().is_in_group("Enemy"):
 		var damage_to_player = area.get_parent().damage_to_player
-	
 		health_system.apply_damage(damage_to_player)
-	
+		add_knockback(area.get_parent().velocity)
 	#end
 
 
 func on_damage_taken(current_health: int):
 	on_screen_ui.apply_damage(current_health)
-	player_audio.stream = preload("res://assets/Sounds/Game/Voice3.wav")
+	start_invincibility_frame()
+	player_audio.stream = preload("res://assets/Sounds/Game/Explosion.wav")
 	player_audio.play()
-	animated_sprite_2D.play('hit')
-	await animated_sprite_2D.animation_finished
+	hit_animator.play("hit_flash")
 	FreezeEngineManager.frameFreeze()
 	#end
 
@@ -115,3 +123,21 @@ func on_stamina_drained():
 
 func on_regen():
 	on_screen_ui.update_stamina_bar(stamina)
+
+func add_knockback(enemy_velocity: Vector2):
+	# find other body direction
+	var knock_direction = (enemy_velocity - velocity).normalized() * knockback_power
+	
+	velocity = knock_direction
+	move_and_slide()
+	pass
+
+func start_invincibility_frame():
+	area_2d.set_collision_layer_value(1, false)
+	is_invincible = true
+	invincibility_timer.start()
+
+
+func _on_invincibility_timer_timeout() -> void:
+	area_2d.set_collision_layer_value(1, true)
+	is_invincible = false
