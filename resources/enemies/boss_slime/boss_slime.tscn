@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://x2gm3mi7q80i"]
+[gd_scene load_steps=68 format=3 uid="uid://x2gm3mi7q80i"]
 
 [ext_resource type="Script" path="res://resources/enemies/boss_slime/boss_slime.gd" id="1_6ef3h"]
 [ext_resource type="Script" path="res://scripts/health_system.gd" id="1_wd0eo"]
@@ -16,12 +16,14 @@
 [ext_resource type="Script" path="res://resources/npcs/npc_state_machine.gd" id="13_3tyn4"]
 [ext_resource type="Script" path="res://resources/enemies/boss_slime/slime_boss_idle_state.gd" id="14_184pv"]
 [ext_resource type="Script" path="res://resources/enemies/boss_slime/slime_boss_wander_state.gd" id="15_c7nam"]
-[ext_resource type="Shape2D" uid="uid://dehu6kpyjuery" path="res://resources/enemies/boss_slime/slime_boss_slam_collision_area.tres" id="15_mb41e"]
 [ext_resource type="Script" path="res://resources/enemies/boss_slime/slime_boss_hit_state.gd" id="16_ufvxn"]
 [ext_resource type="Script" path="res://resources/enemies/boss_slime/slime_boss_chase_state.gd" id="17_mcsta"]
 [ext_resource type="Shape2D" uid="uid://crwgmvonotm6o" path="res://resources/enemies/boss_slime/slime_boss_detection_shape.tres" id="19_fmvif"]
 [ext_resource type="Script" path="res://resources/enemies/boss_slime/slime_boss_slam_state.gd" id="19_xxamj"]
 [ext_resource type="Script" path="res://resources/enemies/boss_slime/slime_boss_dead_state.gd" id="20_tfte3"]
+[ext_resource type="Shape2D" uid="uid://q3q1nb4rytvw" path="res://resources/enemies/boss_slime/slime_boss_slam_collision.tres" id="22_6n0yy"]
+[ext_resource type="Material" uid="uid://cogs06c1kkje0" path="res://resources/enemies/boss_slime/boss_slam_particles.tres" id="23_lkosr"]
+[ext_resource type="Texture2D" uid="uid://t83tnad11kw2" path="res://assets/FX/Particle/Clouds.png" id="24_vkbys"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_abt7f"]
 atlas = ExtResource("2_rsswo")
@@ -372,7 +374,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -384,7 +386,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -422,6 +424,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BossParticles:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_ibhf8"]
 resource_name = "new_animation"
@@ -458,7 +472,7 @@ tracks/2/path = NodePath("AttackArea2D/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.2, 1.4, 1.8),
+"times": PackedFloat32Array(0.2, 1.4, 1.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -523,6 +537,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1), Vector2(1, 1)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BossParticles:emitting")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vrmks"]
 _data = {
@@ -533,8 +559,8 @@ _data = {
 [node name="BossSlime" type="CharacterBody2D" groups=["Enemy"]]
 modulate = Color(1, 1, 1, 0.945098)
 y_sort_enabled = true
-collision_layer = 39
-collision_mask = 39
+collision_layer = 32
+collision_mask = 7
 script = ExtResource("1_6ef3h")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
@@ -574,47 +600,20 @@ position = Vector2(0, -6)
 rotation = -1.5708
 shape = ExtResource("7_hdl1p")
 
-[node name="HurtBox" type="Area2D" parent="." groups=["Enemy"]]
-collision_layer = 32
-
-[node name="IdleCollisionBox" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, -6)
-rotation = -1.5708
-shape = ExtResource("12_vpg88")
-disabled = true
-
-[node name="DetectionArea" type="Area2D" parent="."]
-collision_layer = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(0, -6)
-rotation = -1.5708
-shape = ExtResource("19_fmvif")
-disabled = true
-
-[node name="AttackArea2D" type="Area2D" parent="." groups=["Enemy"]]
-position = Vector2(0, -5)
-collision_layer = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
-shape = ExtResource("15_mb41e")
-disabled = true
-
-[node name="NPCAudioStream" type="AudioStreamPlayer2D" parent="."]
-
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("13_3tyn4")
-state = NodePath("idle")
+state = NodePath("wander")
 
 [node name="idle" type="Node" parent="FSM" node_paths=PackedStringArray("animator", "actor")]
 script = ExtResource("14_184pv")
 animator = NodePath("../../AnimatedSprite2D")
 actor = NodePath("../..")
 
-[node name="hit" type="Node" parent="FSM" node_paths=PackedStringArray("animator", "actor")]
+[node name="hit" type="Node" parent="FSM" node_paths=PackedStringArray("animator", "actor", "hurt_box")]
 script = ExtResource("16_ufvxn")
 animator = NodePath("../../AnimatedSprite2D")
 actor = NodePath("../..")
+hurt_box = NodePath("../../HurtBox")
 
 [node name="wander" type="Node" parent="FSM" node_paths=PackedStringArray("animator", "actor")]
 script = ExtResource("15_c7nam")
@@ -623,7 +622,6 @@ actor = NodePath("../..")
 
 [node name="chase" type="Node" parent="FSM" node_paths=PackedStringArray("actor", "animator", "audio")]
 script = ExtResource("17_mcsta")
-closing_range = 10
 actor = NodePath("../..")
 animator = NodePath("../../AnimatedSprite2D")
 audio = NodePath("../../NPCAudioStream")
@@ -639,13 +637,59 @@ script = ExtResource("20_tfte3")
 animator = NodePath("../../AnimatedSprite2D")
 actor = NodePath("../..")
 
+[node name="HurtBox" type="Area2D" parent="." groups=["Enemy"]]
+collision_layer = 32
+
+[node name="IdleCollisionBox" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -8)
+rotation = -1.5708
+shape = ExtResource("12_vpg88")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(0, -6)
+rotation = -1.5708
+shape = ExtResource("19_fmvif")
+
+[node name="AttackArea2D" type="Area2D" parent="." groups=["Enemy"]]
+position = Vector2(0, -5)
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+position = Vector2(0, -1)
+rotation = -1.5708
+scale = Vector2(2, 2)
+shape = ExtResource("22_6n0yy")
+disabled = true
+
+[node name="NPCAudioStream" type="AudioStreamPlayer2D" parent="."]
+
 [node name="TestLabel" type="Label" parent="."]
+visible = false
 offset_left = -20.0
-offset_top = 7.0
+offset_top = -39.0
 offset_right = 20.0
-offset_bottom = 25.0
+offset_bottom = -21.0
+text = "Test"
+horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_vrmks")
 }
+
+[node name="BossParticles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 4
+sub_emitter = NodePath(".")
+process_material = ExtResource("23_lkosr")
+texture = ExtResource("24_vkbys")
+one_shot = true
+explosiveness = 1.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

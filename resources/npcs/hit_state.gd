@@ -5,6 +5,8 @@ extends State
 @export var actor: NPC
 @export var health_system: HealthSystem
 @export var audio: AudioStreamPlayer2D
+@export var particles: GPUParticles2D
+@export var hit_animator: AnimationPlayer
 
 signal hit_finished
 
@@ -14,7 +16,12 @@ func _ready() -> void:
 
 func enter():
 	set_physics_process(true)
+	print_debug("Hit")
+	print_debug("")
 	animator.play('hit')
+	particles.restart()
+	particles.emitting = true
+	hit_animator.play("hit_flash")
 	Global.score += 10
 
 

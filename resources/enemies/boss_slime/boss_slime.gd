@@ -27,21 +27,24 @@ func _ready():
 	health_system.hit.connect(fsm.change_state.bind(hit))
 	health_system.died.connect(fsm.change_state.bind(dead))
 	
-	#idle
-	idle.idle_timeout.connect(fsm.change_state.bind(idle))
-	#wander
-	wander.target_found.connect(fsm.change_state.bind(chase))
-	#hit
-	hit.hit_finished.connect(fsm.change_state.bind(chase))
-	#chase
-	chase.target_lost.connect(fsm.change_state.bind(idle))
+	# behaviors
 	chase.close_to.connect(fsm.change_state.bind(slam))
-	#slam jump
 	slam.slam_finished.connect(fsm.change_state.bind(chase))
-	#death state
+	
+	# hit and deaths
+	hit.hit_finished.connect(fsm.change_state.bind(slam))   
 	dead.death_finished.connect(on_dead)
 
 
 
 func on_dead():
 	queue_free()
+
+
+func _on_detection_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		fsm.change_state(chase)
+
+func _on_detection_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		fsm.change_state(idle)

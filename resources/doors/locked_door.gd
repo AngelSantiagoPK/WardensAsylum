@@ -14,7 +14,7 @@ var is_open: bool = false
 
 
 func _input(event: InputEvent) -> void: 
-	if event.is_action_pressed("shop_toggle") and is_unlockable and has_key:
+	if event.is_action_pressed("ui_accept") and is_unlockable and has_key:
 		unlock_door()
 
 
@@ -54,6 +54,7 @@ func check_inventory():
 	var items = player.inventory.items
 	for i in items.size():
 		if items[i].name == key_name:
+			label.text = "PRESS SPACE"
 			has_key = true
 
 

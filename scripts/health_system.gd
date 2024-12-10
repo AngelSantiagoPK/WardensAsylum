@@ -3,7 +3,7 @@ extends Node
 class_name HealthSystem
 
 signal died
-signal damage_taken(current_health: int)
+signal update_health(current_health: int)
 signal hit
 
 @export var actor: Node2D
@@ -18,9 +18,8 @@ func init(health: int):
 
 func apply_damage(damage: int):
 	current_health = current_health - damage
-	damage_taken.emit(current_health)
+	update_health.emit(current_health)
 	hit.emit()
-	
+
 	if current_health <= 0:
 		died.emit()
-	

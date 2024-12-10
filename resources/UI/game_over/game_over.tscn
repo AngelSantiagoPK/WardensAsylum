@@ -93,7 +93,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
 [node name="RetryButton" type="Button" parent="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -103,7 +103,7 @@ text = "retry"
 flat = true
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

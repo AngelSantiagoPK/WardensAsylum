@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8qgp84jibglb"]
+
+[ext_resource type="Script" path="res://resources/energy_ball/energy_ball.gd" id="1_jde03"]
+[ext_resource type="SpriteFrames" uid="uid://cbi4grelsd6u0" path="res://resources/energy_ball/energy_ball_sprites.tres" id="1_o6rc0"]
+[ext_resource type="Shape2D" uid="uid://dt8mndvr6vuko" path="res://resources/energy_ball/energy_ball_collision.tres" id="2_5sdjc"]
+[ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="4_ows5b"]
+
+[sub_resource type="Gradient" id="Gradient_rpc2y"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l8s5x"]
+gradient = SubResource("Gradient_rpc2y")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.519231, 0.487179)
+fill_to = Vector2(0.769231, 0.239316)
+
+[node name="EnergyBall" type="Area2D" groups=["Enemy"]]
+scale = Vector2(0.279998, 0.279998)
+collision_layer = 32
+collision_mask = 7
+script = ExtResource("1_jde03")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_o6rc0")
+frame_progress = 0.634453
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_5sdjc")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.686197, 0.773288, 0.214129, 1)
+texture = SubResource("GradientTexture2D_l8s5x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 32.143)
+scale = Vector2(1.14286, 1)
+texture = ExtResource("4_ows5b")

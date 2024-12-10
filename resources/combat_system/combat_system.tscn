@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg81e08g227tf"]
+
+[ext_resource type="Script" path="res://resources/player/combat_system.gd" id="1_q6nve"]
+
+[node name="CombatSystem" type="Node2D"]
+script = ExtResource("1_q6nve")
+
+[node name="RightHandWeaponSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -1)
+centered = false
+
+[node name="Area2D" type="Area2D" parent="RightHandWeaponSprite"]
+collision_layer = 16
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightHandWeaponSprite/Area2D"]
+
+[node name="LeftHandWeaponSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -1)
+centered = false
+
+[node name="Area2D" type="Area2D" parent="LeftHandWeaponSprite"]
+collision_layer = 16
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftHandWeaponSprite/Area2D"]
+
+[connection signal="body_entered" from="RightHandWeaponSprite/Area2D" to="." method="_on_area_2d_body_entered" binds= ["right"]]
+[connection signal="body_entered" from="LeftHandWeaponSprite/Area2D" to="." method="_on_area_2d_body_entered" binds= ["left"]]

@@ -10,7 +10,6 @@ extends State
 @onready var detection_area: Area2D = $"../../DetectionArea"
 @onready var test_label: Label = $"../../TestLabel"
 
-signal target_lost
 signal close_to
 
 func _ready() -> void:

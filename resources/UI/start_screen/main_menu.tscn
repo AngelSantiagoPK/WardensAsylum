@@ -10,7 +10,7 @@ script/source = "extends Node2D
 
 
 func _on_start_button_pressed() -> void:
-	button_audio.stream = preload(\"res://assets/Sounds/Menu/Menu9.wav\")
+	button_audio.stream = preload(\"res://assets/Sounds/Game/Jump.wav\")
 	button_audio.play()
 	await button_audio.finished
 	TransitionChangeManager.change_scene(\"res://scenes/levels/starting_area.tscn\")
@@ -25,6 +25,7 @@ func _on_exit_button_pressed() -> void:
 "
 
 [node name="Main" type="Node2D"]
+position = Vector2(547, 524)
 script = SubResource("GDScript_l62og")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -81,7 +82,7 @@ custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 
 [node name="StartButton" type="Button" parent="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -91,7 +92,7 @@ text = "start"
 flat = true
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer"]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -105,6 +106,7 @@ position = Vector2(597, 532)
 scale = Vector2(4, 4)
 
 [node name="ButtonAudio" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer/ExitButton" to="." method="_on_exit_button_pressed"]

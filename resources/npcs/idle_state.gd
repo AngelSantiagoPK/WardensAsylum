@@ -3,9 +3,7 @@ extends State
 
 @export var animator: AnimatedSprite2D
 @export var actor: NPC
-@export var emoter: Sprite2D
-
-signal idle_finished
+@export var idle_timer: Timer
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -13,18 +11,17 @@ func _ready() -> void:
 
 func enter():
 	set_physics_process(true)
-	emoter.texture = preload("res://assets/Ui/Emote/emote14.png")
-	emoter.visible = true
+	idle_timer.start()
 	animator.play("idle")
+	actor.velocity += Vector2.ZERO
+	print_debug("Idle")
+	print_debug("")
 
 
 func exit():
-	emoter.visible = false
 	set_physics_process(false)
 
 
 func _physics_process(delta: float) -> void:
-	await get_tree().create_timer(1).timeout
-	idle_finished.emit()
 	pass
 	
