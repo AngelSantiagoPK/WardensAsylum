@@ -27,3 +27,13 @@ func hit_and_update(current_health: int):
 	enemy_audio.stream = preload("res://assets/Sounds/Game/Hit6.wav")
 	enemy_audio.play()
 	#end
+
+
+func heal_and_update(current_health: int):
+	if !visible:
+		visible = true
+	
+	# animates the health bar for enemies
+	var tween = create_tween()
+	tween.tween_property(self, "value", current_health, 0.3)
+	#end

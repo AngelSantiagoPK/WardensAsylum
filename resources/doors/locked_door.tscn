@@ -126,6 +126,7 @@ offset_right = 37.0
 offset_bottom = -13.0
 theme_override_font_sizes/font_size = 12
 text = "LOCKED"
+horizontal_alignment = 1
 
 [node name="DoorAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_gthax")

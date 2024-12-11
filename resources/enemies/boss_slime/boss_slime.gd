@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name SlimeBoss
 
 @export var max_health = 100
-@export var max_speed = 40.0
+@export var max_speed = 30.0
 @export var damage_to_player = 5
 @export var acceleration = 50.0
 @export var target: Node2D
@@ -18,6 +18,8 @@ const PICKUP_ITEM_SCENE = preload("res://scenes/pickup_item.tscn")
 @onready var slam: SlimeBossSlamState = $FSM/slam
 @onready var dead: SlimeBossDeadState = $FSM/dead
 
+@onready var context_map: ContextMap = $ContextMap
+@onready var nav_agent: NavigationAgent2D = $NavAgent
 @onready var health_system: HealthSystem = $HealthSystem
 @onready var hurt_box: Area2D = $HurtBox
 
@@ -32,12 +34,26 @@ func _ready():
 	slam.slam_finished.connect(fsm.change_state.bind(chase))
 	
 	# hit and deaths
-	hit.hit_finished.connect(fsm.change_state.bind(slam))   
 	dead.death_finished.connect(on_dead)
 
 
+func _physics_process(delta: float) -> void:
+	var dir = to_local(nav_agent.get_next_path_position()).normalized()
+
+
+func make_path():
+	nav_agent.target_position = target.global_position
+
+
+func _on_timer_timeout() -> void:
+	context_map.set_target_position(target.position)
+
+func apply_knockback(body_position: Vector2):
+	pass
 
 func on_dead():
+	var drop = PICKUP_ITEM_SCENE.instantiate()
+	drop.position = position
 	queue_free()
 
 
