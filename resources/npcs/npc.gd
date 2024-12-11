@@ -29,18 +29,22 @@ const PICKUP_ITEM_SCENE = preload("res://scenes/pickup_item.tscn")
 # REFERENCES
 @onready var health_system: HealthSystem = $HealthSystem
 @onready var hurt_box: Area2D = $HurtBox
+@onready var detection_area: Area2D = $DetectionArea
+
 
 func _ready():
 	#init health systems
 	health_system.init(max_health)
 	health_system.died.connect(fsm.change_state.bind(dead))
-	health_system.hit.connect(fsm.change_state.bind(hit))
-	hit.hit_finished.connect(fsm.change_state.bind(chase))
+	#health_system.hit.connect(fsm.change_state.bind(hit))
+	hit.hit_finished.connect(fsm.change_state.bind(wander))
 	dead.death_complete.connect(erase_instance)
+
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		fsm.change_state(chase)
+		fsm.change_state.bind(chase)
+		pass
 
 
 func _on_detection_area_body_exited(body: Node2D) -> void:

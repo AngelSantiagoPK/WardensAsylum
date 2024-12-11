@@ -14,9 +14,9 @@ func _ready() -> void:
 func enter():
 	set_physics_process(true)
 	animator.play("chase")
-	audio.stream = preload("res://assets/Sounds/Game/Voice1.wav")
-	audio.pitch_scale = randf_range(1, 1.2)
-	audio.play()
+	#audio.stream = preload("res://assets/Sounds/Game/Voice1.wav")
+	#audio.pitch_scale = randf_range(1, 1.2)
+	#audio.play()
 
 
 func exit():

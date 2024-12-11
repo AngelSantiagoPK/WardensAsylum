@@ -1,0 +1,202 @@
+[gd_scene load_steps=18 format=3 uid="uid://c6kmyj2i5h0da"]
+
+[ext_resource type="Script" path="res://resources/enemies/genius/genius.gd" id="1_qcxey"]
+[ext_resource type="PackedScene" uid="uid://csitq07x285ie" path="res://resources/combat_system/context_map.tscn" id="2_mcnqk"]
+[ext_resource type="SpriteFrames" uid="uid://cwo6a16cpn80e" path="res://resources/enemies/genius/ai_sprite_frames.tres" id="2_wors2"]
+[ext_resource type="Script" path="res://scripts/animation_controller.gd" id="3_hn7d8"]
+[ext_resource type="PackedScene" uid="uid://b5e3dgothl2hh" path="res://scenes/HealthSystem.tscn" id="4_bl3wg"]
+[ext_resource type="PackedScene" uid="uid://djlr8l3go4n1t" path="res://scenes/health_bar.tscn" id="5_jsrdu"]
+[ext_resource type="Script" path="res://resources/npcs/npc_state_machine.gd" id="6_id0ru"]
+[ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="6_rpf7h"]
+[ext_resource type="StyleBox" uid="uid://bo620n6p3x02f" path="res://resources/enemies/genius/ai_health_background.tres" id="7_f3esr"]
+[ext_resource type="StyleBox" uid="uid://b2ipvkjlrlpcj" path="res://resources/enemies/genius/ai_health_fill.tres" id="8_8otm5"]
+[ext_resource type="Shape2D" uid="uid://c0247igrhqm6i" path="res://resources/enemies/genius/ai_hurt_box.tres" id="8_oiifk"]
+[ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="12_ahx2d"]
+[ext_resource type="Material" uid="uid://xmcf4j8jq7q4" path="res://resources/npcs/blood_particles.tres" id="13_sfe6n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nexrx"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_cxkc8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_ggmqh"]
+resource_name = "hit_flash"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.790969, 4.28364e-06, 8.66354e-07, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0, 0.174533, 0.0, -0.174533, 0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 7), Vector2(0, 2), Vector2(0, 7), Vector2(0, 7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ydl22"]
+_data = {
+"RESET": SubResource("Animation_cxkc8"),
+"hit_flash": SubResource("Animation_ggmqh")
+}
+
+[node name="Genius" type="CharacterBody2D" groups=["Danger", "Enemy"]]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -6)
+collision_layer = 38
+collision_mask = 39
+slide_on_ceiling = false
+wall_min_slide_angle = 0.0
+script = ExtResource("1_qcxey")
+max_health = 60
+speed = 30000
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 7)
+sprite_frames = ExtResource("2_wors2")
+animation = &"death"
+offset = Vector2(0, -7)
+script = ExtResource("3_hn7d8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_nexrx")
+
+[node name="ContextMap" parent="." node_paths=PackedStringArray("animator") instance=ExtResource("2_mcnqk")]
+visible = false
+steering_force = 0.7
+animator = NodePath("../AnimatedSprite2D")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 1.0
+target_desired_distance = 1.0
+path_max_distance = 10.0
+navigation_layers = 70
+debug_enabled = true
+debug_use_custom = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="HealthSystem" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("4_bl3wg")]
+actor = NodePath("..")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio") instance=ExtResource("5_jsrdu")]
+offset_left = -6.0
+offset_top = -9.0
+offset_right = -3.0
+offset_bottom = -7.0
+scale = Vector2(4, 1)
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_styles/background = ExtResource("7_f3esr")
+theme_override_styles/fill = ExtResource("8_8otm5")
+value = 100.0
+rounded = false
+fill_mode = 0
+script = ExtResource("6_rpf7h")
+health_system = NodePath("../HealthSystem")
+enemy_audio = NodePath("../AI_Audio")
+
+[node name="AI_Audio" type="AudioStreamPlayer2D" parent="."]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("6_id0ru")
+
+[node name="HurtBox" type="Area2D" parent="." groups=["Enemy"]]
+visible = false
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" groups=["Enemy"]]
+position = Vector2(0, 1)
+shape = ExtResource("8_oiifk")
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.439216)
+show_behind_parent = true
+z_index = -1
+position = Vector2(1, 8)
+texture = ExtResource("12_ahx2d")
+
+[node name="HitAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ydl22")
+}
+
+[node name="ParticleFX" type="GPUParticles2D" parent="."]
+z_index = 1
+emitting = false
+amount = 100
+sub_emitter = NodePath(".")
+process_material = ExtResource("13_sfe6n")
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

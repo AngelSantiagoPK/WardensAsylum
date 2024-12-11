@@ -9,8 +9,11 @@ func _ready() -> void:
 	change_state(state)
 
 
-func change_state(new_state: State):	
-	if state is State and state != previous_state:
+func change_state(new_state: State):
+	if state == new_state:
+		return
+		
+	if new_state is State and state != new_state:
 		state.exit()
 	
 	new_state.enter()

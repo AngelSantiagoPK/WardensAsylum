@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://rw8y3keu1b2i"]
+[gd_scene load_steps=44 format=3 uid="uid://rw8y3keu1b2i"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ncqe7"]
 [ext_resource type="Texture2D" uid="uid://crkdiyxx2khl0" path="res://assets/Actor/Characters/Knight/SpriteSheet.png" id="1_qxfs4"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://resources/player/jutsu_system.gd" id="9_eglbx"]
 [ext_resource type="PackedScene" uid="uid://b5e3dgothl2hh" path="res://scenes/HealthSystem.tscn" id="10_wymv7"]
 [ext_resource type="PackedScene" uid="uid://dleumm4tcc3im" path="res://scenes/stamina_system.tscn" id="11_4th3k"]
+[ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="12_754h3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iabce"]
 atlas = ExtResource("1_qxfs4")
@@ -274,21 +275,6 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="Animation" id="Animation_ggmqh"]
-resource_name = "hit_flash"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.790969, 4.28364e-06, 8.66354e-07, 1), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_cxkc8"]
 length = 0.001
 tracks/0/type = "value"
@@ -304,6 +290,21 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_ggmqh"]
+resource_name = "hit_flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.790969, 4.28364e-06, 8.66354e-07, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ydl22"]
 _data = {
 "RESET": SubResource("Animation_cxkc8"),
@@ -311,10 +312,12 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+z_index = 1
 y_sort_enabled = true
 position = Vector2(0, 1)
 collision_mask = 326
 script = ExtResource("1_ncqe7")
+knockback_power = 60
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -9)
@@ -374,6 +377,13 @@ one_shot = true
 libraries = {
 "": SubResource("AnimationLibrary_ydl22")
 }
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.439216)
+show_behind_parent = true
+z_index = -1
+position = Vector2(0, -2)
+texture = ExtResource("12_754h3")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
