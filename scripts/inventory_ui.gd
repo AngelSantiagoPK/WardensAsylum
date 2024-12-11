@@ -13,6 +13,8 @@ signal jutsu_slot_clicked(index: int)
 	$"%HealSlot"
 ]
 @onready var jutsu_ui: VBoxContainer = %"Jutsu Ui"
+@onready var score_label: Label = $MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/ScoreLabel
+@onready var player_level_label: Label = $MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/PlayerLevelLabel
 
 
 const INVENTORY_SLOT_SCENE = preload("res://resources/UI/inventory_slot.tscn")
@@ -40,6 +42,9 @@ func _ready():
 
 func toggle():
 		visible = !visible
+		if visible:
+			score_label.text = "SCORE: " + str(Global.get_score())
+			player_level_label.text = "LEVEL: " + str(Global.get_player_level())
 
 
 

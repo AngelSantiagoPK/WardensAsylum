@@ -19,7 +19,7 @@ class_name Player
 @export var SPEED = 4000.0
 @export var max_health = 100
 @export var stamina = 100
-@export var knockback_power = 100
+@export var knockback_force = 100
 @export_group("")
 var is_invincible = false
 
@@ -87,12 +87,13 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 
 func on_damage_taken(current_health: int):
+	FreezeEngineManager.frameFreeze()
 	on_screen_ui.apply_damage(current_health)
 	start_invincibility_frame()
 	player_audio.stream = preload("res://assets/Sounds/Game/Explosion.wav")
 	player_audio.play()
 	hit_animator.play("hit_flash")
-	FreezeEngineManager.frameFreeze()
+	
 	#end
 
 
@@ -126,8 +127,7 @@ func on_regen():
 
 func add_knockback(enemy_velocity: Vector2):
 	# find other body direction
-	var knock_direction = (enemy_velocity - velocity).normalized() * knockback_power
-	
+	var knock_direction = (enemy_velocity - velocity).normalized() * knockback_force
 	velocity = knock_direction
 	move_and_slide()
 	pass

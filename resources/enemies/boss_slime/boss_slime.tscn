@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://x2gm3mi7q80i"]
+[gd_scene load_steps=69 format=3 uid="uid://x2gm3mi7q80i"]
 
 [ext_resource type="Script" path="res://resources/enemies/boss_slime/boss_slime.gd" id="1_6ef3h"]
 [ext_resource type="Script" path="res://scripts/health_system.gd" id="1_wd0eo"]
@@ -24,6 +24,7 @@
 [ext_resource type="Shape2D" uid="uid://q3q1nb4rytvw" path="res://resources/enemies/boss_slime/slime_boss_slam_collision.tres" id="22_6n0yy"]
 [ext_resource type="Material" uid="uid://cogs06c1kkje0" path="res://resources/enemies/boss_slime/boss_slam_particles.tres" id="23_lkosr"]
 [ext_resource type="Texture2D" uid="uid://t83tnad11kw2" path="res://assets/FX/Particle/Clouds.png" id="24_vkbys"]
+[ext_resource type="PackedScene" uid="uid://csitq07x285ie" path="res://resources/combat_system/context_map.tscn" id="25_jtgqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_abt7f"]
 atlas = ExtResource("2_rsswo")
@@ -563,42 +564,27 @@ collision_layer = 32
 collision_mask = 7
 script = ExtResource("1_6ef3h")
 
-[node name="ShadowSprite" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.407843)
-scale = Vector2(2, 2)
-texture = ExtResource("6_ja8ey")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_2tu06")
 animation = &"slam"
 
-[node name="HealthSystem" type="Node" parent="." node_paths=PackedStringArray("actor")]
-script = ExtResource("1_wd0eo")
-actor = NodePath("..")
-
-[node name="HealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio")]
-visible = false
-z_index = 1
-custom_minimum_size = Vector2(40, 5)
-offset_left = -14.0
-offset_top = -17.0
-offset_right = 26.0
-offset_bottom = 5.0
-scale = Vector2(0.720002, 0.24)
-theme_override_styles/background = ExtResource("9_r47to")
-theme_override_styles/fill = ExtResource("10_v0uqg")
-step = 1.0
-show_percentage = false
-script = ExtResource("11_h4xrm")
-health_system = NodePath("../HealthSystem")
-enemy_audio = NodePath("../NPCAudioStream")
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.407843)
+scale = Vector2(2, 2)
+texture = ExtResource("6_ja8ey")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
 position = Vector2(0, -6)
 rotation = -1.5708
 shape = ExtResource("7_hdl1p")
+
+[node name="ContextMap" parent="." instance=ExtResource("25_jtgqv")]
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]
+navigation_layers = 6
+avoidance_enabled = true
 
 [node name="FSM" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("13_3tyn4")
@@ -636,6 +622,27 @@ audio = NodePath("../../NPCAudioStream")
 script = ExtResource("20_tfte3")
 animator = NodePath("../../AnimatedSprite2D")
 actor = NodePath("../..")
+
+[node name="HealthSystem" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("1_wd0eo")
+actor = NodePath("..")
+
+[node name="HealthBar" type="ProgressBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio")]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(40, 5)
+offset_left = -14.0
+offset_top = -17.0
+offset_right = 26.0
+offset_bottom = 5.0
+scale = Vector2(0.720002, 0.24)
+theme_override_styles/background = ExtResource("9_r47to")
+theme_override_styles/fill = ExtResource("10_v0uqg")
+step = 1.0
+show_percentage = false
+script = ExtResource("11_h4xrm")
+health_system = NodePath("../HealthSystem")
+enemy_audio = NodePath("../NPCAudioStream")
 
 [node name="HurtBox" type="Area2D" parent="." groups=["Enemy"]]
 collision_layer = 32
@@ -689,7 +696,10 @@ texture = ExtResource("24_vkbys")
 one_shot = true
 explosiveness = 1.0
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
