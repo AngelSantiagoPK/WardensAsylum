@@ -7,9 +7,11 @@ class_name StartingArea
 @onready var key_drop_animator: AnimationPlayer = $KeyDropAnimator
 @onready var level_sfx: AudioStreamPlayer2D = $LevelSFX
 
+
 func _ready() -> void:
 	player.position = player_spawn_point.position
 	key_drop_animator.play("drop_key")
+
 
 func on_key_drop():
 	level_sfx.stream = preload("res://assets/Sounds/Game/Voice3.wav")

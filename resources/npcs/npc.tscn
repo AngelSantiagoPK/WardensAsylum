@@ -208,21 +208,6 @@ animations = [{
 radius = 5.0
 height = 14.0
 
-[sub_resource type="Animation" id="Animation_ggmqh"]
-resource_name = "hit_flash"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.790969, 4.28364e-06, 8.66354e-07, 1), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_cxkc8"]
 length = 0.001
 tracks/0/type = "value"
@@ -236,6 +221,70 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 7)]
+}
+
+[sub_resource type="Animation" id="Animation_ggmqh"]
+resource_name = "hit_flash"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.790969, 4.28364e-06, 8.66354e-07, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0, 0.174533, 0.0, -0.174533, 0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 7), Vector2(0, 2), Vector2(0, 7), Vector2(0, 7)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ydl22"]
@@ -257,8 +306,9 @@ loot_stacks = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
+position = Vector2(0, 7)
 sprite_frames = SubResource("SpriteFrames_2piij")
-animation = &"close_to"
+animation = &"hit"
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.560784)
@@ -302,7 +352,7 @@ hit_box = NodePath("../../HurtBox")
 detection_area = NodePath("../../DetectionArea")
 
 [node name="DetectionArea" type="Area2D" parent="."]
-collision_layer = 128
+collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 rotation = -1.5708

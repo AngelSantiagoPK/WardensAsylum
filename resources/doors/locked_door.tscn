@@ -107,7 +107,7 @@ texture = ExtResource("1_hyhkd")
 region_enabled = true
 region_rect = Rect2(-0.0747018, 0.029644, 16.3329, 16.0773)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Danger"]]
 position = Vector2(0, -8)
 shape = ExtResource("2_pj77w")
 

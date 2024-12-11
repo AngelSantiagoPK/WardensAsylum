@@ -48,7 +48,7 @@ func play_movement_animation(velocity: Vector2):
 	elif velocity.y < 0:
 		item_eject_direction = Vector2.UP
 		play("back_walk")
-
+	
 
 
 func play_idle_animation():
