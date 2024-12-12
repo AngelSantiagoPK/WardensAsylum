@@ -1,29 +1,32 @@
-[gd_scene load_steps=31 format=3 uid="uid://c6kmyj2i5h0da"]
+[gd_scene load_steps=34 format=3 uid="uid://c3hmxuoksmsrh"]
 
-[ext_resource type="Script" path="res://resources/enemies/genius/genius.gd" id="1_qcxey"]
-[ext_resource type="PackedScene" uid="uid://csitq07x285ie" path="res://resources/combat_system/context_map.tscn" id="2_mcnqk"]
-[ext_resource type="SpriteFrames" uid="uid://cwo6a16cpn80e" path="res://resources/enemies/genius/ai_sprite_frames.tres" id="2_wors2"]
-[ext_resource type="Script" path="res://scripts/animation_controller.gd" id="3_hn7d8"]
-[ext_resource type="PackedScene" uid="uid://b5e3dgothl2hh" path="res://scenes/HealthSystem.tscn" id="4_bl3wg"]
-[ext_resource type="PackedScene" uid="uid://djlr8l3go4n1t" path="res://scenes/health_bar.tscn" id="5_jsrdu"]
-[ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="6_rpf7h"]
-[ext_resource type="StyleBox" uid="uid://bo620n6p3x02f" path="res://resources/enemies/genius/ai_health_background.tres" id="7_f3esr"]
-[ext_resource type="StyleBox" uid="uid://b2ipvkjlrlpcj" path="res://resources/enemies/genius/ai_health_fill.tres" id="8_8otm5"]
-[ext_resource type="Shape2D" uid="uid://c0247igrhqm6i" path="res://resources/enemies/genius/genius_hurt_box.tres" id="8_oiifk"]
-[ext_resource type="Script" path="res://resources/states/ai_state_machine.gd" id="10_w03pm"]
-[ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_wait.gd" id="11_jm1xd"]
-[ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="12_ahx2d"]
-[ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_pursue.gd" id="12_i8qi6"]
-[ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_attack.gd" id="13_s3bju"]
-[ext_resource type="Material" uid="uid://xmcf4j8jq7q4" path="res://resources/npcs/blood_particles.tres" id="13_sfe6n"]
-[ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_stagger.gd" id="13_uckny"]
-[ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_dead.gd" id="14_yt7lu"]
-[ext_resource type="Shape2D" uid="uid://dnsu01e44ukw5" path="res://resources/enemies/genius/genius_detection_shape.tres" id="19_0e4s3"]
-[ext_resource type="Texture2D" uid="uid://dtx5ao70uhydj" path="res://assets/Ui/Emote/emote8.png" id="21_7210s"]
-[ext_resource type="Script" path="res://resources/enemies/genius/emote.gd" id="21_vc5uf"]
+[ext_resource type="Script" path="res://resources/enemies/golden_knight/golden_knight.gd" id="1_mtoq3"]
+[ext_resource type="SpriteFrames" uid="uid://bkh4enxd87h4i" path="res://resources/enemies/golden_knight/golden_knight_sprites.tres" id="2_xh17t"]
+[ext_resource type="Script" path="res://scripts/animation_controller.gd" id="3_w4j3s"]
+[ext_resource type="PackedScene" uid="uid://csitq07x285ie" path="res://resources/combat_system/context_map.tscn" id="4_1do8e"]
+[ext_resource type="Shape2D" uid="uid://ckstno15cx1e2" path="res://resources/enemies/golden_knight/golden_knight_collision_shape.tres" id="4_nld4v"]
+[ext_resource type="PackedScene" uid="uid://b5e3dgothl2hh" path="res://scenes/HealthSystem.tscn" id="5_8fjud"]
+[ext_resource type="PackedScene" uid="uid://djlr8l3go4n1t" path="res://scenes/health_bar.tscn" id="6_qwp6o"]
+[ext_resource type="StyleBox" uid="uid://bo620n6p3x02f" path="res://resources/enemies/genius/ai_health_background.tres" id="7_1ylcq"]
+[ext_resource type="StyleBox" uid="uid://b2ipvkjlrlpcj" path="res://resources/enemies/genius/ai_health_fill.tres" id="8_ym4ib"]
+[ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="9_jm8oj"]
+[ext_resource type="Script" path="res://resources/states/ai_state_machine.gd" id="10_8u4hf"]
+[ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_wait.gd" id="11_0jnyk"]
+[ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_pursue.gd" id="12_6w5jh"]
+[ext_resource type="Script" path="res://resources/states/goals/GOAL_golden_knight_attack.gd" id="14_dxls4"]
+[ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_stagger.gd" id="14_m2asc"]
+[ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_dead.gd" id="15_b7uds"]
+[ext_resource type="Shape2D" uid="uid://cthdwltv4niyw" path="res://resources/enemies/golden_knight/golden_knight_hurt_box.tres" id="17_82m6n"]
+[ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="18_f4tme"]
+[ext_resource type="Material" uid="uid://xmcf4j8jq7q4" path="res://resources/npcs/blood_particles.tres" id="19_4p04x"]
+[ext_resource type="Texture2D" uid="uid://dtx5ao70uhydj" path="res://assets/Ui/Emote/emote8.png" id="20_gxxtv"]
+[ext_resource type="Script" path="res://resources/enemies/genius/emote.gd" id="21_4l3r1"]
+[ext_resource type="PackedScene" uid="uid://cg81e08g227tf" path="res://resources/combat_system/combat_system.tscn" id="22_v4uqi"]
+[ext_resource type="Resource" uid="uid://c55boolpvvmsl" path="res://resources/weapons/sword/sword_weapon_item.tres" id="23_2nymv"]
+[ext_resource type="PackedScene" uid="uid://dleumm4tcc3im" path="res://scenes/stamina_system.tscn" id="24_th0y8"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_nexrx"]
-radius = 6.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_okyjm"]
+radius = 152.03
 
 [sub_resource type="Animation" id="Animation_22vld"]
 length = 0.001
@@ -203,7 +206,7 @@ _data = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pa36x"]
 
-[node name="Genius" type="CharacterBody2D" groups=["Danger", "Enemy"]]
+[node name="GoldenKnight" type="CharacterBody2D" groups=["Danger", "Enemy"]]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -6)
@@ -212,24 +215,22 @@ collision_mask = 103
 motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
-script = ExtResource("1_qcxey")
-max_health = 30
-speed = 100
-knockback_force = 50
+script = ExtResource("1_mtoq3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, 7)
-sprite_frames = ExtResource("2_wors2")
-animation = &"front_attack"
+sprite_frames = ExtResource("2_xh17t")
+animation = &"death"
 offset = Vector2(0, -7)
-script = ExtResource("3_hn7d8")
+script = ExtResource("3_w4j3s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 1)
-shape = SubResource("CircleShape2D_nexrx")
+shape = ExtResource("4_nld4v")
 
-[node name="ContextMap" parent="." instance=ExtResource("2_mcnqk")]
+[node name="ContextMap" parent="." instance=ExtResource("4_1do8e")]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 125.99
@@ -241,10 +242,10 @@ navigation_layers = 70
 wait_time = 0.5
 autostart = true
 
-[node name="HealthSystem" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("4_bl3wg")]
+[node name="HealthSystem" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("5_8fjud")]
 actor = NodePath("..")
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio") instance=ExtResource("5_jsrdu")]
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio") instance=ExtResource("6_qwp6o")]
 offset_left = -6.0
 offset_top = -9.0
 offset_right = -3.0
@@ -252,69 +253,69 @@ offset_bottom = -7.0
 scale = Vector2(4, 1)
 size_flags_horizontal = 3
 size_flags_vertical = 2
-theme_override_styles/background = ExtResource("7_f3esr")
-theme_override_styles/fill = ExtResource("8_8otm5")
+theme_override_styles/background = ExtResource("7_1ylcq")
+theme_override_styles/fill = ExtResource("8_ym4ib")
 value = 100.0
 rounded = false
 fill_mode = 0
-script = ExtResource("6_rpf7h")
+script = ExtResource("9_jm8oj")
 health_system = NodePath("../HealthSystem")
 enemy_audio = NodePath("../AI_Audio")
 
 [node name="AI_Audio" type="AudioStreamPlayer2D" parent="."]
+visible = false
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
-script = ExtResource("10_w03pm")
+script = ExtResource("10_8u4hf")
 state = NodePath("wait")
 
 [node name="wait" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("11_jm1xd")
+script = ExtResource("11_0jnyk")
 object = NodePath("../..")
 
 [node name="pursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("12_i8qi6")
+script = ExtResource("12_6w5jh")
 object = NodePath("../..")
-steering_force = 2.0
+steering_force = 1.0
 target_distance = 20
 
 [node name="attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("13_s3bju")
+script = ExtResource("14_dxls4")
 object = NodePath("../..")
 
 [node name="stagger" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("13_uckny")
+script = ExtResource("14_m2asc")
 object = NodePath("../..")
 
 [node name="dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("14_yt7lu")
+script = ExtResource("15_b7uds")
 object = NodePath("../..")
 
 [node name="HurtBox" type="Area2D" parent="." groups=["Enemy"]]
-visible = false
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" groups=["Enemy"]]
 position = Vector2(0, 1)
-shape = ExtResource("8_oiifk")
+shape = ExtResource("17_82m6n")
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = ExtResource("19_0e4s3")
+shape = SubResource("CircleShape2D_okyjm")
 
 [node name="DetectionRay" type="RayCast2D" parent="."]
-target_position = Vector2(90, -10)
+target_position = Vector2(150, -18)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="DetectionRay2" type="RayCast2D" parent="."]
-target_position = Vector2(90, 0)
+target_position = Vector2(152, 0)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="DetectionRay3" type="RayCast2D" parent="."]
-target_position = Vector2(90, 9)
+target_position = Vector2(151, 17)
 collision_mask = 7
 collide_with_areas = true
 
@@ -322,8 +323,8 @@ collide_with_areas = true
 modulate = Color(1, 1, 1, 0.439216)
 show_behind_parent = true
 z_index = -1
-position = Vector2(1, 8)
-texture = ExtResource("12_ahx2d")
+position = Vector2(0, 8)
+texture = ExtResource("18_f4tme")
 
 [node name="WalkAnimator" type="AnimationPlayer" parent="."]
 root_node = NodePath("../HitAnimator")
@@ -342,13 +343,13 @@ z_index = 1
 emitting = false
 amount = 100
 sub_emitter = NodePath(".")
-process_material = ExtResource("13_sfe6n")
+process_material = ExtResource("19_4p04x")
 lifetime = 0.7
 one_shot = true
 explosiveness = 1.0
 
 [node name="KnockbackTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
 
 [node name="Emote" type="Sprite2D" parent="."]
@@ -356,12 +357,19 @@ unique_name_in_owner = true
 visible = false
 modulate = Color(1, 1, 1, 0.67451)
 position = Vector2(-1, -19)
-texture = ExtResource("21_7210s")
-script = ExtResource("21_vc5uf")
+texture = ExtResource("20_gxxtv")
+script = ExtResource("21_4l3r1")
 
 [node name="TargetUpdate" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
+
+[node name="StaminaSystem" parent="." instance=ExtResource("24_th0y8")]
+max_stamina = 50
+
+[node name="CombatSystem" parent="." node_paths=PackedStringArray("player_audio") instance=ExtResource("22_v4uqi")]
+player_audio = NodePath("../AI_Audio")
+right_weapon = ExtResource("23_2nymv")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="StateMachine/pursue" method="_on_timer_timeout"]

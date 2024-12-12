@@ -11,16 +11,17 @@ func _ready() -> void:
 
 func enter():
 	set_physics_process(true)
-	print("Staggered...")
+	object.velocity = Vector2.ZERO
+	object.move_and_slide()
+	
 	object.particle_fx.restart()
 	object.particle_fx.emitting = true
 	object.hit_animator.play("hit_flash")
 	await object.hit_animator.animation_finished
-	await get_tree().create_timer(1.0).timeout
 	success.emit()
 
 func _physics_process(delta: float) -> void:
-	object.context_map.set_reverse(false)
+	pass
 
 
 func exit():

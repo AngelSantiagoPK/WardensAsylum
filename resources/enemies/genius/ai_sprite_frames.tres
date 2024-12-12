@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=34 format=3 uid="uid://cwo6a16cpn80e"]
+[gd_resource type="SpriteFrames" load_steps=37 format=3 uid="uid://cwo6a16cpn80e"]
 
 [ext_resource type="Texture2D" uid="uid://cxkklmsqupwba" path="res://assets/Actor/Characters/SkeletonDemon/SpriteSheet.png" id="1_xbygy"]
 
@@ -45,6 +45,18 @@ region = Rect2(16, 96, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_16eo6"]
 atlas = ExtResource("1_xbygy")
 region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pt8o4"]
+atlas = ExtResource("1_xbygy")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsjuc"]
+atlas = ExtResource("1_xbygy")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukbp5"]
+atlas = ExtResource("1_xbygy")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l8s5k"]
 atlas = ExtResource("1_xbygy")
@@ -142,7 +154,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_piar7")
 }],
-"loop": true,
+"loop": false,
 "name": &"back_attack",
 "speed": 5.0
 }, {
@@ -185,8 +197,17 @@ animations = [{
 "name": &"death",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt8o4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsjuc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukbp5")
+}],
+"loop": false,
 "name": &"front_attack",
 "speed": 5.0
 }, {

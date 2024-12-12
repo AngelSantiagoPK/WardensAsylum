@@ -8,14 +8,10 @@ var previous_state: State
 func _ready() -> void:
 	change_state(state)
 
-func change_state(new_state: State):
-	# dont repeat states
-	if new_state == previous_state:
-		return
+func change_state(state: State):	
+	if state is State:
+		self.state.exit()
 	
-	if new_state is State:
-		state.exit()
-	
-	new_state.enter()
-	previous_state = new_state
+	state.enter()
+	self.state = state
 	pass

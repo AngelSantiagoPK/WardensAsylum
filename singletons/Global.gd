@@ -13,6 +13,9 @@ var current_inventory: Array[InventoryItem] = []
 var spawn_point: Vector2
 
 
+### SIGNALS
+signal level_up
+
 ### GETTERS
 func get_game_reset(): return RESET
 func get_score(): return total_score
@@ -48,4 +51,4 @@ func update_level():
 		player_level += 1
 		xp_to_next_level = player_level * 100 * 1.25
 		player_xp = 0
-		print("Level Up!")
+		level_up.emit()

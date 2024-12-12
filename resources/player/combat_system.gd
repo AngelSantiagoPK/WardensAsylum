@@ -10,9 +10,9 @@ signal cast_active_jutsu
 
 @onready var left_hand_weapon_sprite: Sprite2D = $LeftHandWeaponSprite
 @onready var left_hand_collision_shape_2d: CollisionShape2D = $LeftHandWeaponSprite/Area2D/CollisionShape2D
-@onready var player_audio: AudioStreamPlayer2D = $"../PlayerAudio"
+@export var player_audio: AudioStreamPlayer2D
 @onready var stamina_system: StaminaSystem = $"../StaminaSystem"
-@onready var on_screen_ui: OnScreenUI = $"../OnScreenUi"
+@export var on_screen_ui: OnScreenUI
 
 @export var right_weapon: WeaponItem
 @export var left_weapon: WeaponItem
@@ -43,15 +43,17 @@ func perform_action(weapon: WeaponItem, sprite: Sprite2D, collision_shape: Colli
 		
 		var attack_direction = animated_sprite_2d.attack_direction
 		
-		if weapon == null || stamina_system.is_stunned: 
+		if weapon == null:
 			return
 		
+		if stamina_system:
+			if stamina_system.is_stunned:
+				return
 		
-		if stamina_system.current_stamina > 0:
-			stamina_system.use_stamina(weapon.stamina_cost)
-		else:
-			stamina_system.set_stunned()
-			#on_screen_ui.update_stamina_bar(stamina_system.current_stamina)
+			if stamina_system.current_stamina > 0:
+				stamina_system.use_stamina(weapon.stamina_cost)
+			else:
+				stamina_system.set_stunned()
 
 		
 		if weapon.prefered_weapon_sound != null:
