@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func enter():
 	set_physics_process(true)
-	print('healing')
+	await get_tree().create_timer(300.0).timeout
 	object.health_system.apply_heal(heal)
 	object.health_bar.heal_and_update(object.health_system.current_health)
 	success.emit()
@@ -21,5 +21,4 @@ func exit():
 	set_physics_process(false)
 
 func _physics_process(delta: float) -> void:
-	object.context_map.set_reverse(false)
 	pass

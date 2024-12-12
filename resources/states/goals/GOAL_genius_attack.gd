@@ -7,19 +7,16 @@ class_name GoalGeniusAttack
 @onready var emote: Sprite2D = %Emote
 
 signal success
-signal failure
 
 func enter():
 	set_physics_process(true)
-	print('attacking...')
-	emote.texture = preload("res://assets/Ui/Emote/emote22.png")
-	object.velocity = Vector2.ZERO
+	await object.animator.animation_finished
 	object.animator.play_attack_animation()
 	await object.animator.animation_finished
 	success.emit()
 
 func _physics_process(delta: float) -> void:
-	object.context_map.set_reverse(false)
+	pass
 
 
 func exit():

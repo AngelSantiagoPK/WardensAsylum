@@ -39,6 +39,8 @@ func _ready() -> void:
 	# init ui bars
 	on_screen_ui.init_health_bar(max_health)
 	on_screen_ui.init_stamina_bar(stamina)
+	# global init
+	Global.level_up.connect(level_up)
 	#end
 
 func _physics_process(delta: float) -> void:
@@ -141,3 +143,6 @@ func start_invincibility_frame():
 func _on_invincibility_timer_timeout() -> void:
 	area_2d.set_collision_layer_value(1, true)
 	is_invincible = false
+
+func level_up():
+	health_system.apply_heal(999)

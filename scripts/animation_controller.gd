@@ -52,7 +52,7 @@ func play_movement_animation(velocity: Vector2):
 
 
 func play_idle_animation():
-	if MOVEMENT_TO_IDLE.keys().has(animation):
+	if MOVEMENT_TO_IDLE.keys().has(animation) and animation_looped:
 		play(MOVEMENT_TO_IDLE[animation])
 
 

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-class_name Genius
+class_name GoldenKnight
 
 ### ATTRIBUTE VARIABLES
 @export_group("Targeting")
@@ -36,6 +36,8 @@ var player_in_sight: bool = false
 @onready var detection_ray_3: RayCast2D = $DetectionRay3
 @onready var target_update: Timer = $TargetUpdate
 @onready var target_position = Vector2.ZERO
+@onready var stamina_system: StaminaSystem = $StaminaSystem
+
 
 
 ### STATE MACHINE
@@ -49,6 +51,7 @@ func _ready() -> void:
 	health_system.init(max_health)
 	health_bar.max_value = max_health
 	health_bar.value = max_health
+	stamina_system.init(50)
 	animator.play_idle_animation()
 	
 	# load states
@@ -70,6 +73,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	detection_ray.force_raycast_update()
+	detection_ray_2.force_raycast_update()
+	detection_ray_3.force_raycast_update()
 	sight_check()
 	manage_sight_check()
 
