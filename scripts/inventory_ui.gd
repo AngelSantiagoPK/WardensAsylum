@@ -6,6 +6,7 @@ signal equip_item(index: int, slot_to_equip)
 signal drop_item_on_the_ground(index: int)
 signal jutsu_slot_clicked(index: int)
 
+@export var object: Player
 @onready var grid_container: GridContainer = $MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/GridContainer
 @onready var jutsu_slots: Array[InventorySlot] = [
 	$"%FireballSlot",

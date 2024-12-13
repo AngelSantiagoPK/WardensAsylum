@@ -61,7 +61,7 @@ func _ready() -> void:
 	# When close to player target, do attack
 	STATES.pursue.close_to.connect(state_machine.change_state.bind(STATES.attack))
 	# when attack attempted, go to pursue player target
-	STATES.attack.success.connect(state_machine.change_state.bind(STATES.pursue))
+	STATES.attack.success.connect(await on_successful_hit)
 	# when hit, do stagger
 	health_system.hit.connect(state_machine.change_state.bind(STATES.stagger))
 	#when stagger done, pursue the player target
@@ -162,3 +162,8 @@ func manage_sight_check():
 func _on_target_update_timeout() -> void:
 	target_position = target.global_position
 	self.animator.play_movement_animation(velocity)
+
+func on_successful_hit():
+	await get_tree().create_timer(1.0).timeout
+	state_machine.change_state.bind(STATES.wait)
+	

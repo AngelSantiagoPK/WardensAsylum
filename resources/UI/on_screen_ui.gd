@@ -17,7 +17,6 @@ class_name OnScreenUI
 	"Jutsu": jutsu_slot
 }
 
-
 func equip_item(item: InventoryItem, slot_to_equip: String):
 	slots_dictionary[slot_to_equip].set_equipment_texture(item.texture)
 

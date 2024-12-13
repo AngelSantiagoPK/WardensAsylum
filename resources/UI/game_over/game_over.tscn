@@ -9,7 +9,6 @@ script/source = "extends Node2D
 
 @onready var button_audio: AudioStreamPlayer2D = $ButtonAudio
 
-
 func _on_exit_button_pressed() -> void:
 	button_audio.stream = preload(\"res://assets/Sounds/Game/Voice3.wav\")
 	button_audio.play()

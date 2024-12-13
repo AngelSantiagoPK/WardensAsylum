@@ -13,8 +13,8 @@ func _on_start_button_pressed() -> void:
 	button_audio.stream = preload(\"res://assets/Sounds/Game/Jump.wav\")
 	button_audio.play()
 	await button_audio.finished
+	Global.game_reset()
 	TransitionChangeManager.change_scene(\"res://scenes/levels/starting_area.tscn\")
-	#get_tree().change_scene_to_file(\"res://scenes/levels/starting_area.tscn\")
 
 
 func _on_exit_button_pressed() -> void:

@@ -203,7 +203,7 @@ _data = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pa36x"]
 
-[node name="Genius" type="CharacterBody2D" groups=["Danger", "Enemy"]]
+[node name="Genius" type="CharacterBody2D" groups=["Enemy"]]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -6)
@@ -216,6 +216,21 @@ script = ExtResource("1_qcxey")
 max_health = 30
 speed = 100
 knockback_force = 50
+
+[node name="DetectionRay" type="RayCast2D" parent="."]
+target_position = Vector2(90, -10)
+collision_mask = 7
+collide_with_areas = true
+
+[node name="DetectionRay2" type="RayCast2D" parent="."]
+target_position = Vector2(90, 0)
+collision_mask = 7
+collide_with_areas = true
+
+[node name="DetectionRay3" type="RayCast2D" parent="."]
+target_position = Vector2(90, 9)
+collision_mask = 7
+collide_with_areas = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
@@ -262,6 +277,7 @@ health_system = NodePath("../HealthSystem")
 enemy_audio = NodePath("../AI_Audio")
 
 [node name="AI_Audio" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("10_w03pm")
@@ -302,21 +318,6 @@ collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = ExtResource("19_0e4s3")
-
-[node name="DetectionRay" type="RayCast2D" parent="."]
-target_position = Vector2(90, -10)
-collision_mask = 7
-collide_with_areas = true
-
-[node name="DetectionRay2" type="RayCast2D" parent="."]
-target_position = Vector2(90, 0)
-collision_mask = 7
-collide_with_areas = true
-
-[node name="DetectionRay3" type="RayCast2D" parent="."]
-target_position = Vector2(90, 9)
-collision_mask = 7
-collide_with_areas = true
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.439216)

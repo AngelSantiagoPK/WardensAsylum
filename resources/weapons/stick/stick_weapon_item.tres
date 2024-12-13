@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WeaponItem" load_steps=5 format=3 uid="uid://brucm6wxvb5ju"]
 
 [ext_resource type="Texture2D" uid="uid://jvixwfkpw4hd" path="res://resources/weapons/stick/SpriteInHand.png" id="1_30gsf"]
-[ext_resource type="Shape2D" uid="uid://cid3dgqfd3ahg" path="res://resources/weapons/stick/stick_weapon_collision_shape.tres" id="1_sh4oh"]
+[ext_resource type="Shape2D" uid="uid://5nsvfcydm6h7" path="res://resources/weapons/stick/stick_collision_poly_shape.tres" id="1_acqif"]
 [ext_resource type="Script" path="res://resources/weapons/weapon_item.gd" id="2_2r6m5"]
 [ext_resource type="AudioStream" uid="uid://dywrt6rua33i8" path="res://assets/Sounds/Game/Hit.wav" id="3_pealv"]
 
@@ -10,7 +10,7 @@ script = ExtResource("2_2r6m5")
 damage = 12
 stamina_cost = 20
 in_hand_texture = ExtResource("1_30gsf")
-collision_shape = ExtResource("1_sh4oh")
+collision_shape = ExtResource("1_acqif")
 attack_type = "Melee"
 prefered_weapon_sound = ExtResource("3_pealv")
 left_attachment_position = Vector2(-8, -7)

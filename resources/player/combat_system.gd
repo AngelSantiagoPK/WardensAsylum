@@ -24,10 +24,10 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("right_hand_action"):
 		perform_action(right_weapon, right_hand_weapon_sprite, right_hand_collision_shape_2d)
 		
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("left_hand_action"):
 		perform_action(left_weapon, left_hand_weapon_sprite, left_hand_collision_shape_2d)
 
 

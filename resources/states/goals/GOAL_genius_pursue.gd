@@ -45,9 +45,12 @@ func enter():
 func exit():
 	set_physics_process(false)
 
-
+func make_path():
+	object.nav_agent.target_position = object.target.global_position
+	
 # FUNCTIONS
 func _physics_process(delta: float) -> void:
+	make_path()
 	set_target_position(object.target_position)
 	set_target_vector()
 	calculate_interest_dot_product()

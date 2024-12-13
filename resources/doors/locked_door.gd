@@ -14,7 +14,7 @@ var is_open: bool = false
 
 
 func _input(event: InputEvent) -> void: 
-	if event.is_action_pressed("ui_accept") and is_unlockable and has_key:
+	if event.is_action_pressed("right_hand_action") and is_unlockable and has_key:
 		unlock_door()
 
 
