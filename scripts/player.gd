@@ -29,8 +29,10 @@ const PLAYER_BREADCRUMB_SCENE = preload("res://resources/player/player_breadcrum
 func _ready() -> void:
 	# init health system
 	health_system.init(max_health)
+	health_system.healed.connect(func (): on_screen_ui.apply_damage(health_system.current_health))
 	health_system.died.connect(on_player_dead)
 	health_system.update_health.connect(on_damage_taken)
+
 	# init stamina system
 	stamina_system.init(stamina)
 	stamina_system.drained.connect(on_stamina_drained)
@@ -109,20 +111,22 @@ func on_player_dead():
 
 
 func setup_test_inventory():
-	const SWORD_INVENTORY_ITEM = preload("res://resources/weapons/sword/sword_inventory_item.tres")
-	const GOLD_COIN = preload("res://resources/gold_coin/gold_coin.tres")
+	var items: Array[InventoryItem] = InventoryStateManager.get_inventory()
+	for i in items:
+		inventory.add_item(i, i.stacks)
 	
-	inventory.add_item(SWORD_INVENTORY_ITEM, 1)
-	inventory.add_item(GOLD_COIN, 100)
+	#const SWORD_INVENTORY_ITEM = preload("res://resources/weapons/sword/sword_inventory_item.tres")
+	#const GOLD_COIN = preload("res://resources/gold_coin/gold_coin.tres")
+	#
+	#inventory.add_item(SWORD_INVENTORY_ITEM, 1)
+	#inventory.add_item(GOLD_COIN, 100)
 
 
 func on_update_stamina(current_stamina: int):
 	on_screen_ui.update_stamina_bar(current_stamina)
 
-
 func on_stamina_drained():
 	on_screen_ui.update_stamina_bar(0)
-
 
 func on_regen():
 	on_screen_ui.update_stamina_bar(stamina)
@@ -139,10 +143,11 @@ func start_invincibility_frame():
 	is_invincible = true
 	invincibility_timer.start()
 
-
 func _on_invincibility_timer_timeout() -> void:
 	area_2d.set_collision_layer_value(1, true)
 	is_invincible = false
 
 func level_up():
-	health_system.apply_heal(999)
+	var level_up_sfx = preload("res://assets/Sounds/Game/Success3.wav")
+	player_audio.stream = level_up_sfx
+	player_audio.play()

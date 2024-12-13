@@ -404,8 +404,9 @@ script = ExtResource("6_7c11i")
 
 [node name="OnScreenUi" parent="." instance=ExtResource("7_r5k04")]
 
-[node name="InventoryUi" parent="." instance=ExtResource("5_0d4te")]
+[node name="InventoryUi" parent="." node_paths=PackedStringArray("object") instance=ExtResource("5_0d4te")]
 visible = false
+object = NodePath("..")
 
 [node name="CombatSystem" parent="." instance=ExtResource("8_6qhnn")]
 

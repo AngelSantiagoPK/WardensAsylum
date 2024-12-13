@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cwnf22onaerju"]
+[gd_scene load_steps=18 format=3 uid="uid://cwnf22onaerju"]
 
 [ext_resource type="Script" path="res://resources/jutsus/jutsu.gd" id="1_iavq2"]
 [ext_resource type="Texture2D" uid="uid://b653yfscrv4f7" path="res://assets/FX/Magic/Aura/SpriteSheetPurple.png" id="2_r8osl"]
 [ext_resource type="Texture2D" uid="uid://dbl3621vn0svb" path="res://assets/FX/Projectile/Fireball.png" id="3_61vkq"]
 [ext_resource type="Texture2D" uid="uid://b5rlb57njnkkg" path="res://assets/FX/Projectile/Kunai.png" id="4_r8j8c"]
 [ext_resource type="Shape2D" uid="uid://cfofap03t5nmr" path="res://resources/jutsus/heal/heal_collision_shape.tres" id="5_5i0qx"]
+[ext_resource type="AudioStream" uid="uid://cbvkkw5ul7ivg" path="res://assets/Sounds/Game/Explosion3.wav" id="6_g1lh1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qq7x0"]
 atlas = ExtResource("3_61vkq")
@@ -87,7 +88,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Jutsu" type="Area2D"]
+[sub_resource type="GDScript" id="GDScript_c0023"]
+script/source = "extends AudioStreamPlayer2D
+
+func _process(delta: float) -> void:
+	await get_tree().create_timer(0.25).timeout
+	pitch_scale = randf_range(0.9, 1.1)
+"
+
+[node name="Jutsu" type="Area2D" groups=["Danger"]]
+collision_layer = 16
 collision_mask = 33
 script = ExtResource("1_iavq2")
 
@@ -98,5 +108,9 @@ animation = &"fireball"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
 shape = ExtResource("5_5i0qx")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_g1lh1")
+script = SubResource("GDScript_c0023")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

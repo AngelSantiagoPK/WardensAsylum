@@ -6,8 +6,8 @@ class_name TransitionManager
 signal transition_done
 
 # VARIABLES
-@export var fade_in_time = 1.0
-@export var fade_out_time = 1.0
+@export var fade_in_time = 0.5
+@export var fade_out_time = 0.5
 @export var transition_time = 1.0
 
 @onready var color_rect: ColorRect = $ColorRect

@@ -2,7 +2,8 @@ extends StaticBody2D
 
 class_name PlayerBreadcrumb
 
-var duration = 7
+@export var duration = .25
+
 
 func _ready() -> void:
 	await get_tree().create_timer(duration).timeout

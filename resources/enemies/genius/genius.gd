@@ -72,6 +72,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	sight_check()
 	manage_sight_check()
+		
+	detection_ray.force_raycast_update()
+	detection_ray_2.force_raycast_update()
+	detection_ray_3.force_raycast_update()
 
 ### KNOCKBACK
 func apply_knockback(player_position: Vector2):

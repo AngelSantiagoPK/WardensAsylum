@@ -4,6 +4,7 @@ class_name Jutsu
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var audio_stream: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var direction: Vector2
 var speed: float
@@ -23,6 +24,7 @@ func _process(delta: float) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if area.get_parent() is Enemy:
-		(area.get_parent() as Enemy).apply_damage(damage)
+	if area.is_in_group("Enemy"):
+		(area.get_parent().find_child("HealthSystem") as HealthSystem).apply_damage(damage)
+		audio_stream.play()
 		queue_free()

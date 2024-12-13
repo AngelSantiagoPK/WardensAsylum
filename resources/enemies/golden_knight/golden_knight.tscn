@@ -216,6 +216,7 @@ motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 script = ExtResource("1_mtoq3")
+speed = 20
 knockback_force = 30
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -226,6 +227,21 @@ animation = &"left_attack"
 autoplay = "front_idle"
 offset = Vector2(0, -7)
 script = ExtResource("3_w4j3s")
+
+[node name="DetectionRay" type="RayCast2D" parent="."]
+target_position = Vector2(150, -18)
+collision_mask = 7
+collide_with_areas = true
+
+[node name="DetectionRay2" type="RayCast2D" parent="."]
+target_position = Vector2(152, 0)
+collision_mask = 7
+collide_with_areas = true
+
+[node name="DetectionRay3" type="RayCast2D" parent="."]
+target_position = Vector2(151, 17)
+collision_mask = 7
+collide_with_areas = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -264,6 +280,7 @@ health_system = NodePath("../HealthSystem")
 enemy_audio = NodePath("../AI_Audio")
 
 [node name="AI_Audio" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
 [node name="CombatSystem" parent="." node_paths=PackedStringArray("animated_sprite_2d") instance=ExtResource("22_v4uqi")]
 position = Vector2(1, 7)
@@ -309,21 +326,6 @@ collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 shape = SubResource("CircleShape2D_okyjm")
-
-[node name="DetectionRay" type="RayCast2D" parent="."]
-target_position = Vector2(150, -18)
-collision_mask = 7
-collide_with_areas = true
-
-[node name="DetectionRay2" type="RayCast2D" parent="."]
-target_position = Vector2(152, 0)
-collision_mask = 7
-collide_with_areas = true
-
-[node name="DetectionRay3" type="RayCast2D" parent="."]
-target_position = Vector2(151, 17)
-collision_mask = 7
-collide_with_areas = true
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.439216)

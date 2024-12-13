@@ -5,11 +5,13 @@ extends Node
 # resets the player stats and game if true
 var RESET = true
 
+# FIRST SPAWN MARKER, change if initial spawn does
+const INITIAL_SPAWN = Vector2(51, -36)
+
 var total_score: int = 0
 var player_xp = 0
 var player_level: int = 1
 var xp_to_next_level: float = player_level * 100 * 1.25
-var current_inventory: Array[InventoryItem] = []
 var spawn_point: Vector2
 
 
@@ -20,7 +22,6 @@ signal level_up
 func get_game_reset(): return RESET
 func get_score(): return total_score
 func get_player_level(): return player_level
-func get_inventory(): return current_inventory
 func get_spawn_point(): return spawn_point
 
 
@@ -34,16 +35,12 @@ func increase_score(score: int):
 func decrease_score(score: int):
 	self.score -= score
 
-func update_inventory(inventory: Array[InventoryItem]):
-	self.current_inventory = inventory
-
 func set_spawn_point(spawn_position: Vector2):
 	self.spawn_point = spawn_position
 
 func give_player_xp(xp: int):
 	if xp < 0: return
 	player_xp += xp
-
 
 ### GLOBAL FUNCTIONS
 func update_level():
@@ -52,3 +49,6 @@ func update_level():
 		xp_to_next_level = player_level * 100 * 1.25
 		player_xp = 0
 		level_up.emit()
+
+func game_reset():
+	spawn_point = INITIAL_SPAWN
