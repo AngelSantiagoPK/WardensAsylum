@@ -12,7 +12,6 @@ func _ready() -> void:
 	player.position = player_spawn_point.position
 	key_drop_animator.play("drop_key")
 
-
 func on_key_drop():
 	level_sfx.stream = preload("res://assets/Sounds/Game/Voice3.wav")
 	level_sfx.pitch_scale = randf_range(0.8, 1.2)

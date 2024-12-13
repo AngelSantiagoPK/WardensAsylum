@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://resources/player/combat_system.gd" id="1_q6nve"]
 
-[node name="CombatSystem" type="Node2D"]
+[node name="CombatSystem" type="Node2D" groups=["Danger"]]
 script = ExtResource("1_q6nve")
 
 [node name="RightHandWeaponSprite" type="Sprite2D" parent="."]

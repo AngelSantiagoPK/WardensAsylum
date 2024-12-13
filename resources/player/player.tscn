@@ -371,7 +371,7 @@ knockback_force = 400
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_6txn0")
-animation = &"front_idle"
+animation = &"right_attack"
 autoplay = "front_idle"
 offset = Vector2(0, -7)
 script = ExtResource("3_2l827")
@@ -407,9 +407,7 @@ script = ExtResource("6_7c11i")
 [node name="InventoryUi" parent="." instance=ExtResource("5_0d4te")]
 visible = false
 
-[node name="CombatSystem" parent="." node_paths=PackedStringArray("player_audio", "on_screen_ui") instance=ExtResource("8_6qhnn")]
-player_audio = NodePath("../PlayerAudio")
-on_screen_ui = NodePath("../OnScreenUi")
+[node name="CombatSystem" parent="." instance=ExtResource("8_6qhnn")]
 
 [node name="JutsuSystem" type="Node" parent="."]
 script = ExtResource("9_eglbx")

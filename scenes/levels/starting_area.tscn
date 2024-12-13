@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://d4lpcwk7x6u0r"]
+[gd_scene load_steps=20 format=4 uid="uid://d4lpcwk7x6u0r"]
 
 [ext_resource type="Script" path="res://scenes/levels/starting_area.gd" id="1_5205f"]
 [ext_resource type="TileSet" uid="uid://ch8cmv46bdq6i" path="res://tiles/tileset.tres" id="1_c24xd"]
@@ -8,10 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://bpgmorog7pln8" path="res://scenes/pickup_item.tscn" id="3_unowp"]
 [ext_resource type="Resource" uid="uid://bxx2oc55jb6fj" path="res://resources/weapons/sword/sword_inventory_item.tres" id="4_tq020"]
 [ext_resource type="Resource" uid="uid://cubd48y3rjpmt" path="res://resources/weapons/stick/stick_inventory_item.tres" id="7_d7ejl"]
+[ext_resource type="PackedScene" uid="uid://c3hmxuoksmsrh" path="res://resources/enemies/golden_knight/golden_knight.tscn" id="7_xy0n1"]
 [ext_resource type="Resource" uid="uid://bu8f7kbwly4yd" path="res://resources/key/cell_key.tres" id="8_c4wf6"]
 [ext_resource type="Resource" uid="uid://c24c8m2vajwb6" path="res://resources/key/small_key.tres" id="8_uu2rv"]
 [ext_resource type="PackedScene" uid="uid://unp88u61pdei" path="res://resources/doors/locked_door.tscn" id="12_f5aq3"]
 [ext_resource type="AudioStream" uid="uid://dx2arga7lv4wy" path="res://assets/Musics/21 - Dungeon.ogg" id="13_woraq"]
+[ext_resource type="Resource" uid="uid://c6fyubqr2neww" path="res://resources/weapons/knight_sword/knight_sword_inventory_item.tres" id="16_gqcmn"]
 [ext_resource type="PackedScene" uid="uid://c6kmyj2i5h0da" path="res://resources/enemies/genius/genius.tscn" id="17_3gqou"]
 [ext_resource type="PackedScene" uid="uid://ckpvefjc8e5bd" path="res://resources/weather/weather_system.tscn" id="18_5ygrw"]
 
@@ -241,6 +243,10 @@ position = Vector2(-585, -305)
 target = NodePath("../../Player")
 spawn_point = NodePath("../Monster Spawn2")
 
+[node name="GoldenKnight" parent="Enemies" node_paths=PackedStringArray("target") instance=ExtResource("7_xy0n1")]
+position = Vector2(-238, -18)
+target = NodePath("../../Player")
+
 [node name="Pickups" type="Node" parent="."]
 
 [node name="StickPickUp" parent="Pickups" instance=ExtResource("3_unowp")]
@@ -298,3 +304,7 @@ blend_mode = 1
 
 [node name="LevelSFX" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-87, 76)
+
+[node name="PickupItem" parent="." instance=ExtResource("3_unowp")]
+position = Vector2(-32, -18)
+inventory_item = ExtResource("16_gqcmn")

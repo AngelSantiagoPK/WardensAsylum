@@ -13,6 +13,7 @@ class_name GoldenKnight
 @export_group("Knockback")
 @export var knockback_force: int = 8000
 @export var knockback_time: float = 0.50
+@export_group("Weapon")
 
 var player_in_range: bool = false
 var player_in_sight: bool = false
@@ -23,6 +24,7 @@ var player_in_sight: bool = false
 @onready var hit_animator: AnimationPlayer = $HitAnimator
 @onready var walk_animator: AnimationPlayer = $HitAnimator
 @onready var context_map: ContextMap = $ContextMap
+@onready var combat_system: EnemyCombatSystem = $CombatSystem
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var health_system: HealthSystem = $HealthSystem
 @onready var health_bar: ProgressBar = $HealthBar
@@ -36,7 +38,6 @@ var player_in_sight: bool = false
 @onready var detection_ray_3: RayCast2D = $DetectionRay3
 @onready var target_update: Timer = $TargetUpdate
 @onready var target_position = Vector2.ZERO
-@onready var stamina_system: StaminaSystem = $StaminaSystem
 
 
 
@@ -51,7 +52,6 @@ func _ready() -> void:
 	health_system.init(max_health)
 	health_bar.max_value = max_health
 	health_bar.value = max_health
-	stamina_system.init(50)
 	animator.play_idle_animation()
 	
 	# load states
@@ -73,20 +73,20 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# TODO: iterate over rays to make the spread more automated
 	detection_ray.force_raycast_update()
 	detection_ray_2.force_raycast_update()
 	detection_ray_3.force_raycast_update()
 	sight_check()
 	manage_sight_check()
 
-### KNOCKBACK
+### KNOCKBACK ~ Works great! Don't touch!
 func apply_knockback(player_position: Vector2):
 	var knock_direction = -sign(global_position.direction_to(player_position))
 	velocity += knock_direction * knockback_force
 	knockback_timer.wait_time = knockback_time
 	knockback_timer.start()
 	move_and_slide()
-
 
 func _on_knockback_timer_timeout() -> void:
 	velocity = Vector2.ZERO
