@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://resources/states/ai_state_machine.gd" id="10_8u4hf"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_wait.gd" id="11_0jnyk"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_pursue.gd" id="12_6w5jh"]
+[ext_resource type="Resource" uid="uid://bmrsvr6e4gjwq" path="res://resources/weapons/knight_sword/knight_sword_weapon_item.tres" id="13_gxwrc"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_golden_knight_attack.gd" id="14_dxls4"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_stagger.gd" id="14_m2asc"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_dead.gd" id="15_b7uds"]
@@ -22,8 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://dtx5ao70uhydj" path="res://assets/Ui/Emote/emote8.png" id="20_gxxtv"]
 [ext_resource type="Script" path="res://resources/enemies/genius/emote.gd" id="21_4l3r1"]
 [ext_resource type="PackedScene" uid="uid://cg81e08g227tf" path="res://resources/combat_system/combat_system.tscn" id="22_v4uqi"]
-[ext_resource type="Resource" uid="uid://c55boolpvvmsl" path="res://resources/weapons/sword/sword_weapon_item.tres" id="23_2nymv"]
-[ext_resource type="PackedScene" uid="uid://dleumm4tcc3im" path="res://scenes/stamina_system.tscn" id="24_th0y8"]
+[ext_resource type="Script" path="res://resources/enemies/enemy_combat_system.gd" id="24_mtxav"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_okyjm"]
 radius = 152.03
@@ -216,17 +216,18 @@ motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 script = ExtResource("1_mtoq3")
+knockback_force = 30
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, 7)
 sprite_frames = ExtResource("2_xh17t")
-animation = &"death"
+animation = &"left_attack"
+autoplay = "front_idle"
 offset = Vector2(0, -7)
 script = ExtResource("3_w4j3s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 1)
 shape = ExtResource("4_nld4v")
 
@@ -263,7 +264,12 @@ health_system = NodePath("../HealthSystem")
 enemy_audio = NodePath("../AI_Audio")
 
 [node name="AI_Audio" type="AudioStreamPlayer2D" parent="."]
-visible = false
+
+[node name="CombatSystem" parent="." node_paths=PackedStringArray("animated_sprite_2d") instance=ExtResource("22_v4uqi")]
+position = Vector2(1, 7)
+script = ExtResource("24_mtxav")
+animated_sprite_2d = NodePath("../AnimatedSprite2D")
+right_weapon = ExtResource("13_gxwrc")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("10_8u4hf")
@@ -363,13 +369,6 @@ script = ExtResource("21_4l3r1")
 [node name="TargetUpdate" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
-
-[node name="StaminaSystem" parent="." instance=ExtResource("24_th0y8")]
-max_stamina = 50
-
-[node name="CombatSystem" parent="." node_paths=PackedStringArray("player_audio") instance=ExtResource("22_v4uqi")]
-player_audio = NodePath("../AI_Audio")
-right_weapon = ExtResource("23_2nymv")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="StateMachine/pursue" method="_on_timer_timeout"]
