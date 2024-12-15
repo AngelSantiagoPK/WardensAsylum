@@ -11,6 +11,7 @@ func _ready() -> void:
 
 func enter():
 	set_physics_process(true)
+	object.disable_collisions()
 	object.target_update.stop()
 	object.velocity = Vector2.ZERO
 	object.move_and_slide()
@@ -23,6 +24,7 @@ func enter():
 	Global.increase_score(100)
 	Global.give_player_xp(100)
 	Global.update_level()
+	AsylumModeManager.skeleton_killed()
 	success.emit()
 
 func _physics_process(delta: float) -> void:

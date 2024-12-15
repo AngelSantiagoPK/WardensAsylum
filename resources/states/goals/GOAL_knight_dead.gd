@@ -1,6 +1,6 @@
 extends State
 
-class_name GoalGeniusStagger
+class_name GoalGoldenKnightDead
 
 @export var object: CharacterBody2D
 
@@ -12,11 +12,19 @@ func _ready() -> void:
 func enter():
 	set_physics_process(true)
 	object.disable_collisions()
+	object.target_update.stop()
 	object.velocity = Vector2.ZERO
 	object.move_and_slide()
-	object.disable_collisions()
-	object.hit_animator.play("hit_flash")
-	await object.hit_animator.animation_finished
+
+	object.health_bar.visible = false
+	object.hit_animator.play("death_flash")
+	object.animator.play("death")
+	await object.animator.animation_finished
+
+	Global.increase_score(100)
+	Global.give_player_xp(100)
+	Global.update_level()
+	AsylumModeManager.gold_knight_killed()
 	success.emit()
 
 func _physics_process(delta: float) -> void:
@@ -25,4 +33,3 @@ func _physics_process(delta: float) -> void:
 
 func exit():
 	set_physics_process(false)
-	object.enable_collisions()

@@ -14,6 +14,7 @@ func enter():
 	set_physics_process(true)
 	object.velocity = Vector2.ZERO
 	object.move_and_slide()
+	await get_tree().create_timer(0.5).timeout
 
 
 func exit():

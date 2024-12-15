@@ -4,8 +4,6 @@ class_name GoalGeniusAttack
 
 @export var object: CharacterBody2D
 
-@onready var emote: Sprite2D = %Emote
-
 signal success
 
 func enter():

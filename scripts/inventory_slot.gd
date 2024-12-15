@@ -67,8 +67,6 @@ func add_item(item: InventoryItem):
 	if item.stacks < 2:
 		return
 	stacks_label.text = str(item.stacks)
-		
-
 
 
 func _on_on_click_button_pressed() -> void:

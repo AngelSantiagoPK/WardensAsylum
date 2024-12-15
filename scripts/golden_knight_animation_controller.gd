@@ -1,6 +1,6 @@
 extends AnimatedSprite2D
 
-class_name AnimationController
+class_name GoldenKnightAnimationController
 
 signal attack_animation_finished
 
@@ -41,15 +41,13 @@ func play_movement_animation(velocity: Vector2):
 	elif velocity.y < 0:
 		item_eject_direction = Vector2.UP
 		play("back_walk")
-		
+	
 	if velocity.x > 0:
 		item_eject_direction = Vector2.RIGHT
 		play("right_walk")
 	elif velocity.x < 0:
 		item_eject_direction = Vector2.LEFT
 		play("left_walk")
-	
-	
 	
 
 
@@ -58,15 +56,14 @@ func play_idle_animation():
 		play(MOVEMENT_TO_IDLE[animation])
 
 
-
 func play_attack_animation():
 	var direction = animation.split("_")[0]
 	attack_direction = direction
-	if attack_direction == "hit" || attack_direction == "death":
+	if attack_direction == "death":
 		return
+	
 	play(DIRECTION_TO_ATTACK_ANIMATION[direction])
 	await animation_finished
-
 
 
 func _on_animation_finished() -> void:

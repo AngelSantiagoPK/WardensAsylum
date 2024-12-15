@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://btj634sipwibm"]
+
+[ext_resource type="Script" path="res://resources/dash_system/dash_system.gd" id="1_ve0n7"]
+
+[node name="DashSystem" type="Node2D"]
+script = ExtResource("1_ve0n7")
+dash_time = 0.25
+dash_multiplier = 8.0

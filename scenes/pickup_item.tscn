@@ -2,10 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/pickup_item.gd" id="1_fcatf"]
 [ext_resource type="Texture2D" uid="uid://dsu3fh2i0fg3" path="res://assets/Ui/Icon/Job&Action/Interact.png" id="2_k2juf"]
+[ext_resource type="Shape2D" uid="uid://cfr5i1wsqdyq2" path="res://scenes/pickup_item_collision_shape.tres" id="3_gg245"]
 [ext_resource type="Script" path="res://scenes/pikcup_collision_offset.gd" id="4_q6547"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_jpuk4"]
-radius = 18.0019
 
 [node name="PickupItem" type="Area2D"]
 y_sort_enabled = true
@@ -20,5 +18,5 @@ region_rect = Rect2(0, 0, 16, 16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.38419e-07, 7.75)
 scale = Vector2(1, 0.960002)
-shape = SubResource("CircleShape2D_jpuk4")
+shape = ExtResource("3_gg245")
 script = ExtResource("4_q6547")

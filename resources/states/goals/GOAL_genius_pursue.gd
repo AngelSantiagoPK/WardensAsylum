@@ -2,27 +2,23 @@ extends State
 
 class_name GoalGeniusPursue
 
+### VARIABLES
+@export_group("Target")
 @export var object: CharacterBody2D
 
+@export var target_distance = 10
 var target_position: Vector2
 var target_vector: Vector2
 
-
+@export_group("Context Weight")
 var interest_array: Array[float] = [0,0,0,0,0,0,0,0]
 var danger_array: Array[float] = [0,0,0,0,0,0,0,0]
 @export var danger_weight = 5.0
 @export var danger_padding_weight = 2.0
-
+@export var steering_force = 0.75
 var context_array: Array[float] = [0,0,0,0,0,0,0,0]
 var desired_direction: Vector2 = Vector2.ZERO
 var resultant_force: Vector2 = Vector2.ZERO
-
-@export var steering_force = 0.75
-@onready var target_update_interval_time = 1
-@onready var target_update_timer
-@export var target_distance = 10
-@onready var walk_animator: AnimationPlayer = $"../../WalkAnimator"
-
 var NORMAL_VECTORS = [
 	Vector2(0,-1),
 	Vector2(1,-1),
@@ -34,8 +30,20 @@ var NORMAL_VECTORS = [
 	Vector2(-1,-1)
 	]
 
+
+### REFERENCES
+@onready var target_update_interval_time = 1
+@onready var target_update_timer
+@onready var walk_animator: AnimationPlayer = $"../../WalkAnimator"
+
+
+
+
+### SIGNALS
 signal close_to
 
+
+### FUNCTIONS
 func _ready() -> void:
 	set_physics_process(false)
 
@@ -46,7 +54,8 @@ func exit():
 	set_physics_process(false)
 
 func make_path():
-	object.nav_agent.target_position = object.target.global_position
+	if object.target != null:
+		object.nav_agent.target_position = object.target.global_position
 	
 # FUNCTIONS
 func _physics_process(delta: float) -> void:
@@ -61,7 +70,8 @@ func _physics_process(delta: float) -> void:
 	walk_animator.play('walk')
 	
 	if object.global_position.distance_to(object.target_position) < target_distance:
-		close_to.emit()
+		await get_tree().create_timer(1.0).timeout
+		object.animator.play_attack_animation()
 
 
 ### GET DESIRED DIRECTION
@@ -107,7 +117,8 @@ func set_desired_direction():
 	desired_direction = NORMAL_VECTORS[index]
 
 
-func apply_context_steering(delta:float):
+func apply_context_steering(delta:float):	
 	resultant_force = (steering_force * desired_direction) - object.velocity * delta
-	object.velocity = object.velocity + resultant_force
+	object.velocity += resultant_force * object.acceleration * delta
+	object.velocity = object.velocity.limit_length(object.speed)
 	object.move_and_slide()

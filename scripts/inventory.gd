@@ -28,7 +28,6 @@ func _input(event: InputEvent) -> void:
 		inventory_ui.toggle()
 
 
-
 func add_item(item: InventoryItem, stacks: int):
 	if stacks && item.max_stacks > 1:
 		add_stackable_item_to_inventory(item, stacks)
@@ -69,26 +68,25 @@ func add_stackable_item_to_inventory(item: InventoryItem, stacks: int):
 		taken_inventory_slots_count += 1
 
 
-
 func on_item_equipped(index: int, slot_to_equip):
 	var item_to_equip = items[index]
 	on_screen_ui.equip_item(item_to_equip, slot_to_equip)
 	combat_system.set_active_weapon(item_to_equip.weapon_item, slot_to_equip)
-
 	check_jutsu_ui_visibility()
+
 
 func on_item_dropped(index: int):
 	clear_inventory_slot(index)
 	eject_item_to_ground(index)
-
 	check_jutsu_ui_visibility()
+
 
 func clear_inventory_slot(index: int):
 	# prevents players from dropping their cakes and eating them too (weapon drops)
 	# reduce inventory count or risk bad math
 	taken_inventory_slots_count -= 1
 	inventory_ui.clear_slot_at_index(index)
-	pass
+
 
 func eject_item(index):
 	if index == null || index == -1:
@@ -96,7 +94,8 @@ func eject_item(index):
 		
 	items[index] = null
 	clear_inventory_slot(index)
-	
+
+
 func eject_item_to_ground(index):
 	# adds dropped weapon to world so things don't just dissapear into oblivion when you drop them
 	var inventory_item_to_ejected = items[index]
@@ -134,14 +133,12 @@ func eject_item_to_ground(index):
 	items[index] = null
 
 
-
 func on_jutsu_slot_clicked(index: int):
 	selected_jutsu_index = index
 	inventory_ui.set_selected_jutsu_slot(selected_jutsu_index)
 	jutsu_activated.emit(index)
-	
-	
-	
+
+
 func check_jutsu_ui_visibility():
 	var should_show_magic_ui = (combat_system.left_weapon != null and \
 	combat_system.left_weapon.attack_type == "Magic") or \

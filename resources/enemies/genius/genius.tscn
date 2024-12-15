@@ -1,9 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://c6kmyj2i5h0da"]
+[gd_scene load_steps=28 format=3 uid="uid://c6kmyj2i5h0da"]
 
 [ext_resource type="Script" path="res://resources/enemies/genius/genius.gd" id="1_qcxey"]
 [ext_resource type="PackedScene" uid="uid://csitq07x285ie" path="res://resources/combat_system/context_map.tscn" id="2_mcnqk"]
 [ext_resource type="SpriteFrames" uid="uid://cwo6a16cpn80e" path="res://resources/enemies/genius/ai_sprite_frames.tres" id="2_wors2"]
-[ext_resource type="Script" path="res://scripts/animation_controller.gd" id="3_hn7d8"]
+[ext_resource type="Script" path="res://scripts/golden_knight_animation_controller.gd" id="3_6l8jx"]
 [ext_resource type="PackedScene" uid="uid://b5e3dgothl2hh" path="res://scenes/HealthSystem.tscn" id="4_bl3wg"]
 [ext_resource type="PackedScene" uid="uid://djlr8l3go4n1t" path="res://scenes/health_bar.tscn" id="5_jsrdu"]
 [ext_resource type="Script" path="res://scripts/enemy_health_bar.gd" id="6_rpf7h"]
@@ -15,12 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="12_ahx2d"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_pursue.gd" id="12_i8qi6"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_attack.gd" id="13_s3bju"]
-[ext_resource type="Material" uid="uid://xmcf4j8jq7q4" path="res://resources/npcs/blood_particles.tres" id="13_sfe6n"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_stagger.gd" id="13_uckny"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_dead.gd" id="14_yt7lu"]
 [ext_resource type="Shape2D" uid="uid://dnsu01e44ukw5" path="res://resources/enemies/genius/genius_detection_shape.tres" id="19_0e4s3"]
-[ext_resource type="Texture2D" uid="uid://dtx5ao70uhydj" path="res://assets/Ui/Emote/emote8.png" id="21_7210s"]
-[ext_resource type="Script" path="res://resources/enemies/genius/emote.gd" id="21_vc5uf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nexrx"]
 radius = 6.0
@@ -214,21 +211,23 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 script = ExtResource("1_qcxey")
 max_health = 30
-speed = 100
-knockback_force = 50
+knockback_force = 1000
 
 [node name="DetectionRay" type="RayCast2D" parent="."]
-target_position = Vector2(90, -10)
+visible = false
+target_position = Vector2(299, -10)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="DetectionRay2" type="RayCast2D" parent="."]
-target_position = Vector2(90, 0)
+visible = false
+target_position = Vector2(300, 6)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="DetectionRay3" type="RayCast2D" parent="."]
-target_position = Vector2(90, 9)
+visible = false
+target_position = Vector2(298, 20)
 collision_mask = 7
 collide_with_areas = true
 
@@ -238,13 +237,15 @@ position = Vector2(0, 7)
 sprite_frames = ExtResource("2_wors2")
 animation = &"front_attack"
 offset = Vector2(0, -7)
-script = ExtResource("3_hn7d8")
+script = ExtResource("3_6l8jx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_nexrx")
 
 [node name="ContextMap" parent="." instance=ExtResource("2_mcnqk")]
+visible = false
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 125.99
@@ -290,8 +291,8 @@ object = NodePath("../..")
 [node name="pursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
 script = ExtResource("12_i8qi6")
 object = NodePath("../..")
-steering_force = 2.0
 target_distance = 20
+steering_force = 1.0
 
 [node name="attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
 script = ExtResource("13_s3bju")
@@ -314,6 +315,7 @@ position = Vector2(0, 1)
 shape = ExtResource("8_oiifk")
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
@@ -338,27 +340,9 @@ libraries = {
 "player": SubResource("AnimationLibrary_pa36x")
 }
 
-[node name="ParticleFX" type="GPUParticles2D" parent="."]
-z_index = 1
-emitting = false
-amount = 100
-sub_emitter = NodePath(".")
-process_material = ExtResource("13_sfe6n")
-lifetime = 0.7
-one_shot = true
-explosiveness = 1.0
-
 [node name="KnockbackTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
-
-[node name="Emote" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-visible = false
-modulate = Color(1, 1, 1, 0.67451)
-position = Vector2(-1, -19)
-texture = ExtResource("21_7210s")
-script = ExtResource("21_vc5uf")
 
 [node name="TargetUpdate" type="Timer" parent="."]
 wait_time = 0.05
