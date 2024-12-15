@@ -2,7 +2,7 @@ extends Node2D
 
 class_name EnemyCombatSystem
 
-@export var animated_sprite_2d: AnimationController
+@export var animated_sprite_2d: GoldenKnightAnimationController
 
 @onready var left_hand_weapon_sprite: Sprite2D = $LeftHandWeaponSprite
 @onready var left_hand_collision_shape_2d: CollisionShape2D = $LeftHandWeaponSprite/Area2D/CollisionShape2D
@@ -32,7 +32,7 @@ func perform_attack(hand: String) -> void:
 		perform_action(left_weapon, left_hand_weapon_sprite, left_hand_collision_shape_2d)
 
 
-func perform_action(weapon: WeaponItem, sprite: Sprite2D, collision_shape: CollisionShape2D):
+func perform_action(weapon: WeaponItem, sprite: Sprite2D, collision_shape: CollisionShape2D):	
 	# this prevents attacking before the attack cooldown ends
 	if !can_attack:
 		return
@@ -66,7 +66,6 @@ func perform_action(weapon: WeaponItem, sprite: Sprite2D, collision_shape: Colli
 	
 	if weapon.attack_type == "Magic":
 		cast_active_enemy_jutsu.emit()
-		
 	
 	
 func set_active_weapon(weapon: WeaponItem, slot_to_equip: String):
@@ -95,6 +94,8 @@ func on_attack_animation_finished():
 
 
 func _on_area_2d_body_entered(body: Node2D, hand_type) -> void:
-	if body.has_node("HealthSystem") and hand_type == "right":
-		(body.find_child("HealthSystem") as HealthSystem)
-		#FreezeEngineManager.frameFreeze()
+	if body.get_parent().has_node("HealthSystem") and hand_type == "right":
+		var damage = right_weapon.damage
+		if body.is_in_group("Player"):
+			(body.find_child("HealthSystem") as HealthSystem).apply_damage(damage)
+			body.get_parent().add_knockback(get_parent().velocity)

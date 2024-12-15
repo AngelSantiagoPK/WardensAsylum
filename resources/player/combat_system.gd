@@ -13,6 +13,7 @@ signal cast_active_jutsu
 @onready var player_audio: AudioStreamPlayer2D = $"../PlayerAudio"
 @onready var stamina_system: StaminaSystem = $"../StaminaSystem"
 @onready var on_screen_ui: OnScreenUI = $"../OnScreenUi"
+@onready var slice: AnimatedSprite2D = $RightHandWeaponSprite/Slice
 
 @export var right_weapon: WeaponItem
 @export var left_weapon: WeaponItem
@@ -39,7 +40,9 @@ func perform_action(weapon: WeaponItem, sprite: Sprite2D, collision_shape: Colli
 		can_attack = false
 		
 		# this plays the desired 
+		slice.play('circular_slice')
 		animated_sprite_2d.play_attack_animation()
+
 		
 		var attack_direction = animated_sprite_2d.attack_direction
 		
@@ -106,5 +109,5 @@ func on_attack_animation_finished():
 func _on_area_2d_body_entered(body: Node2D, hand_type) -> void:
 	if body.has_node("HealthSystem") and hand_type == "right":
 		(body.find_child("HealthSystem") as HealthSystem).apply_damage(right_weapon.damage)
-		FreezeEngineManager.frameFreeze()
 		body.apply_knockback(global_position)
+		FreezeEngineManager.frameFreeze()

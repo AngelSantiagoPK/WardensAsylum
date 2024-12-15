@@ -1,8 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://c3hmxuoksmsrh"]
+[gd_scene load_steps=29 format=3 uid="uid://c3hmxuoksmsrh"]
 
 [ext_resource type="Script" path="res://resources/enemies/golden_knight/golden_knight.gd" id="1_mtoq3"]
 [ext_resource type="SpriteFrames" uid="uid://bkh4enxd87h4i" path="res://resources/enemies/golden_knight/golden_knight_sprites.tres" id="2_xh17t"]
-[ext_resource type="Script" path="res://scripts/animation_controller.gd" id="3_w4j3s"]
+[ext_resource type="Script" path="res://scripts/golden_knight_animation_controller.gd" id="3_5q57v"]
 [ext_resource type="PackedScene" uid="uid://csitq07x285ie" path="res://resources/combat_system/context_map.tscn" id="4_1do8e"]
 [ext_resource type="Shape2D" uid="uid://ckstno15cx1e2" path="res://resources/enemies/golden_knight/golden_knight_collision_shape.tres" id="4_nld4v"]
 [ext_resource type="PackedScene" uid="uid://b5e3dgothl2hh" path="res://scenes/HealthSystem.tscn" id="5_8fjud"]
@@ -14,16 +14,11 @@
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_wait.gd" id="11_0jnyk"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_pursue.gd" id="12_6w5jh"]
 [ext_resource type="Resource" uid="uid://bmrsvr6e4gjwq" path="res://resources/weapons/knight_sword/knight_sword_weapon_item.tres" id="13_gxwrc"]
-[ext_resource type="Script" path="res://resources/states/goals/GOAL_golden_knight_attack.gd" id="14_dxls4"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_stagger.gd" id="14_m2asc"]
-[ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_dead.gd" id="15_b7uds"]
+[ext_resource type="PackedScene" uid="uid://c0222dh3dsqkm" path="res://resources/combat_system/ai_combat_system.tscn" id="14_q3y5c"]
 [ext_resource type="Shape2D" uid="uid://cthdwltv4niyw" path="res://resources/enemies/golden_knight/golden_knight_hurt_box.tres" id="17_82m6n"]
+[ext_resource type="Script" path="res://resources/states/goals/GOAL_knight_dead.gd" id="17_nnvo2"]
 [ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="18_f4tme"]
-[ext_resource type="Material" uid="uid://xmcf4j8jq7q4" path="res://resources/npcs/blood_particles.tres" id="19_4p04x"]
-[ext_resource type="Texture2D" uid="uid://dtx5ao70uhydj" path="res://assets/Ui/Emote/emote8.png" id="20_gxxtv"]
-[ext_resource type="Script" path="res://resources/enemies/genius/emote.gd" id="21_4l3r1"]
-[ext_resource type="PackedScene" uid="uid://cg81e08g227tf" path="res://resources/combat_system/combat_system.tscn" id="22_v4uqi"]
-[ext_resource type="Script" path="res://resources/enemies/enemy_combat_system.gd" id="24_mtxav"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_okyjm"]
 radius = 152.03
@@ -216,38 +211,42 @@ motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 script = ExtResource("1_mtoq3")
-speed = 20
-knockback_force = 30
+knockback_force = 600
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, 7)
 sprite_frames = ExtResource("2_xh17t")
-animation = &"left_attack"
+animation = &"back_attack"
 autoplay = "front_idle"
 offset = Vector2(0, -7)
-script = ExtResource("3_w4j3s")
+script = ExtResource("3_5q57v")
 
 [node name="DetectionRay" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(150, -18)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="DetectionRay2" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(152, 0)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="DetectionRay3" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(151, 17)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 1)
 shape = ExtResource("4_nld4v")
 
 [node name="ContextMap" parent="." instance=ExtResource("4_1do8e")]
+visible = false
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 125.99
@@ -255,18 +254,13 @@ target_desired_distance = 95.9
 path_max_distance = 30.0
 navigation_layers = 70
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
 [node name="HealthSystem" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("5_8fjud")]
 actor = NodePath("..")
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio") instance=ExtResource("6_qwp6o")]
 offset_left = -6.0
-offset_top = -9.0
+offset_top = -12.0
 offset_right = -3.0
-offset_bottom = -7.0
 scale = Vector2(4, 1)
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -282,9 +276,7 @@ enemy_audio = NodePath("../AI_Audio")
 [node name="AI_Audio" type="AudioStreamPlayer2D" parent="."]
 bus = &"SFX"
 
-[node name="CombatSystem" parent="." node_paths=PackedStringArray("animated_sprite_2d") instance=ExtResource("22_v4uqi")]
-position = Vector2(1, 7)
-script = ExtResource("24_mtxav")
+[node name="CombatSystem" parent="." node_paths=PackedStringArray("animated_sprite_2d") instance=ExtResource("14_q3y5c")]
 animated_sprite_2d = NodePath("../AnimatedSprite2D")
 right_weapon = ExtResource("13_gxwrc")
 
@@ -299,22 +291,19 @@ object = NodePath("../..")
 [node name="pursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
 script = ExtResource("12_6w5jh")
 object = NodePath("../..")
+target_distance = 35
 steering_force = 1.0
-target_distance = 20
-
-[node name="attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("14_dxls4")
-object = NodePath("../..")
 
 [node name="stagger" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
 script = ExtResource("14_m2asc")
 object = NodePath("../..")
 
 [node name="dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("15_b7uds")
+script = ExtResource("17_nnvo2")
 object = NodePath("../..")
 
 [node name="HurtBox" type="Area2D" parent="." groups=["Enemy"]]
+visible = false
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" groups=["Enemy"]]
@@ -322,6 +311,7 @@ position = Vector2(0, 1)
 shape = ExtResource("17_82m6n")
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
@@ -346,35 +336,21 @@ libraries = {
 "player": SubResource("AnimationLibrary_pa36x")
 }
 
-[node name="ParticleFX" type="GPUParticles2D" parent="."]
-z_index = 1
-emitting = false
-amount = 100
-sub_emitter = NodePath(".")
-process_material = ExtResource("19_4p04x")
-lifetime = 0.7
-one_shot = true
-explosiveness = 1.0
-
 [node name="KnockbackTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 
-[node name="Emote" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-visible = false
-modulate = Color(1, 1, 1, 0.67451)
-position = Vector2(-1, -19)
-texture = ExtResource("20_gxxtv")
-script = ExtResource("21_4l3r1")
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
 
 [node name="TargetUpdate" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Timer" to="StateMachine/pursue" method="_on_timer_timeout"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="StateMachine/pursue" method="_on_timer_timeout"]
 [connection signal="timeout" from="TargetUpdate" to="." method="_on_target_update_timeout"]

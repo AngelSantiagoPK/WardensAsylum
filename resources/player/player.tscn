@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://rw8y3keu1b2i"]
+[gd_scene load_steps=48 format=3 uid="uid://rw8y3keu1b2i"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ncqe7"]
 [ext_resource type="Texture2D" uid="uid://crkdiyxx2khl0" path="res://assets/Actor/Characters/Knight/SpriteSheet.png" id="1_qxfs4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/inventory.gd" id="6_7c11i"]
 [ext_resource type="PackedScene" uid="uid://mqcaccn11ief" path="res://resources/UI/on_screen_ui.tscn" id="7_r5k04"]
 [ext_resource type="PackedScene" uid="uid://cg81e08g227tf" path="res://resources/combat_system/combat_system.tscn" id="8_6qhnn"]
+[ext_resource type="PackedScene" uid="uid://btj634sipwibm" path="res://resources/dash_system/dash_system.tscn" id="9_a33cn"]
 [ext_resource type="Script" path="res://resources/player/jutsu_system.gd" id="9_eglbx"]
 [ext_resource type="PackedScene" uid="uid://b5e3dgothl2hh" path="res://scenes/HealthSystem.tscn" id="10_wymv7"]
 [ext_resource type="PackedScene" uid="uid://dleumm4tcc3im" path="res://scenes/stamina_system.tscn" id="11_4th3k"]
@@ -275,6 +276,42 @@ animations = [{
 "speed": 6.0
 }]
 
+[sub_resource type="Animation" id="Animation_ts7tv"]
+resource_name = "dash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimatedSprite2D:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0.34902, 0.968627, 0.603922), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vsf04"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jqf3x"]
+_data = {
+"RESET": SubResource("Animation_vsf04"),
+"dash": SubResource("Animation_ts7tv")
+}
+
 [sub_resource type="Animation" id="Animation_m00mc"]
 length = 0.001
 tracks/0/type = "value"
@@ -331,7 +368,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("AnimatedSprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -366,12 +403,13 @@ y_sort_enabled = true
 position = Vector2(0, 1)
 collision_mask = 326
 script = ExtResource("1_ncqe7")
-knockback_force = 400
+SPEED = 70.0
+knockback_force = 150
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_6txn0")
-animation = &"right_attack"
+animation = &"front_idle"
 autoplay = "front_idle"
 offset = Vector2(0, -7)
 script = ExtResource("3_2l827")
@@ -381,6 +419,7 @@ position = Vector2(0, -8)
 shape = ExtResource("4_ogu7s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 zoom = Vector2(4, 4)
 process_callback = 0
 position_smoothing_enabled = true
@@ -410,6 +449,12 @@ object = NodePath("..")
 
 [node name="CombatSystem" parent="." instance=ExtResource("8_6qhnn")]
 
+[node name="DashSystem" parent="." node_paths=PackedStringArray("object", "animator", "stamina_system") instance=ExtResource("9_a33cn")]
+object = NodePath("..")
+animator = NodePath("../DashAnimator")
+stamina_system = NodePath("../StaminaSystem")
+dash_time = 0.2
+
 [node name="JutsuSystem" type="Node" parent="."]
 script = ExtResource("9_eglbx")
 
@@ -430,6 +475,12 @@ show_behind_parent = true
 z_index = -1
 position = Vector2(0, -2)
 texture = ExtResource("12_754h3")
+
+[node name="DashAnimator" type="AnimationPlayer" parent="."]
+root_node = NodePath("../HitAnimator")
+libraries = {
+"": SubResource("AnimationLibrary_jqf3x")
+}
 
 [node name="HitAnimator" type="AnimationPlayer" parent="."]
 libraries = {

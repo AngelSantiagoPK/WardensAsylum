@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6ywp00fnh8li"]
+[gd_scene load_steps=6 format=3 uid="uid://b6ywp00fnh8li"]
 
 [ext_resource type="AudioStream" uid="uid://cg0nusmeipbmw" path="res://assets/Musics/30 - Ruins.ogg" id="1_x1t18"]
 [ext_resource type="Script" path="res://resources/UI/score.gd" id="2_gyjx7"]
 [ext_resource type="PackedScene" uid="uid://ckpvefjc8e5bd" path="res://resources/weather/weather_system.tscn" id="2_nclhx"]
+[ext_resource type="Script" path="res://resources/UI/game_over/retry_button.gd" id="3_jr5cb"]
 
 [sub_resource type="GDScript" id="GDScript_l62og"]
 script/source = "extends Node2D
@@ -20,7 +21,7 @@ func _on_retry_button_pressed() -> void:
 	button_audio.stream = preload(\"res://assets/Sounds/Game/Bonus.wav\")
 	button_audio.play()
 	await button_audio.finished
-	TransitionChangeManager.change_scene(\"res://scenes/levels/starting_area.tscn\")
+	TransitionChangeManager.change_scene(\"res://scenes/levels/royale/asylum_royale.tscn\")
 "
 
 [node name="GameOver" type="Node2D"]
@@ -100,6 +101,7 @@ mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 32
 text = "retry"
 flat = true
+script = ExtResource("3_jr5cb")
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer"]
 custom_minimum_size = Vector2(100, 0)

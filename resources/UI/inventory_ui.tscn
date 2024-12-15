@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dat8ni22r6ob3"]
+[gd_scene load_steps=9 format=3 uid="uid://dat8ni22r6ob3"]
 
 [ext_resource type="Script" path="res://scripts/inventory_ui.gd" id="1_83pbg"]
 [ext_resource type="Texture2D" uid="uid://bf8x8mhy4fcu5" path="res://assets/Ui/Dialog/DialogueBoxSimple.png" id="2_h17yc"]
 [ext_resource type="Theme" uid="uid://d7ptudjtc0c7" path="res://themes/text_theme.tres" id="3_y6bcf"]
 [ext_resource type="PackedScene" uid="uid://bux5o3y3lygfj" path="res://resources/UI/inventory_slot.tscn" id="4_itcou"]
+[ext_resource type="Script" path="res://resources/UI/grid_container.gd" id="4_ndh1a"]
 [ext_resource type="Texture2D" uid="uid://qd1rqkioq0i1" path="res://assets/Ui/Icon/Spell/Fireball.png" id="5_cg4y1"]
 [ext_resource type="Texture2D" uid="uid://c1qnmtt7aavpg" path="res://assets/Ui/Icon/Items&Weapon/Kunai.png" id="6_8byja"]
 [ext_resource type="Texture2D" uid="uid://0nwd44ho5i3k" path="res://assets/Ui/Icon/Spell/Heal.png" id="7_1876t"]
@@ -89,6 +90,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 3
+script = ExtResource("4_ndh1a")
 
 [node name="Jutsu Ui" type="VBoxContainer" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true

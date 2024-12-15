@@ -6,10 +6,16 @@ class_name Genius
 @export_group("Targeting")
 @export var target: Player
 @export var spawn_point: Marker2D
+
 @export_group("Base Stats")
 @export var max_health: int = 100
-@export var speed: int = 1
 @export var damage_to_player: int = 10
+
+@export_group("Movement")
+@export var speed: float = 70
+@export var acceleration = 100
+@export var friction = 400
+
 @export_group("Knockback")
 @export var knockback_force: int = 8000
 @export var knockback_time: float = 0.50
@@ -19,7 +25,7 @@ var player_in_sight: bool = false
 
 
 ### REFERENCES
-@onready var animator: AnimationController = $AnimatedSprite2D
+@onready var animator: GoldenKnightAnimationController = $AnimatedSprite2D
 @onready var hit_animator: AnimationPlayer = $HitAnimator
 @onready var walk_animator: AnimationPlayer = $HitAnimator
 @onready var context_map: ContextMap = $ContextMap
@@ -29,7 +35,6 @@ var player_in_sight: bool = false
 @onready var hurt_box: Area2D = $HurtBox
 @onready var timer: Timer = $Timer
 @onready var knockback_timer: Timer = $KnockbackTimer
-@onready var particle_fx: GPUParticles2D = $ParticleFX
 @onready var detection_area: Area2D = $DetectionArea
 @onready var detection_ray: RayCast2D = $DetectionRay
 @onready var detection_ray_2: RayCast2D = $DetectionRay2
@@ -70,12 +75,16 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	sight_check()
-	manage_sight_check()
-		
+	if !target:
+		queue_free()
+	
 	detection_ray.force_raycast_update()
 	detection_ray_2.force_raycast_update()
 	detection_ray_3.force_raycast_update()
+	sight_check()
+	manage_sight_check()
+	
+	
 
 ### KNOCKBACK
 func apply_knockback(player_position: Vector2):
@@ -90,11 +99,20 @@ func _on_knockback_timer_timeout() -> void:
 	velocity = Vector2.ZERO
 
 
-func cleanup():
+func enable_collisions():
+	set_collision_layer_value(2, true)
+	set_collision_layer_value(3, true)
+	set_collision_layer_value(6, true)
+	hurt_box.set_collision_layer_value(6, true)
+	
+	
+func disable_collisions():
 	set_collision_layer_value(2, false)
 	set_collision_layer_value(3, false)
 	set_collision_layer_value(6, false)
 	hurt_box.set_collision_layer_value(6, false)
+
+func cleanup():
 	set_physics_process(false)
 	await get_tree().create_timer(0.75).timeout
 	queue_free()
@@ -111,6 +129,9 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 
 
 func sight_check():
+	if !target:
+		return
+	
 	if player_in_range:
 		# Rotate the rays toward player
 		detection_ray.rotation = global_position.angle_to_point(target.global_position)
@@ -158,5 +179,6 @@ func manage_sight_check():
 
 
 func _on_target_update_timeout() -> void:
-	target_position = target.global_position
-	self.animator.play_movement_animation(velocity)
+	if target:
+		target_position = target.global_position
+		self.animator.play_movement_animation(velocity)

@@ -10,20 +10,33 @@ class_name Player
 @onready var stamina_system: StaminaSystem = $StaminaSystem
 @onready var on_screen_ui: OnScreenUI = $OnScreenUi
 @onready var combat_system: CombatSystem = $CombatSystem
+@onready var jutsu_system: JutsuSystem = $JutsuSystem
 @onready var player_audio: AudioStreamPlayer2D = $PlayerAudio
 @onready var area_2d: Area2D = $Area2D
 @onready var invincibility_timer: Timer = $InvincibilityTimer
 @onready var hit_animator: AnimationPlayer = $HitAnimator
 
+@export_group("Player Movement")
+@export var SPEED = 65.0
+@export var acceleration = 170
+@export var friction = 400
+
 @export_group("Player Stats")
-@export var SPEED = 4000.0
 @export var max_health = 100
 @export var stamina = 100
 @export var knockback_force = 100
 @export_group("")
 var is_invincible = false
 
-const PLAYER_BREADCRUMB_SCENE = preload("res://resources/player/player_breadcrumb.tscn")
+var SOUNDS = {
+	"metal_steps": preload ("res://assets/Sounds/Game/footsteps/step_metal (2).ogg"),
+	"pickup": preload("res://assets/Sounds/Game/footsteps/step_lth2.ogg"),
+	"damage": preload("res://assets/Sounds/Game/Explosion.wav"),
+	"level_up": preload("res://assets/Sounds/Game/Success3.wav")
+}
+
+
+signal player_died
 
 # FUNCTIONS
 func _ready() -> void:
@@ -38,9 +51,11 @@ func _ready() -> void:
 	stamina_system.drained.connect(on_stamina_drained)
 	stamina_system.stamina_updated.connect(on_update_stamina)
 	stamina_system.on_regen.connect(on_regen)
+	
 	# init ui bars
 	on_screen_ui.init_health_bar(max_health)
 	on_screen_ui.init_stamina_bar(stamina)
+	
 	# global init
 	Global.level_up.connect(level_up)
 	#end
@@ -50,18 +65,23 @@ func _physics_process(delta: float) -> void:
 	if animated_sprite_2D.animation.contains("attack"):
 		return
 	
-	var direction = Input.get_vector("left", "right", "up", "down")
+	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
 	if direction:
-		velocity = direction * SPEED * delta
+		velocity += direction * acceleration * delta
+		velocity = velocity.limit_length(SPEED)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED*delta)
-		velocity.y = move_toward(velocity.y, 0, SPEED*delta)
-	
-	if velocity != Vector2.ZERO:
-		animated_sprite_2D.play_movement_animation(velocity)
+		if velocity.length() > (friction * delta):
+			velocity -= velocity.normalized() * (friction * delta)
+		else:
+			velocity = Vector2.ZERO
+
+
+	if direction:
+		animated_sprite_2D.play_movement_animation(direction)
+		
 		if player_audio.playing == false:
-			player_audio.stream =preload ("res://assets/Sounds/Game/footsteps/step_metal (2).ogg") 
+			player_audio.stream = SOUNDS.metal_steps
 			player_audio.play()
 	else:
 		animated_sprite_2D.play_idle_animation()
@@ -69,18 +89,17 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	#end
 
-
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area is PickupItem:
 		inventory.add_item(area.inventory_item, area.stacks)
 		
-		player_audio.stream = preload("res://assets/Sounds/Game/Gold2.wav")
+		player_audio.stream = SOUNDS.pickup
 		player_audio.play()
-			
+		
 		area.queue_free()
 	
 	# check for invincibility frame
-	if is_invincible == true:
+	if is_invincible:
 		return
 	
 	if area.get_parent().is_in_group("Enemy"):
@@ -89,38 +108,28 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		add_knockback(area.get_parent().velocity)
 	#end
 
-
 func on_damage_taken(current_health: int):
 	FreezeEngineManager.frameFreeze()
 	on_screen_ui.apply_damage(current_health)
 	start_invincibility_frame()
-	player_audio.stream = preload("res://assets/Sounds/Game/Explosion.wav")
+	player_audio.stream = SOUNDS.damage
 	player_audio.play()
 	hit_animator.play("hit_flash")
 	
 	#end
-
 
 func on_player_dead():
 	set_physics_process(false)
 	combat_system.set_process_input(false)
 	animated_sprite_2D.play('dead')
 	await animated_sprite_2D.animation_finished
-	TransitionChangeManager.change_scene("res://resources/UI/game_over/game_over.tscn")
+	player_died.emit()
 	#end
-
 
 func setup_test_inventory():
 	var items: Array[InventoryItem] = InventoryStateManager.get_inventory()
 	for i in items:
 		inventory.add_item(i, i.stacks)
-	
-	#const SWORD_INVENTORY_ITEM = preload("res://resources/weapons/sword/sword_inventory_item.tres")
-	#const GOLD_COIN = preload("res://resources/gold_coin/gold_coin.tres")
-	#
-	#inventory.add_item(SWORD_INVENTORY_ITEM, 1)
-	#inventory.add_item(GOLD_COIN, 100)
-
 
 func on_update_stamina(current_stamina: int):
 	on_screen_ui.update_stamina_bar(current_stamina)
@@ -132,11 +141,9 @@ func on_regen():
 	on_screen_ui.update_stamina_bar(stamina)
 
 func add_knockback(enemy_velocity: Vector2):
-	# find other body direction
 	var knock_direction = (enemy_velocity - velocity).normalized() * knockback_force
 	velocity = knock_direction
 	move_and_slide()
-	pass
 
 func start_invincibility_frame():
 	area_2d.set_collision_layer_value(1, false)
@@ -148,6 +155,5 @@ func _on_invincibility_timer_timeout() -> void:
 	is_invincible = false
 
 func level_up():
-	var level_up_sfx = preload("res://assets/Sounds/Game/Success3.wav")
-	player_audio.stream = level_up_sfx
+	#player_audio.stream = SOUNDS.level_up
 	player_audio.play()

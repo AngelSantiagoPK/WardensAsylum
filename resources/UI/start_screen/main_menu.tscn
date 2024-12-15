@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://yfi8xm6hymrx"]
+[gd_scene load_steps=5 format=3 uid="uid://yfi8xm6hymrx"]
 
 [ext_resource type="AudioStream" uid="uid://3lwrn8khctjp" path="res://assets/Musics/29 - Lament.ogg" id="1_hakcg"]
+[ext_resource type="Script" path="res://resources/UI/start_screen/start_button.gd" id="2_ne653"]
 [ext_resource type="PackedScene" uid="uid://ckpvefjc8e5bd" path="res://resources/weather/weather_system.tscn" id="2_y2vdb"]
 
 [sub_resource type="GDScript" id="GDScript_l62og"]
@@ -13,8 +14,7 @@ func _on_start_button_pressed() -> void:
 	button_audio.stream = preload(\"res://assets/Sounds/Game/Jump.wav\")
 	button_audio.play()
 	await button_audio.finished
-	Global.game_reset()
-	TransitionChangeManager.change_scene(\"res://scenes/levels/starting_area.tscn\")
+	TransitionChangeManager.change_scene(\"res://scenes/levels/royale/asylum_royale.tscn\")
 
 
 func _on_exit_button_pressed() -> void:
@@ -90,6 +90,7 @@ mouse_default_cursor_shape = 2
 theme_override_font_sizes/font_size = 32
 text = "start"
 flat = true
+script = ExtResource("2_ne653")
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer"]
 custom_minimum_size = Vector2(100, 0)
