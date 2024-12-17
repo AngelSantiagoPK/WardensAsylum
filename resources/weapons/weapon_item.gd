@@ -8,8 +8,9 @@ class_name WeaponItem
 @export var in_hand_texture: Texture2D
 @export var side_in_hand_texture: Texture2D
 @export var collision_shape: ConvexPolygonShape2D
-@export_enum("Melee", "Ranged", "Magic") var attack_type: String
+@export_enum("Melee", "Ranged", "Magic", "Shield") var attack_type: String
 @export var prefered_weapon_sound: AudioStream = preload("res://assets/Sounds/Game/Hit.wav")
+@export var shield_resource: Resource
 @export_group("")
 
 @export_group("Attachment Postion")
@@ -59,3 +60,9 @@ func get_data_for_direction(direction: String):
 				"rotation": back_rotation,
 				"z_index":back_z_index
 			}
+
+func get_shield_resource():
+	if shield_resource == null:
+		return
+	
+	return shield_resource

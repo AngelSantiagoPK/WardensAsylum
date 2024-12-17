@@ -17,10 +17,10 @@
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_attack.gd" id="13_s3bju"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_stagger.gd" id="13_uckny"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_genius_dead.gd" id="14_yt7lu"]
-[ext_resource type="Shape2D" uid="uid://dnsu01e44ukw5" path="res://resources/enemies/genius/genius_detection_shape.tres" id="19_0e4s3"]
+[ext_resource type="PackedScene" uid="uid://c5f30b5pyem5p" path="res://resources/DetectionSystem/detection_system.tscn" id="17_is0de"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nexrx"]
-radius = 6.0
+radius = 5.0
 
 [sub_resource type="Animation" id="Animation_22vld"]
 length = 0.001
@@ -136,7 +136,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.790969, 4.28364e-06, 8.66354e-07, 1), Color(0.546968, 0.546968, 0.546968, 1)]
+"values": [Color(0.790969, 4.28364e-06, 8.66354e-07, 1), Color(0.545098, 0.545098, 0.545098, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -201,7 +201,6 @@ _data = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pa36x"]
 
 [node name="Genius" type="CharacterBody2D" groups=["Enemy"]]
-z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -6)
 collision_layer = 103
@@ -211,25 +210,6 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 script = ExtResource("1_qcxey")
 max_health = 30
-knockback_force = 1000
-
-[node name="DetectionRay" type="RayCast2D" parent="."]
-visible = false
-target_position = Vector2(299, -10)
-collision_mask = 7
-collide_with_areas = true
-
-[node name="DetectionRay2" type="RayCast2D" parent="."]
-visible = false
-target_position = Vector2(300, 6)
-collision_mask = 7
-collide_with_areas = true
-
-[node name="DetectionRay3" type="RayCast2D" parent="."]
-visible = false
-target_position = Vector2(298, 20)
-collision_mask = 7
-collide_with_areas = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
@@ -240,12 +220,10 @@ offset = Vector2(0, -7)
 script = ExtResource("3_6l8jx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 1)
+position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_nexrx")
 
 [node name="ContextMap" parent="." instance=ExtResource("2_mcnqk")]
-visible = false
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 125.99
@@ -306,20 +284,15 @@ object = NodePath("../..")
 script = ExtResource("14_yt7lu")
 object = NodePath("../..")
 
+[node name="DetectionSystem" parent="." node_paths=PackedStringArray("object") instance=ExtResource("17_is0de")]
+object = NodePath("..")
+
 [node name="HurtBox" type="Area2D" parent="." groups=["Enemy"]]
-visible = false
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" groups=["Enemy"]]
 position = Vector2(0, 1)
 shape = ExtResource("8_oiifk")
-
-[node name="DetectionArea" type="Area2D" parent="."]
-visible = false
-collision_layer = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = ExtResource("19_0e4s3")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.439216)
@@ -345,12 +318,10 @@ wait_time = 0.5
 one_shot = true
 
 [node name="TargetUpdate" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.01
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="StateMachine/pursue" method="_on_timer_timeout"]
-[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
-[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
 [connection signal="timeout" from="TargetUpdate" to="." method="_on_target_update_timeout"]

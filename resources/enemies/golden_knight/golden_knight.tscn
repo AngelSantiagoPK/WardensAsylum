@@ -19,9 +19,7 @@
 [ext_resource type="Shape2D" uid="uid://cthdwltv4niyw" path="res://resources/enemies/golden_knight/golden_knight_hurt_box.tres" id="17_82m6n"]
 [ext_resource type="Script" path="res://resources/states/goals/GOAL_knight_dead.gd" id="17_nnvo2"]
 [ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="18_f4tme"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_okyjm"]
-radius = 152.03
+[ext_resource type="PackedScene" uid="uid://c5f30b5pyem5p" path="res://resources/DetectionSystem/detection_system.tscn" id="20_y1ely"]
 
 [sub_resource type="Animation" id="Animation_22vld"]
 length = 0.001
@@ -222,31 +220,11 @@ autoplay = "front_idle"
 offset = Vector2(0, -7)
 script = ExtResource("3_5q57v")
 
-[node name="DetectionRay" type="RayCast2D" parent="."]
-visible = false
-target_position = Vector2(150, -18)
-collision_mask = 7
-collide_with_areas = true
-
-[node name="DetectionRay2" type="RayCast2D" parent="."]
-visible = false
-target_position = Vector2(152, 0)
-collision_mask = 7
-collide_with_areas = true
-
-[node name="DetectionRay3" type="RayCast2D" parent="."]
-visible = false
-target_position = Vector2(151, 17)
-collision_mask = 7
-collide_with_areas = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 1)
 shape = ExtResource("4_nld4v")
 
 [node name="ContextMap" parent="." instance=ExtResource("4_1do8e")]
-visible = false
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 125.99
@@ -303,19 +281,11 @@ script = ExtResource("17_nnvo2")
 object = NodePath("../..")
 
 [node name="HurtBox" type="Area2D" parent="." groups=["Enemy"]]
-visible = false
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" groups=["Enemy"]]
 position = Vector2(0, 1)
 shape = ExtResource("17_82m6n")
-
-[node name="DetectionArea" type="Area2D" parent="."]
-visible = false
-collision_layer = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-shape = SubResource("CircleShape2D_okyjm")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.439216)
@@ -348,8 +318,9 @@ autostart = true
 wait_time = 0.05
 autostart = true
 
-[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
-[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[node name="DetectionSystem" parent="." node_paths=PackedStringArray("object") instance=ExtResource("20_y1ely")]
+object = NodePath("..")
+
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="StateMachine/pursue" method="_on_timer_timeout"]

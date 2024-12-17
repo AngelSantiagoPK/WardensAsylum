@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://byo6f7k77qbwo"]
+[gd_scene load_steps=6 format=4 uid="uid://byo6f7k77qbwo"]
 
 [ext_resource type="Script" path="res://scenes/levels/royale/asylum_royale.gd" id="1_3dv4f"]
 [ext_resource type="TileSet" uid="uid://ch8cmv46bdq6i" path="res://tiles/tileset.tres" id="1_hrj35"]
@@ -32,17 +32,6 @@ func play_defeat():
 	play()
 "
 
-[sub_resource type="Gradient" id="Gradient_65ryj"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tmsri"]
-gradient = SubResource("Gradient_65ryj")
-width = 1000
-height = 1000
-fill = 1
-fill_from = Vector2(0.534188, 0.508547)
-fill_to = Vector2(0.995726, 0.0192308)
-
 [node name="AsylumRoyale" type="Node2D"]
 script = ExtResource("1_3dv4f")
 
@@ -59,8 +48,28 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AADz//f/BgAIAAYAAAD0//f/BgAIAAYAAAD1//f/BgAIAAYAAAD2//f/BgAIAAYAAAD3//f/BgAIAAYAAAD4//f/BgAIAAYAAAD5//f/BgAIAAYAAAD6//f/BgAIAAYAAAD7//f/BgAIAAYAAAD8//f/BgAIAAYAAAD9//f/BgAIAAYAAAD+//f/BgAIAAYAAAD///f/BgAIAAYAAAAAAPf/BgAIAAYAAAABAPf/BgAIAAYAAAACAPf/BgAIAAYAAAADAPf/BgAIAAYAAAAEAPf/BgAIAAYAAAAFAPf/BgAIAAYAAAAGAPf/BgAIAAYAAAAHAPf/BgAIAAYAAAAIAPf/BgAIAAYAAADy//f/BgAIAAYAAAAIAAYABgAIAAoAAAAHAAYABgAIAAoAAAAGAAYABgAIAAoAAAAFAAYABgAIAAoAAAAEAAYABgAIAAoAAAADAAYABgAIAAoAAAACAAYABgAIAAoAAAABAAYABgAIAAoAAAAAAAYABgAIAAoAAAD//wYABgAIAAoAAAD+/wYABgAIAAoAAAD9/wYABgAIAAoAAAD8/wYABgAIAAoAAAD7/wYABgAIAAoAAAD6/wYABgAIAAoAAAD5/wYABgAIAAoAAAD4/wYABgAIAAoAAAD3/wYABgAIAAoAAAD2/wYABgAIAAoAAAD1/wYABgAIAAoAAAD0/wYABgAIAAoAAADz/wYABgAIAAoAAADy/wYABgAIAAoAAAAIAAcABgAIAAYAAAAHAAcABgAIAAYAAAAGAAcABgAIAAYAAAAFAAcABgAIAAYAAAAEAAcABgAIAAYAAAADAAcABgAIAAYAAAACAAcABgAIAAYAAAABAAcABgAIAAYAAAAAAAcABgAIAAYAAAD//wcABgAIAAYAAAD+/wcABgAIAAYAAAD9/wcABgAIAAYAAAD8/wcABgAIAAYAAAD7/wcABgAIAAYAAAD6/wcABgAIAAYAAAD5/wcABgAIAAYAAAD4/wcABgAIAAYAAAD3/wcABgAIAAYAAAD2/wcABgAIAAYAAAD1/wcABgAIAAYAAAD0/wcABgAIAAYAAADz/wcABgAIAAYAAADx/wUABgAFAAcAAADx/wQABgAFAAcAAADx/wMABgAFAAcAAADx/wIABgAFAAcAAADx/wEABgAFAAcAAADx/wAABgAFAAcAAADx////BgAFAAcAAADx//7/BgAFAAcAAADx//3/BgAFAAcAAADx//z/BgAFAAcAAADx//v/BgAFAAcAAADx//r/BgAFAAcAAADx//n/BgAFAAcAAADx//j/BgAFAAcAAADx//f/BgAFAAYAAADx/wYABgAFAAoAAADy//b/BgAIAAoAAADz//b/BgAIAAoAAAD0//b/BgAIAAoAAAD1//b/BgAIAAoAAAD2//b/BgAIAAoAAAD3//b/BgAIAAoAAAD4//b/BgAIAAoAAAD5//b/BgAIAAoAAAD6//b/BgAIAAoAAAD7//b/BgAIAAoAAAD8//b/BgAIAAoAAAD9//b/BgAIAAoAAAD+//b/BgAIAAoAAAD///b/BgAIAAoAAAAAAPb/BgAIAAoAAAABAPb/BgAIAAoAAAACAPb/BgAIAAoAAAADAPb/BgAIAAoAAAAEAPb/BgAIAAoAAAAFAPb/BgAIAAoAAAAGAPb/BgAIAAoAAAAHAPb/BgAIAAoAAAAIAPb/BgAIAAoAAADx//b/BgAIAAoAAADx/wcABgAIAAYAAADy/wcABgAIAAYAAADw/wcABgAHAAgAAADw/wYABgAJAAcAAADw/wUABgAJAAcAAADw/wQABgAJAAcAAADw/wMABgAJAAcAAADw/wIABgAJAAcAAADw/wEABgAJAAcAAADw/wAABgAJAAcAAADw////BgAJAAcAAADw//7/BgAJAAcAAADw//3/BgAJAAcAAADw//z/BgAJAAcAAADw//v/BgAJAAcAAADw//r/BgAJAAcAAADw//n/BgAJAAcAAADw//j/BgAJAAcAAADw//f/BgAJAAcAAADw//b/BgAHAAcAAAAMAPb/BgAIAAoAAAAMAPf/BgAJAAYAAAAMAPj/BgAJAAcAAAAMAPn/BgAJAAcAAAAMAPr/BgAJAAcAAAAMAPv/BgAJAAcAAAAMAPz/BgAJAAcAAAAMAP3/BgAJAAcAAAAMAP7/BgAJAAcAAAAMAP//BgAJAAcAAAAMAAAABgAJAAcAAAAMAAEABgAJAAcAAAAMAAIABgAJAAcAAAAMAAMABgAJAAcAAAAMAAQABgAJAAcAAAAMAAUABgAJAAcAAAAMAAYABgAJAAoAAAAMAAcABgAIAAYAAAANAPb/BgAIAAcAAAANAPf/BgAFAAcAAAANAPj/BgAFAAcAAAANAPn/BgAFAAcAAAANAPr/BgAFAAcAAAANAPv/BgAFAAcAAAANAPz/BgAFAAcAAAANAP3/BgAFAAcAAAANAP7/BgAFAAcAAAANAP//BgAFAAcAAAANAAAABgAFAAcAAAANAAEABgAFAAcAAAANAAIABgAFAAcAAAANAAMABgAFAAcAAAANAAQABgAFAAcAAAANAAUABgAFAAcAAAANAAYABgAFAAcAAAANAAcABgAIAAgAAAAJAPb/BgAIAAoAAAAJAPf/BgAIAAYAAAAJAAYABgAIAAoAAAAJAAcABgAIAAYAAAAKAPb/BgAIAAoAAAAKAPf/BgAIAAYAAAAKAAYABgAIAAoAAAAKAAcABgAIAAYAAAALAPb/BgAIAAoAAAALAPf/BgAIAAYAAAALAAYABgAIAAoAAAALAAcABgAIAAYAAAA=")
 tile_set = ExtResource("1_hrj35")
 
+[node name="Decoration" type="TileMapLayer" parent="MapLayers" groups=["Danger"]]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAD+//z/AwAFABUAAAD+//3/AwAFABYAAAD///z/AwAGABUAAAD///3/AwAGABYAAAD0//n/AwAHABUAAAD0//r/AwAHABYAAAD0/wIAAwAHABUAAAD0/wMAAwAHABYAAAAJAAIAAwAHABUAAAAJAAMAAwAHABYAAAAJAPn/AwAHABUAAAAJAPr/AwAHABYAAAA=")
+tile_set = ExtResource("1_hrj35")
+
 [node name="Player" parent="." instance=ExtResource("2_nhaph")]
-position = Vector2(0, -1)
+position = Vector2(-59, -8)
+
+[node name="PlayerCam" type="Camera2D" parent="Player"]
+zoom = Vector2(3, 3)
+process_callback = 0
+limit_left = -256
+limit_top = -160
+limit_right = 224
+limit_bottom = 128
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.0
+drag_top_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
 
 [node name="EnemySpawnPoints" type="Node" parent="."]
 
@@ -99,28 +108,16 @@ position = Vector2(-152, -41)
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 3.0
-autostart = true
 
 [node name="RoundTimer" type="Timer" parent="."]
 
 [node name="RoundBanner" parent="." instance=ExtResource("4_he41s")]
 
 [node name="LevelMusic" type="AudioStreamPlayer2D" parent="."]
+visible = false
+position = Vector2(-1, -1)
+volume_db = -10.59
 bus = &"Music"
 script = SubResource("GDScript_asikq")
-
-[node name="LevelCam" type="Camera2D" parent="."]
-position = Vector2(-16, -17)
-zoom = Vector2(4, 4)
-
-[node name="Lighting" type="Node" parent="."]
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Lighting"]
-position = Vector2(-260, 0)
-blend_mode = 1
-
-[node name="PointLight2D" type="PointLight2D" parent="Lighting"]
-position = Vector2(-16, -17)
-texture = SubResource("GradientTexture2D_tmsri")
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_timer_timeout"]

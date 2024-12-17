@@ -521,10 +521,10 @@ tracks/6/path = NodePath("ShadowSprite:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.2, 0.6, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.2, 0.6, 0.8, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(2, 2), Vector2(1, 1), Vector2(2, 2)]
+"values": [Vector2(2, 2), Vector2(1, 1), Vector2(8, 8), Vector2(2, 2), Vector2(2, 2)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -563,6 +563,7 @@ y_sort_enabled = true
 collision_layer = 32
 collision_mask = 7
 script = ExtResource("1_6ef3h")
+damage_to_player = 20
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
@@ -571,7 +572,7 @@ sprite_frames = SubResource("SpriteFrames_2tu06")
 animation = &"slam"
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.407843)
+modulate = Color(1, 1, 1, 0.239216)
 scale = Vector2(2, 2)
 texture = ExtResource("6_ja8ey")
 
@@ -665,7 +666,7 @@ position = Vector2(0, -5)
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
-position = Vector2(0, -1)
+position = Vector2(0, 2)
 rotation = -1.5708
 scale = Vector2(2, 2)
 shape = ExtResource("22_6n0yy")

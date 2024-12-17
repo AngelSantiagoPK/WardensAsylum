@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShieldItem" load_steps=2 format=3 uid="uid://dphaktmfw07ao"]
+
+[ext_resource type="Script" path="res://resources/shield_system/shield_item.gd" id="1_wjq5c"]
+
+[resource]
+script = ExtResource("1_wjq5c")
+shield_angle_start = 90.0
+shield_angle_end = -90.0
+defense_percentage = 100.0
+knockback_defense = 50.0

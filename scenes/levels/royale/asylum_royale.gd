@@ -40,20 +40,19 @@ func spawn_mob():
 	var num = randi_range(0, enemy_markers.size() - 1)
 	var enemy_marker = enemy_markers[enemy_spawn_points.get_child(num).name]
 	
-	get_tree().root.add_child(mob)
-	mob.disable_collisions()
-	mob.target = player
 	mob.global_position = enemy_marker.global_position
-	mob.enable_collisions()
+	mob.init(player)
+	get_tree().root.add_child(mob)
+
 
 func spawn_knight():
 	var mob = GOLD_KNIGHT_MOB_SCENE.instantiate()
 	var num = randi_range(0, enemy_markers.size() - 1)
 	var enemy_marker = enemy_markers[enemy_spawn_points.get_child(num).name]
 	
-	get_tree().root.add_child(mob)
-	mob.target = player
 	mob.global_position = enemy_marker.global_position
+	mob.init(player)
+	get_tree().root.add_child(mob)
 
 
 func _on_timer_timeout() -> void:
@@ -84,7 +83,6 @@ func on_victory():
 
 
 func on_dead():
-	player = null
 	AsylumModeManager.player_is_alive = false
 	level_music.play_defeat()
 	await round_banner.show_banner("defeat")
@@ -97,9 +95,12 @@ func on_dead():
 func setup_player_inventory():
 	const SWORD_INVENTORY_ITEM = preload("res://resources/weapons/sword/sword_inventory_item.tres")
 	const SCROLL_INVENTORY_ITEM = preload("res://resources/weapons/scroll/scroll_inventory_item.tres")
+	const SHIELD_INVENTORY_ITEM = preload("res://resources/weapons/shield/shield_inventory_item.tres")
 	
 	player.inventory.add_item(SWORD_INVENTORY_ITEM, 1)
 	player.inventory.add_item(SCROLL_INVENTORY_ITEM, 1)
+	player.inventory.add_item(SHIELD_INVENTORY_ITEM, 1)
+	
 	player.inventory.on_item_equipped(0, "Right_Hand")
-	player.inventory.on_item_equipped(1, "Left_Hand")
+	player.inventory.on_item_equipped(2, "Left_Hand")
 	player.jutsu_system.on_jutsu_activated(0)

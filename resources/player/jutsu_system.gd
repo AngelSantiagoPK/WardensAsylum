@@ -19,6 +19,8 @@ var current_jutsu_cooldown = 0
 var cooldown_timer = 999
 var active_jutsu_index = -1
 
+signal cast_heal
+
 func _ready() -> void:
 	inventory_toggler.jutsu_activated.connect(on_jutsu_activated)
 	combat_system.cast_active_jutsu.connect(on_cast_active_jutsu)
@@ -48,6 +50,8 @@ func on_cast_active_jutsu():
 	else:	
 		cooldown_timer = 0
 	
+	
+	
 	var jutsu_rotation = get_jutsu_rotation(jutsu_direction, jutsu_config.initial_rotation)
 	var jutsu : Jutsu = JUTSU_SCENE.instantiate()
 	
@@ -73,8 +77,8 @@ func get_jutsu_rotation(jutsu_direction: Vector2, initial_rotation: int):
 			return -90 + initial_rotation
 		Vector2.DOWN:
 			return 90 + initial_rotation
-					
-			
-			
-			
-			
+
+func check_heal():
+	var active_jutsu = jutsu_configs[active_jutsu_index]
+	if active_jutsu.jutsu_name == "heal":
+		cast_heal.emit(active_jutsu.damage)
