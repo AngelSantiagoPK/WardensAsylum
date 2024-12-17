@@ -11,6 +11,6 @@ collision_shape = ExtResource("1_dmce0")
 jutsu_name = "Fireball"
 initial_rotation = 90
 ui_texture = ExtResource("3_jmr7g")
-initial_cooldown = 3.0
+initial_cooldown = 10.0
 damage = 30
 target_self = false

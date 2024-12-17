@@ -6,6 +6,7 @@ class_name SlimeBoss
 @export var damage_to_player = 5
 @export var acceleration = 50.0
 @export var target: Node2D
+var target_position: Vector2
 const PICKUP_ITEM_SCENE = preload("res://scenes/pickup_item.tscn")
 @export var item_to_drop: InventoryItem
 @export var loot_stacks: int
@@ -46,7 +47,7 @@ func make_path():
 
 
 func _on_timer_timeout() -> void:
-	context_map.set_target_position(target.position)
+	target_position = target.global_position
 
 func apply_knockback(body_position: Vector2):
 	pass

@@ -51,7 +51,8 @@ func play_movement_animation(velocity: Vector2):
 	
 	
 	
-
+func get_attack_vector(direction: String):
+	return DIRECTION_TO_ATTACK_VECTOR[direction]
 
 func play_idle_animation():
 	if MOVEMENT_TO_IDLE.keys().has(animation) and animation_looped:
@@ -62,7 +63,7 @@ func play_idle_animation():
 func play_attack_animation():
 	var direction = animation.split("_")[0]
 	attack_direction = direction
-	if attack_direction == "hit" || attack_direction == "death":
+	if attack_direction == "hit" || attack_direction == "dead":
 		return
 	play(DIRECTION_TO_ATTACK_ANIMATION[direction])
 	await animation_finished

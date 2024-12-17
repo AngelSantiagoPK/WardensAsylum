@@ -52,7 +52,7 @@ func start_round():
 	
 	skeletons_to_spawn = round_number * 2
 	var value = snapped(round_number / 3, 1)
-	gold_knights_to_spawn = value
+	gold_knights_to_spawn = 01
 	enemies_alive = skeletons_to_spawn + gold_knights_to_spawn
 	
 	player_is_alive = true

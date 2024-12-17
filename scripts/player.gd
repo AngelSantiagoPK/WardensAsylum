@@ -10,6 +10,7 @@ class_name Player
 @onready var stamina_system: StaminaSystem = $StaminaSystem
 @onready var on_screen_ui: OnScreenUI = $OnScreenUi
 @onready var combat_system: CombatSystem = $CombatSystem
+@onready var shield_system: ShieldSystem = $ShieldSystem
 @onready var jutsu_system: JutsuSystem = $JutsuSystem
 @onready var player_audio: AudioStreamPlayer2D = $PlayerAudio
 @onready var area_2d: Area2D = $Area2D
@@ -51,6 +52,10 @@ func _ready() -> void:
 	stamina_system.drained.connect(on_stamina_drained)
 	stamina_system.stamina_updated.connect(on_update_stamina)
 	stamina_system.on_regen.connect(on_regen)
+	
+	# system system
+	jutsu_system.cast_heal.connect(health_system.apply_heal.bind())
+	combat_system.active_block.connect(shield_system.activate_shield.bind())
 	
 	# init ui bars
 	on_screen_ui.init_health_bar(max_health)
@@ -104,8 +109,17 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	
 	if area.get_parent().is_in_group("Enemy"):
 		var damage_to_player = area.get_parent().damage_to_player
-		health_system.apply_damage(damage_to_player)
-		add_knockback(area.get_parent().velocity)
+		#region Shields
+		if shield_system.is_active():
+			if shield_system.is_blocking_angle_valid(area):
+				shield_system.process_enemy_attack(area)
+			else: 
+				health_system.apply_damage(damage_to_player)
+				add_knockback(area.get_parent().velocity)
+		else: 
+				health_system.apply_damage(damage_to_player)
+				add_knockback(area.get_parent().velocity)
+		#endregion
 	#end
 
 func on_damage_taken(current_health: int):

@@ -8,12 +8,15 @@ func _ready() -> void:
 	health_system.init(max_health)
 	health_bar.max_value = max_health
 	health_bar.value = max_health
+	detection_system.init_detection()
 	animator.play_idle_animation()
 	
 	# load states
 	for i in state_machine.get_children():
 		STATES[i.name] = i
 	# states hookup
+	detection_system.target_in_sight.connect(state_machine.change_state.bind(STATES.pursue))
+	detection_system.target_lost.connect(state_machine.change_state.bind(STATES.wait))
 	# When close to player target, do attack
 	STATES.pursue.close_to.connect(state_machine.change_state.bind(STATES.wait))
 	# when hit, do stagger
