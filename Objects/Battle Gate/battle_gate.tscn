@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d30u2fa80graw"]
+
+[ext_resource type="Script" path="res://Objects/Battle Gate/battle_gate.gd" id="1_01sc6"]
+[ext_resource type="Shape2D" uid="uid://brr0jonruu1ql" path="res://Objects/Battle Gate/battle_gate_collision_shape.tres" id="1_fbxw0"]
+[ext_resource type="Texture2D" uid="uid://b2ryvrdu5vyjx" path="res://assets/Backgrounds/Tilesets/TilesetDungeon.png" id="2_7m4a6"]
+
+[node name="BattleGate" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 0
+script = ExtResource("1_01sc6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("1_fbxw0")
+disabled = true
+
+[node name="GateSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_7m4a6")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)

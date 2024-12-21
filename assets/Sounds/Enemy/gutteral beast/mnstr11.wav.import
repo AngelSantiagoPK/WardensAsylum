@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bgrruqlrnrl5t"
+path="res://.godot/imported/mnstr11.wav-982817659a9d66e7c5addc319d4f9954.sample"
+
+[deps]
+
+source_file="res://assets/Sounds/Enemy/gutteral beast/mnstr11.wav"
+dest_files=["res://.godot/imported/mnstr11.wav-982817659a9d66e7c5addc319d4f9954.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

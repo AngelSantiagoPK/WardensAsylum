@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbi8c0mc4ixek"]
+
+[ext_resource type="Script" path="res://scenes/levels/Battle Area/battle_area.gd" id="1_8osvo"]
+[ext_resource type="PackedScene" uid="uid://chtlfu4c8ce55" path="res://Objects/Spawner/spawner.tscn" id="2_kn0ej"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7ctq"]
+size = Vector2(190, 158)
+
+[node name="BattleArea" type="Area2D"]
+collision_layer = 64
+script = ExtResource("1_8osvo")
+min_mobs = 2
+max_mobs = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_y7ctq")
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="Spawner1" parent="Spawners" instance=ExtResource("2_kn0ej")]
+position = Vector2(-47, -39)
+
+[node name="Spawner2" parent="Spawners" instance=ExtResource("2_kn0ej")]
+position = Vector2(43, -40)
+
+[node name="Spawner3" parent="Spawners" instance=ExtResource("2_kn0ej")]
+position = Vector2(-45, 35)
+
+[node name="Spawner4" parent="Spawners" instance=ExtResource("2_kn0ej")]
+position = Vector2(41, 34)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="BattleAudio" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

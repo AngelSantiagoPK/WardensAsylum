@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="ProjectileConfig" load_steps=2 format=3 uid="uid://b2ew3pgvt61kl"]
-
-[ext_resource type="Script" path="res://resources/energy_ball/projectile_config.gd" id="1_a3rh3"]
-
-[resource]
-script = ExtResource("1_a3rh3")
-speed = 100
-damage_to_player = 10
-life = 5.0

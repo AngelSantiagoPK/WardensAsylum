@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=5 format=3 uid="uid://c55boolpvvmsl"]
+
+[ext_resource type="Shape2D" uid="uid://bl5ss8f0bk840" path="res://Objects/Weapons/sword/sword_collision_poly_shape.tres" id="1_7th1m"]
+[ext_resource type="Texture2D" uid="uid://mm88glnebfwl" path="res://assets/Items/Weapons/Sword2/SpriteInHand.png" id="1_xrork"]
+[ext_resource type="Script" path="res://Objects/Weapons/weapon_item.gd" id="2_f1lpc"]
+[ext_resource type="AudioStream" uid="uid://bl6wug13r17qy" path="res://assets/Sounds/Game/Sword2.wav" id="3_1hrl3"]
+
+[resource]
+script = ExtResource("2_f1lpc")
+damage = 25
+stamina_cost = 30
+in_hand_texture = ExtResource("1_xrork")
+collision_shape = ExtResource("1_7th1m")
+attack_type = "Melee"
+prefered_weapon_sound = ExtResource("3_1hrl3")
+left_attachment_position = Vector2(-8, -8)
+right_attachment_position = Vector2(8, -2)
+front_attachment_position = Vector2(-5, 0)
+back_attachment_position = Vector2(0, -16)
+left_rotation = 90
+right_rotation = -90
+front_rotation = 0
+back_rotation = 180
+left_z_index = 1
+right_z_index = 1
+front_z_index = 1
+back_z_index = 0

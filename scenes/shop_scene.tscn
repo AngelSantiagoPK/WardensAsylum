@@ -1,16 +1,47 @@
-[gd_scene load_steps=7 format=4 uid="uid://8fw2lvlg35y8"]
+[gd_scene load_steps=7 format=4 uid="uid://cg0dh1exbnxci"]
 
 [ext_resource type="TileSet" uid="uid://ch8cmv46bdq6i" path="res://tiles/tileset.tres" id="1_mgig6"]
-[ext_resource type="Script" path="res://scripts/shop_scene_interior.gd" id="1_xx7lk"]
-[ext_resource type="PackedScene" uid="uid://76uoputgaoja" path="res://scenes/merchant.tscn" id="3_t7s6d"]
-[ext_resource type="Script" path="res://scripts/inventory_item.gd" id="4_ubbvp"]
-[ext_resource type="Resource" uid="uid://c4ptw8nr6mbk4" path="res://resources/weapons/shield/shield_inventory_item.tres" id="6_nfh6n"]
+[ext_resource type="PackedScene" uid="uid://76uoputgaoja" path="res://Actors/merchant/merchant.tscn" id="3_t7s6d"]
+[ext_resource type="Script" path="res://Utility/Inventory System/inventory_item.gd" id="4_ubbvp"]
+[ext_resource type="Resource" uid="uid://c4ptw8nr6mbk4" path="res://Objects/Weapons/shield/shield_inventory_item.tres" id="6_nfh6n"]
+
+[sub_resource type="GDScript" id="GDScript_jorsm"]
+script/source = "extends Node
+
+const PLAYER_SCENE = preload(\"res://resources/player/player.tscn\")
+@onready var player_spawn_point: Marker2D = $PlayerSpawnPoint
+
+
+func _ready() -> void:
+	TransitionChangeManager.transition_done.connect(on_transition_done)
+	var player = PLAYER_SCENE.instantiate()
+	self.add_child(player)
+	
+	if TransitionChangeManager.is_transitioning:
+		player.set_physics_process(false)
+		player.set_process_input(false)
+	player.position = player_spawn_point.position
+	player.setup_test_inventory()
+	#end
+
+
+func on_transition_done():
+	$Player.set_physics_process(true)
+	$Player.set_process_input(true)
+	#end
+
+
+func _on_exit_area_2d_body_entered(body: Node2D) -> void:
+	TransitionChangeManager.player_spawn_position = Vector2.ZERO
+	TransitionChangeManager.change_scene(\"res://scenes/main.tscn\")
+	#end
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1qrl2"]
 size = Vector2(20, 8)
 
 [node name="ShopScene" type="Node"]
-script = ExtResource("1_xx7lk")
+script = SubResource("GDScript_jorsm")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD9//7/BQALAAYAAAD9////BQALAAcAAAD9/wAABQALAAcAAAD9/wEABQALAAcAAAD9/wIABQALAAcAAAD9/wMABQALAAgAAAD+//7/BQAMAAYAAAD+////BQAMAAcAAAD+/wAABQAMAAcAAAD+/wEABQAMAAcAAAD+/wIABQAMAAcAAAD+/wMABQAMAAgAAAD///7/BQAMAAYAAAD/////BQAMAAcAAAD//wAABQAMAAcAAAD//wEABQAMAAcAAAD//wIABQAMAAcAAAD//wMABQAMAAgAAAAAAP7/BQAMAAYAAAAAAP//BQAMAAcAAAAAAAAABQAMAAcAAAAAAAEABQAMAAcAAAAAAAIABQAMAAcAAAAAAAMABQAMAAgAAAABAP7/BQAMAAYAAAABAP//BQAMAAcAAAABAAAABQAMAAcAAAABAAEABQAMAAcAAAABAAIABQAMAAcAAAABAAMABQAMAAgAAAACAP7/BQAMAAYAAAACAP//BQAMAAcAAAACAAAABQAMAAcAAAACAAEABQAMAAcAAAACAAIABQAMAAcAAAACAAMABQAMAAgAAAADAP7/BQANAAYAAAADAP//BQANAAcAAAADAAAABQANAAcAAAADAAEABQANAAcAAAADAAIABQANAAcAAAADAAMABQANAAgAAAD8//7/BgAAAAcAAAD8////BgAAAAcAAAD8/wAABgAAAAcAAAD8/wEABgAAAAcAAAD8/wIABgAAAAcAAAD8/wMABgAAAAcAAAAEAP7/BgAEAAcAAAAEAP//BgAEAAcAAAAEAAAABgAEAAcAAAAEAAEABgAEAAcAAAAEAAIABgAEAAcAAAAEAAMABgAEAAcAAAD9//3/BgADAAYAAAD+//3/BgADAAYAAAD///3/BgABAAYAAAAAAP3/BgABAAcAAAABAP3/BgACAAYAAAACAP3/BgADAAYAAAADAP3/BgADAAYAAAD8//3/BgAAAAYAAAAEAP3/BgAEAAYAAAAEAAQABgAEAAoAAAD8/wQABgAAAAoAAAABAAQABgABAAoAAAD9/wQABgADAAoAAAD+/wQABgADAAoAAAD//wQABgADAAoAAAAAAAQABgADAAoAAAADAAQABgACAAoAAAACAAQABQAMAAcAAAA=")

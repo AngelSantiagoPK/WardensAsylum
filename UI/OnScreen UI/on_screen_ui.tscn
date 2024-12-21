@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://mqcaccn11ief"]
+
+[ext_resource type="PackedScene" uid="uid://ivmhtvn15ll1" path="res://UI/OnScreen UI/on_screen_equipment_slot.tscn" id="1_8olpk"]
+[ext_resource type="Script" path="res://UI/OnScreen UI/on_screen_ui.gd" id="1_cqljj"]
+[ext_resource type="StyleBox" uid="uid://da27g4e1qgsos" path="res://UI/OnScreen UI/health_bar_background.tres" id="2_6q5tu"]
+[ext_resource type="StyleBox" uid="uid://23ibews3ucw1" path="res://UI/OnScreen UI/health_bar_fill.tres" id="3_ejgab"]
+[ext_resource type="StyleBox" uid="uid://c84uccdk6tkcd" path="res://UI/OnScreen UI/stamina_bar_background.tres" id="4_mf65l"]
+[ext_resource type="StyleBox" uid="uid://crv2mf100ljcl" path="res://UI/OnScreen UI/stamina_bar_fill.tres" id="5_sump8"]
+[ext_resource type="Script" path="res://UI/Game Over Screen/score.gd" id="6_pclld"]
+
+[node name="OnScreenUi" type="CanvasLayer"]
+script = ExtResource("1_cqljj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="PlayerHealthStaminaContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="MarginContainer/PlayerHealthStaminaContainer"]
+custom_minimum_size = Vector2(200, 12)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/background = ExtResource("2_6q5tu")
+theme_override_styles/fill = ExtResource("3_ejgab")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="PlayerStaminaBar" type="ProgressBar" parent="MarginContainer/PlayerHealthStaminaContainer"]
+custom_minimum_size = Vector2(200, 6)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/background = ExtResource("4_mf65l")
+theme_override_styles/fill = ExtResource("5_sump8")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/PlayerHealthStaminaContainer"]
+layout_mode = 2
+text = "SCORE: "
+script = ExtResource("6_pclld")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="LeftHandSlot" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_8olpk")]
+layout_mode = 2
+slot_name = "L HAND"
+
+[node name="RightHandSlot" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_8olpk")]
+layout_mode = 2
+slot_name = "R HAND"
+
+[node name="PotionSlot" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_8olpk")]
+visible = false
+layout_mode = 2
+slot_name = "POTION"
+
+[node name="JutsuSlot" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_8olpk")]
+visible = false
+layout_mode = 2
+slot_name = "JUTSU"

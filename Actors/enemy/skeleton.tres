@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="EnemyConfig" load_steps=5 format=3 uid="uid://ripny6pk23u7"]
+
+[ext_resource type="Script" path="res://Actors/enemy/enemy_config.gd" id="1_evxtx"]
+[ext_resource type="Shape2D" uid="uid://cl5iddlxr67qs" path="res://Actors/enemy/enemy_hurt_collision_shape.tres" id="1_r1cv0"]
+[ext_resource type="Resource" uid="uid://cubd48y3rjpmt" path="res://Objects/Weapons/stick/stick_inventory_item.tres" id="2_n5s73"]
+[ext_resource type="SpriteFrames" uid="uid://vyuywcejs7tq" path="res://Actors/enemy/skeleton_sprites.tres" id="2_n8c6s"]
+
+[resource]
+script = ExtResource("1_evxtx")
+npc_name = "Skeleton"
+spritesheet = ExtResource("2_n8c6s")
+collision_shape = ExtResource("1_r1cv0")
+health = 30
+physical_attack = 10
+physical_defense = 10
+magical_attack = 10
+magical_defense = 10
+speed = 30
+acceleration = 600
+friction = 400
+poise = 20
+item_to_drop = ExtResource("2_n5s73")
+loot_stacks = 1

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=5 format=3 uid="uid://c6fyubqr2neww"]
+
+[ext_resource type="Shape2D" uid="uid://dvme251xrtkk1" path="res://Objects/Weapons/knight_sword/knight_sword_weapon_collison.tres" id="1_xox6s"]
+[ext_resource type="Script" path="res://Utility/Inventory System/inventory_item.gd" id="2_d4lfb"]
+[ext_resource type="Texture2D" uid="uid://dh76kkt3j350m" path="res://assets/Items/Weapons/Lance2/Sprite.png" id="3_8jokj"]
+[ext_resource type="Resource" uid="uid://bmrsvr6e4gjwq" path="res://Objects/Weapons/knight_sword/knight_sword_weapon_item.tres" id="4_pn23t"]
+
+[resource]
+script = ExtResource("2_d4lfb")
+slot_type = "Right_Hand"
+ground_collision_shape = ExtResource("1_xox6s")
+name = "Knight Sword"
+texture = ExtResource("3_8jokj")
+max_stacks = 1
+price = 70
+weapon_item = ExtResource("4_pn23t")

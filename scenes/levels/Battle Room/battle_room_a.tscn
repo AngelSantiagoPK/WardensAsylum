@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbxijwt2mqe5b"]
+
+[ext_resource type="TileSet" uid="uid://ch8cmv46bdq6i" path="res://tiles/tileset.tres" id="1_iq2u3"]
+[ext_resource type="Script" path="res://scenes/levels/SpawnRoom/spawn_room.gd" id="1_q7lcl"]
+[ext_resource type="PackedScene" uid="uid://b4brbhkjsghmo" path="res://Objects/RoomExit/room_exit.tscn" id="2_v7vxt"]
+[ext_resource type="PackedScene" uid="uid://rw8y3keu1b2i" path="res://Actors/player/player.tscn" id="4_8gl3x"]
+
+[node name="BattleRoomA" type="Node2D" node_paths=PackedStringArray("player", "spawn_markers")]
+script = ExtResource("1_q7lcl")
+player = NodePath("Actors/Player")
+spawn_markers = NodePath("SpawnMarkers")
+
+[node name="Map" type="Node" parent="."]
+
+[node name="GroundLayer" type="TileMapLayer" parent="Map"]
+z_index = -1
+tile_set = ExtResource("1_iq2u3")
+
+[node name="WallLayer" type="TileMapLayer" parent="Map"]
+tile_set = ExtResource("1_iq2u3")
+
+[node name="DecorLayer" type="TileMapLayer" parent="Map"]
+tile_map_data = PackedByteArray(0, 0, 6, 0, 255, 255, 7, 0, 6, 0, 0, 0, 0, 0, 6, 0, 0, 0, 7, 0, 6, 0, 1, 0, 0, 0, 6, 0, 1, 0, 7, 0, 6, 0, 2, 0, 0, 0)
+tile_set = ExtResource("1_iq2u3")
+
+[node name="LevelCam" type="Camera2D" parent="."]
+position = Vector2(4, -12)
+scale = Vector2(-1.5, 9.26586)
+zoom = Vector2(2.7, 2.7)
+
+[node name="Objects" type="Node" parent="."]
+
+[node name="RoomExit" parent="Objects" node_paths=PackedStringArray("associated_marker") instance=ExtResource("2_v7vxt")]
+position = Vector2(100, 9)
+leads_to_scene_path = "res://scenes/levels/SpawnRoom/spawn_room.tscn"
+associated_marker = NodePath("../../DoorSpawnMarker")
+exit_label_text = "Spawnfire"
+
+[node name="SpawnMarkers" type="Node" parent="."]
+
+[node name="DoorSpawnMarker" type="Marker2D" parent="."]
+position = Vector2(75, 9)
+
+[node name="Actors" type="Node" parent="."]
+
+[node name="Player" parent="Actors" instance=ExtResource("4_8gl3x")]

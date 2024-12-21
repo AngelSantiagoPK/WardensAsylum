@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cch45fysgyj11"]
+
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_o8x81"]
+[ext_resource type="PackedScene" uid="uid://ivj50m2dh7lu" path="res://UI/Pause Screen/pause_menu.tscn" id="2_xys1x"]
+[ext_resource type="PackedScene" uid="uid://c41yovk5qykgs" path="res://scenes/levels/SpawnRoom/spawn_room.tscn" id="3_h4tfu"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("initial_spawn_location")]
+process_mode = 3
+script = ExtResource("1_o8x81")
+initial_spawn_location = NodePath("InitialSpawn")
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_xys1x")]
+visible = false
+
+[node name="SpawnRoom" parent="." instance=ExtResource("3_h4tfu")]
+
+[node name="InitialSpawn" type="Marker2D" parent="."]
+position = Vector2(8, -36)
