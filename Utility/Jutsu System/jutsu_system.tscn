@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://0gktw447h01a"]
+
+[ext_resource type="Script" path="res://Utility/Jutsu System/jutsu_system.gd" id="1_rgx3r"]
+
+[node name="JutsuSystem" type="Node"]
+script = ExtResource("1_rgx3r")

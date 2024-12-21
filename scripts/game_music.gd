@@ -1,6 +1,6 @@
 extends AudioStreamPlayer2D
 
-@onready var audio_stream_player_2d: AudioStreamPlayer2D = $"."
+@export var audio_stream_player_2d: AudioStreamPlayer2D
 
 # A list of all existing music tracks
 const MUSIC_TRACKS: Array[AudioStream] = [

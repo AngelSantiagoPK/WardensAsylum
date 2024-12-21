@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://chtlfu4c8ce55"]
+
+[ext_resource type="Script" path="res://Objects/Spawner/spawner.gd" id="1_4kxdi"]
+[ext_resource type="Texture2D" uid="uid://b0rut7hpfcl22" path="res://assets/FX/Magic/Spirit/SpriteSheetBlue.png" id="1_6xfau"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b234i"]
+atlas = ExtResource("1_6xfau")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klt1v"]
+atlas = ExtResource("1_6xfau")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1l7e"]
+atlas = ExtResource("1_6xfau")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udt5u"]
+atlas = ExtResource("1_6xfau")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxcio"]
+atlas = ExtResource("1_6xfau")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lu836"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b234i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klt1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1l7e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udt5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxcio")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[node name="Spawner" type="Marker2D"]
+script = ExtResource("1_4kxdi")
+
+[node name="SpawnerSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_lu836")
+animation = &"spawn"
+frame = 4
+frame_progress = 1.0
+
+[node name="SpawnerAudio" type="AudioStreamPlayer2D" parent="."]
+volume_db = -0.09
+bus = &"SFX"

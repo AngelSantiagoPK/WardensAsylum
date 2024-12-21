@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=5 format=3 uid="uid://bmrsvr6e4gjwq"]
+
+[ext_resource type="Shape2D" uid="uid://cam8pw27dlqh0" path="res://Objects/Weapons/knight_sword/knight_sword_collision_shape_2.tres" id="1_ldlg3"]
+[ext_resource type="Texture2D" uid="uid://cy0vvbsbu2648" path="res://assets/Items/Weapons/Lance2/SpriteInHand.png" id="2_j7gka"]
+[ext_resource type="AudioStream" uid="uid://cyquwwy8jnunq" path="res://assets/Sounds/Game/Hit7.wav" id="3_b0i55"]
+[ext_resource type="Script" path="res://Objects/Weapons/weapon_item.gd" id="4_und54"]
+
+[resource]
+script = ExtResource("4_und54")
+damage = 30
+stamina_cost = 30
+in_hand_texture = ExtResource("2_j7gka")
+collision_shape = ExtResource("1_ldlg3")
+attack_type = "Melee"
+prefered_weapon_sound = ExtResource("3_b0i55")
+left_attachment_position = Vector2(-7, -8)
+right_attachment_position = Vector2(7, -2)
+front_attachment_position = Vector2(-5, -1)
+back_attachment_position = Vector2(0, -15)
+left_rotation = 90
+right_rotation = -90
+front_rotation = 0
+back_rotation = 180
+left_z_index = 1
+right_z_index = 1
+front_z_index = 1
+back_z_index = 0
