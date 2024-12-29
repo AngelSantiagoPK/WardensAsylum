@@ -10,22 +10,26 @@ script = ExtResource("1_hw2ff")
 collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+scale = Vector2(3, 3)
 shape = ExtResource("2_lt42y")
 debug_color = Color(0, 0.6, 0.701961, 0.211765)
 
 [node name="Rays" type="Node2D" parent="."]
 
 [node name="VisionCast1" type="RayCast2D" parent="Rays"]
+scale = Vector2(3, 3)
 target_position = Vector2(147, -9)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="VisionCast2" type="RayCast2D" parent="Rays"]
+scale = Vector2(3, 3)
 target_position = Vector2(148, 0)
 collision_mask = 7
 collide_with_areas = true
 
 [node name="VisionCast3" type="RayCast2D" parent="Rays"]
+scale = Vector2(3, 3)
 target_position = Vector2(147, 9)
 collision_mask = 7
 collide_with_areas = true

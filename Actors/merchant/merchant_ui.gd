@@ -90,14 +90,12 @@ func _on_buy_button_pressed() -> void:
 		(player.find_child("Inventory") as Inventory).add_stackable_item_to_inventory(item_to_buy, item_to_buy.stacks) 
 		
 		selected_buy_item_indexes.erase(i)
-		items_to_buy.erase(item_to_buy)
+		#TODO: Remove from the merchant inventory
 		
 		var gold_to_add_to_merchant_purse = item_to_buy.price * item_to_buy.stacks
 		Global.subtract_currency(gold_to_add_to_merchant_purse)
 		Global.add_merchant_currency(gold_to_add_to_merchant_purse)
 	
-	items_to_buy.erase(items_to_buy[0])
-	Global.update_stock(items_to_buy)
 	setup_buying_grid()
 	setup_selling_grid()
 	buy_button.disabled = true

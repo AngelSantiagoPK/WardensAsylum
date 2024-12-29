@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="EnemyConfig" load_steps=4 format=3 uid="uid://dmbce2fgrae7w"]
+
+[ext_resource type="Script" path="res://Actors/enemy/enemy_config.gd" id="1_027xf"]
+[ext_resource type="Shape2D" uid="uid://cl5iddlxr67qs" path="res://Actors/enemy/enemy_hurt_collision_shape.tres" id="1_p3l83"]
+[ext_resource type="SpriteFrames" uid="uid://cbgu64mtu616f" path="res://Actors/small_slime/small_slime_sprites.tres" id="2_skerb"]
+
+[resource]
+script = ExtResource("1_027xf")
+npc_name = "Slime"
+spritesheet = ExtResource("2_skerb")
+collision_shape = ExtResource("1_p3l83")
+health = 10
+physical_attack = 5
+physical_defense = 0
+magical_attack = 0
+magical_defense = 0
+speed = 50
+acceleration = 600
+friction = 40
+poise = 5
+loot_stacks = 0

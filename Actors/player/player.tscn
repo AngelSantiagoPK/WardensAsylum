@@ -487,6 +487,7 @@ object = NodePath("..")
 animator = NodePath("../DashAnimator")
 stamina_system = NodePath("../StaminaSystem")
 dash_time = 0.3
+dash_top_speed_multiplier = 2.0
 
 [node name="JutsuSystem" parent="." node_paths=PackedStringArray("animated_sprite_2d", "inventory_toggler", "on_screen_ui", "combat_system") instance=ExtResource("10_7lkax")]
 animated_sprite_2d = NodePath("../AnimatedSprite2D")

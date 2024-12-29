@@ -5,7 +5,8 @@ class_name Spawner
 # Variables
 const ENEMY_SCENE = preload("res://Actors/enemy/enemy.tscn")
 @export var enemy_config: Resource = preload("res://Actors/enemy/skeleton.tres")
-var target: Player
+@export var target: Player
+@export var automatic_spawn_timer: float = 10.0
 
 #region SOUNDS
 const SHADE_1: AudioStream = preload("res://assets/Sounds/Enemy/shade/shade1.wav")
@@ -23,6 +24,7 @@ const SPAWN_SOUNDS: Array[AudioStream] = [SHADE_1, SHADE_2, SHADE_3, SHADE_4, SH
 # Components
 @onready var spawner_sprite: AnimatedSprite2D = $SpawnerSprite
 @onready var spawner_audio: AudioStreamPlayer2D = $SpawnerAudio
+@onready var spawn_timer: Timer = $SpawnTimer
 
 # Functions
 func init_spawner(player: Player):
@@ -41,6 +43,9 @@ func spawn_mob():
 	mob.config(enemy_config)
 	get_tree().root.add_child(mob)
 	mob.disable_collisions()
-	mob.global_position = self.global_position
+	mob.position = self.position
 	mob.enable_collisions()
 	spawner_sprite.hide()
+
+func _on_spawn_timer_timeout() -> void:
+	spawn_mob()

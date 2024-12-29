@@ -5,6 +5,15 @@ extends Node
 # resets the player stats and game if true
 var RESET: bool = true
 
+func reset_game():
+	RESET = true
+
+func get_game():
+	return RESET
+
+func set_game():
+	RESET = false
+
 #region FIRST SPAWN MARKER, change if initial spawn does
 const INITIAL_SPAWN: Vector2 = Vector2(51, -36)
 var current_spawn_point: Vector2

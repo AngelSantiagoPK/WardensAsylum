@@ -27,7 +27,7 @@ F to use Left Hand
 Tab or I to use the Inventory System"
 config/version="0.1"
 config/tags=PackedStringArray("game", "project", "tutorial")
-run/main_scene="res://UI/Main Menu/main_menu.tscn"
+run/main_scene="res://scenes/game/game.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=60
 boot_splash/show_image=false
@@ -44,7 +44,6 @@ WorldNavigationManager="*res://singletons/WorldNavigation.gd"
 
 [display]
 
-window/size/mode=2
 window/size/initial_position_type=2
 window/size/resizable=false
 window/size/always_on_top=true

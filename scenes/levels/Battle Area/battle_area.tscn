@@ -4,31 +4,32 @@
 [ext_resource type="PackedScene" uid="uid://chtlfu4c8ce55" path="res://Objects/Spawner/spawner.tscn" id="2_kn0ej"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7ctq"]
-size = Vector2(190, 158)
+size = Vector2(125, 108)
 
 [node name="BattleArea" type="Area2D"]
+position = Vector2(33, 25)
 collision_layer = 64
 script = ExtResource("1_8osvo")
 min_mobs = 2
 max_mobs = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 0)
+position = Vector2(-33, -25)
 shape = SubResource("RectangleShape2D_y7ctq")
 
 [node name="Spawners" type="Node2D" parent="."]
 
 [node name="Spawner1" parent="Spawners" instance=ExtResource("2_kn0ej")]
-position = Vector2(-47, -39)
+position = Vector2(-46, -39)
 
 [node name="Spawner2" parent="Spawners" instance=ExtResource("2_kn0ej")]
-position = Vector2(43, -40)
+position = Vector2(-15, -46)
 
 [node name="Spawner3" parent="Spawners" instance=ExtResource("2_kn0ej")]
-position = Vector2(-45, 35)
+position = Vector2(-45, -12)
 
 [node name="Spawner4" parent="Spawners" instance=ExtResource("2_kn0ej")]
-position = Vector2(41, 34)
+position = Vector2(-14, -11)
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 1.5

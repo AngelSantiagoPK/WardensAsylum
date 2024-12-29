@@ -8,9 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://dbi8c0mc4ixek" path="res://scenes/levels/Battle Area/battle_area.tscn" id="6_eh7vl"]
 [ext_resource type="PackedScene" uid="uid://d30u2fa80graw" path="res://Objects/Battle Gate/battle_gate.tscn" id="7_v1qm7"]
 
-[node name="SpawnRoom" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="SpawnRoom" type="Node2D" node_paths=PackedStringArray("player", "spawnfire")]
 script = ExtResource("1_aaree")
 player = NodePath("Actors/Player")
+spawnfire = NodePath("Objects/Spawnfire")
 
 [node name="Map" type="Node" parent="."]
 
@@ -30,22 +31,22 @@ tile_set = ExtResource("1_2ydch")
 [node name="Objects" type="Node" parent="."]
 
 [node name="Spawnfire" parent="Objects" instance=ExtResource("2_3od85")]
-position = Vector2(8, 12)
+position = Vector2(7, 8)
 
 [node name="Actors" type="Node" parent="."]
 
+[node name="Merchant" parent="Actors" instance=ExtResource("4_13ro5")]
+z_index = -1
+position = Vector2(8, -118)
+
 [node name="Player" parent="Actors" instance=ExtResource("3_0vn0a")]
-position = Vector2(-14, 11)
+position = Vector2(-38, 11)
 
 [node name="LevelCam" type="Camera2D" parent="Actors/Player"]
 position = Vector2(30, -51)
 rotation = 3.14159
 scale = Vector2(1.5, -9.26586)
 zoom = Vector2(2.7, 2.7)
-
-[node name="Merchant" parent="Actors" instance=ExtResource("4_13ro5")]
-z_index = -1
-position = Vector2(8, -118)
 
 [node name="BattleGates" type="Node" parent="."]
 
