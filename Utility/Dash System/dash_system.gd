@@ -37,6 +37,8 @@ func perform_dash():
 	else:
 		stamina_system.use_stamina(stamina_cost)
 	
+	object.player_audio.stream = preload("res://assets/Sounds/Game/Fireball.wav")
+	object.player_audio.play()
 	object.SPEED = object.SPEED * dash_top_speed_multiplier
 	object.acceleration = object.acceleration * dash_accel_multiplier
 	animator.play("dash")

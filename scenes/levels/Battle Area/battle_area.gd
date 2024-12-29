@@ -17,8 +17,6 @@ enum {
 }
 
 #region SOUNDS
-const DOOR_CLOSE: AudioStream = preload("res://assets/Sounds/Doors/qubodup-DoorClose10.ogg")
-const SUCCESS: AudioStream = preload("res://assets/Sounds/Game/Success1.wav")
 #endregion
 
 #Components
@@ -43,8 +41,6 @@ func _physics_process(_delta: float) -> void:
 		LOCKED:
 			if Global.get_enemies() <= 0:
 				unlock_room()
-				battle_audio.stream = SUCCESS
-				battle_audio.play()
 				current_state = CLEARED
 			else:
 				lock_room()
@@ -56,8 +52,6 @@ func _on_body_entered(body: Node2D) -> void:
 		if current_state != UNLOCKED:
 			return
 		current_state = LOCKED
-		battle_audio.stream = DOOR_CLOSE
-		battle_audio.play()
 		enemy_amount = randi_range(min_mobs, max_mobs)
 		enemies_alive = enemy_amount
 		Global.set_enemies(enemies_alive)

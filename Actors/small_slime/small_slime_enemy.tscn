@@ -1,21 +1,22 @@
-[gd_scene load_steps=26 format=3 uid="uid://blrenxiji7b71"]
+[gd_scene load_steps=27 format=3 uid="uid://xgihr0s0ql35"]
 
-[ext_resource type="Script" path="res://Actors/enemy/enemy.gd" id="1_pc6gt"]
-[ext_resource type="SpriteFrames" uid="uid://vyuywcejs7tq" path="res://Actors/enemy/skeleton_sprites.tres" id="2_mhj0o"]
-[ext_resource type="Script" path="res://scripts/animation_controller.gd" id="3_3blv2"]
-[ext_resource type="PackedScene" uid="uid://csitq07x285ie" path="res://Utility/Context Map/context_map.tscn" id="4_v24wf"]
-[ext_resource type="PackedScene" uid="uid://b5e3dgothl2hh" path="res://Utility/Health System/HealthSystem.tscn" id="5_nyctb"]
-[ext_resource type="PackedScene" uid="uid://djlr8l3go4n1t" path="res://Utility/NPC Healthbar/npc_healthbar.tscn" id="6_nrkpx"]
-[ext_resource type="Script" path="res://Utility/NPC Healthbar/npc_healthbar.gd" id="7_d2yav"]
-[ext_resource type="Script" path="res://scripts/states/ai_state_machine.gd" id="8_bvnrm"]
-[ext_resource type="Script" path="res://scripts/states/goals/GOAL_genius_wait.gd" id="9_ahttn"]
-[ext_resource type="Script" path="res://scripts/states/goals/GOAL_genius_pursue.gd" id="10_mv2uu"]
-[ext_resource type="Script" path="res://scripts/states/goals/GOAL_genius_attack.gd" id="11_kw8ol"]
-[ext_resource type="Script" path="res://scripts/states/goals/GOAL_genius_stagger.gd" id="12_gk80f"]
-[ext_resource type="Script" path="res://scripts/states/goals/GOAL_genius_dead.gd" id="13_joycp"]
-[ext_resource type="PackedScene" uid="uid://c5f30b5pyem5p" path="res://Utility/DetectionSystem/detection_system.tscn" id="14_elmg5"]
-[ext_resource type="Shape2D" uid="uid://cl5iddlxr67qs" path="res://Actors/enemy/enemy_hurt_collision_shape.tres" id="15_vg6qp"]
-[ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="16_so2pb"]
+[ext_resource type="Script" path="res://Actors/small_slime/small_slime_enemy.gd" id="1_xtw3v"]
+[ext_resource type="Resource" uid="uid://dmbce2fgrae7w" path="res://Actors/small_slime/small_slime.tres" id="2_mauyd"]
+[ext_resource type="SpriteFrames" uid="uid://cbgu64mtu616f" path="res://Actors/small_slime/small_slime_sprites.tres" id="2_qwhel"]
+[ext_resource type="Script" path="res://scripts/animation_controller.gd" id="3_pgenu"]
+[ext_resource type="PackedScene" uid="uid://csitq07x285ie" path="res://Utility/Context Map/context_map.tscn" id="4_3wmaq"]
+[ext_resource type="PackedScene" uid="uid://b5e3dgothl2hh" path="res://Utility/Health System/HealthSystem.tscn" id="5_07p87"]
+[ext_resource type="PackedScene" uid="uid://djlr8l3go4n1t" path="res://Utility/NPC Healthbar/npc_healthbar.tscn" id="6_0yi1w"]
+[ext_resource type="Script" path="res://Utility/NPC Healthbar/npc_healthbar.gd" id="7_io12b"]
+[ext_resource type="Script" path="res://scripts/states/ai_state_machine.gd" id="8_yrt60"]
+[ext_resource type="Script" path="res://scripts/states/goals/GOAL_genius_wait.gd" id="9_qvlqb"]
+[ext_resource type="Script" path="res://scripts/states/goals/GOAL_small_slime_pursue.gd" id="10_ck1dg"]
+[ext_resource type="Script" path="res://scripts/states/goals/GOAL_genius_attack.gd" id="11_w4q07"]
+[ext_resource type="Script" path="res://scripts/states/goals/GOAL_genius_stagger.gd" id="12_nryt7"]
+[ext_resource type="Script" path="res://scripts/states/goals/GOAL_genius_dead.gd" id="13_5d5nm"]
+[ext_resource type="PackedScene" uid="uid://c5f30b5pyem5p" path="res://Utility/DetectionSystem/detection_system.tscn" id="14_3a2w8"]
+[ext_resource type="Shape2D" uid="uid://cl5iddlxr67qs" path="res://Actors/enemy/enemy_hurt_collision_shape.tres" id="15_6ftoo"]
+[ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="16_2fnfy"]
 
 [sub_resource type="Animation" id="Animation_22vld"]
 length = 0.001
@@ -198,24 +199,25 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_nexrx"]
 radius = 5.0
 
-[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+[node name="SmallSlime" type="CharacterBody2D" groups=["Enemy"]]
 y_sort_enabled = true
 position = Vector2(0, -6)
 collision_layer = 103
 collision_mask = 103
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
-script = ExtResource("1_pc6gt")
+script = ExtResource("1_xtw3v")
+enemy_config = ExtResource("2_mauyd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, 7)
-sprite_frames = ExtResource("2_mhj0o")
+sprite_frames = ExtResource("2_qwhel")
 animation = &"back_attack"
 offset = Vector2(0, -7)
-script = ExtResource("3_3blv2")
+script = ExtResource("3_pgenu")
 
-[node name="ContextMap" parent="." instance=ExtResource("4_v24wf")]
+[node name="ContextMap" parent="." instance=ExtResource("4_3wmaq")]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 125.99
@@ -227,10 +229,10 @@ navigation_layers = 70
 wait_time = 0.5
 autostart = true
 
-[node name="HealthSystem" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("5_nyctb")]
+[node name="HealthSystem" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("5_07p87")]
 actor = NodePath("..")
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio") instance=ExtResource("6_nrkpx")]
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_system", "enemy_audio") instance=ExtResource("6_0yi1w")]
 offset_left = -6.0
 offset_top = -9.0
 offset_right = -3.0
@@ -241,7 +243,7 @@ size_flags_vertical = 2
 value = 100.0
 rounded = false
 fill_mode = 0
-script = ExtResource("7_d2yav")
+script = ExtResource("7_io12b")
 health_system = NodePath("../HealthSystem")
 enemy_audio = NodePath("../AI_Audio")
 
@@ -249,31 +251,30 @@ enemy_audio = NodePath("../AI_Audio")
 bus = &"SFX"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
-script = ExtResource("8_bvnrm")
+script = ExtResource("8_yrt60")
 state = NodePath("wait")
 
 [node name="wait" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("9_ahttn")
+script = ExtResource("9_qvlqb")
 object = NodePath("../..")
 
 [node name="pursue" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("10_mv2uu")
+script = ExtResource("10_ck1dg")
 object = NodePath("../..")
-steering_force = 1.0
 
 [node name="attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("11_kw8ol")
+script = ExtResource("11_w4q07")
 object = NodePath("../..")
 
 [node name="stagger" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("12_gk80f")
+script = ExtResource("12_nryt7")
 object = NodePath("../..")
 
 [node name="dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("13_joycp")
+script = ExtResource("13_5d5nm")
 object = NodePath("../..")
 
-[node name="DetectionSystem" parent="." node_paths=PackedStringArray("object") instance=ExtResource("14_elmg5")]
+[node name="DetectionSystem" parent="." node_paths=PackedStringArray("object") instance=ExtResource("14_3a2w8")]
 visible = false
 object = NodePath("..")
 
@@ -282,14 +283,14 @@ collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" groups=["Enemy"]]
 position = Vector2(0, 1)
-shape = ExtResource("15_vg6qp")
+shape = ExtResource("15_6ftoo")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.439216)
 show_behind_parent = true
 z_index = -1
 position = Vector2(1, 8)
-texture = ExtResource("16_so2pb")
+texture = ExtResource("16_2fnfy")
 
 [node name="WalkAnimator" type="AnimationPlayer" parent="."]
 root_node = NodePath("../HitAnimator")

@@ -59,3 +59,8 @@ frame_progress = 1.0
 [node name="SpawnerAudio" type="AudioStreamPlayer2D" parent="."]
 volume_db = -0.09
 bus = &"SFX"
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

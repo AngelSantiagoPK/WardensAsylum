@@ -73,6 +73,7 @@ func on_item_equipped(index: int, slot_to_equip):
 	var item_to_equip = items[index]
 	on_screen_ui.equip_item(item_to_equip, slot_to_equip)
 	combat_system.set_active_weapon(item_to_equip.weapon_item, slot_to_equip)
+	InventoryStateManager.update_active_weapon(index, slot_to_equip)
 	check_jutsu_ui_visibility()
 
 

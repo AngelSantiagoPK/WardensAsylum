@@ -46,7 +46,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func interact():
 	if !active:
 		active = true
-		label.text = "rest"
+		label.text = "RESET"
 		animator.visible = true
 		animator.play("spark_up")
 		await animator.animation_finished

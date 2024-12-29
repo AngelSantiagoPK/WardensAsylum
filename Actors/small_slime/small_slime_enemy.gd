@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-class_name Enemy
+class_name SmallSlimeEnemy
 
 #region ATTRIBUTE VARIABLES
 @export var enemy_config: EnemyConfig
