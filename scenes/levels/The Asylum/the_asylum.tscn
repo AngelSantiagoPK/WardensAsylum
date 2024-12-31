@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bqicjw0nsbqnr"]
+[gd_scene load_steps=14 format=4 uid="uid://bqicjw0nsbqnr"]
 
 [ext_resource type="Script" path="res://scenes/levels/The Asylum/the_asylum_scene.gd" id="1_6it6w"]
 [ext_resource type="TileSet" uid="uid://ch8cmv46bdq6i" path="res://tiles/tileset.tres" id="2_k8qd1"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://vq7puxist6n5" path="res://Objects/LevelSwitch/level_switch.tscn" id="7_sn2v6"]
 [ext_resource type="PackedScene" uid="uid://xgihr0s0ql35" path="res://Actors/small_slime/small_slime_enemy.tscn" id="9_dgjfp"]
 [ext_resource type="PackedScene" uid="uid://x2gm3mi7q80i" path="res://Actors/boss_slime/boss_slime.tscn" id="12_6sms1"]
+[ext_resource type="PackedScene" uid="uid://djxibxyfqoqkg" path="res://Objects/Level Portal/level_portal.tscn" id="13_wx84i"]
 
 [node name="TheAsylum" type="Node2D" node_paths=PackedStringArray("player", "switches", "boss")]
 script = ExtResource("1_6it6w")
@@ -63,6 +64,9 @@ inventory_item = ExtResource("5_aixsr")
 [node name="Scroll" parent="Objects" instance=ExtResource("4_bkio8")]
 position = Vector2(1293, -462)
 inventory_item = ExtResource("5_tllmb")
+
+[node name="LevelPortal" parent="Objects" instance=ExtResource("13_wx84i")]
+position = Vector2(1, -145)
 
 [node name="Player" parent="." instance=ExtResource("3_p7pcu")]
 z_index = 1

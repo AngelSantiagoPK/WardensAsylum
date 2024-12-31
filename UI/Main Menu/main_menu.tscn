@@ -14,7 +14,7 @@ func _on_start_button_pressed() -> void:
 	button_audio.stream = preload(\"res://assets/Sounds/Game/Jump.wav\")
 	button_audio.play()
 	await button_audio.finished
-	TransitionChangeManager.change_scene(\"res://scenes/levels/Asylum Royale/asylum_royale.tscn\")
+	TransitionChangeManager.change_scene(\"res://scenes/game/game.tscn\")
 
 
 func _on_exit_button_pressed() -> void:
@@ -22,6 +22,13 @@ func _on_exit_button_pressed() -> void:
 	button_audio.play()
 	await button_audio.finished
 	get_tree().quit()
+
+
+func _on_tutorial_button_pressed() -> void:
+	button_audio.stream = preload(\"res://assets/Sounds/Game/Jump.wav\")
+	button_audio.play()
+	await button_audio.finished
+	TransitionChangeManager.change_scene(\"res://UI/Tutorial Screen/tutorial_screen.tscn\")
 "
 
 [node name="Main" type="Node2D"]
@@ -92,6 +99,16 @@ text = "start"
 flat = true
 script = ExtResource("2_ne653")
 
+[node name="TutorialButton" type="Button" parent="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "learn to play
+"
+flat = true
+
 [node name="ExitButton" type="Button" parent="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -110,4 +127,5 @@ scale = Vector2(4, 4)
 bus = &"SFX"
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/NinePatchRect/TitleContainer/ExitButton" to="." method="_on_exit_button_pressed"]

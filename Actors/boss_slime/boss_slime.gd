@@ -35,6 +35,8 @@ const PICKUP_ITEM_SCENE = preload("res://Objects/Pickup/pickup_item.tscn")
 @onready var health_system: HealthSystem = $HealthSystem
 @onready var hurt_box: Area2D = $HurtBox
 
+signal boss_died
+
 func _ready():
 	#init health systems
 	health_system.init(health)
@@ -68,6 +70,7 @@ func apply_knockback(_body_position: Vector2):
 func on_dead():
 	var drop = PICKUP_ITEM_SCENE.instantiate()
 	drop.position = position
+	boss_died.emit()
 	queue_free()
 
 func disable():

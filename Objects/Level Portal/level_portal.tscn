@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://djxibxyfqoqkg"]
+
+[ext_resource type="Texture2D" uid="uid://44stjjd6yjnv" path="res://assets/Backgrounds/Tilesets/TilesetHouse.png" id="1_pbrv0"]
+[ext_resource type="Script" path="res://Objects/Level Portal/level_portal.gd" id="1_rq6mp"]
+[ext_resource type="Texture2D" uid="uid://kr1gpjcu7ofy" path="res://assets/Actor/Characters/Shadow.png" id="2_nge3j"]
+[ext_resource type="Texture2D" uid="uid://bog0y8jqeem11" path="res://assets/FX/Magic/Spirit/SpriteSheetDouble.png" id="3_3byv1"]
+[ext_resource type="Shape2D" uid="uid://eerwx2j15s2l" path="res://Objects/Level Portal/level_portal__inner_collision_shape.tres" id="5_ebmow"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6jvq"]
+atlas = ExtResource("3_3byv1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r80o6"]
+atlas = ExtResource("3_3byv1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0lok"]
+atlas = ExtResource("3_3byv1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tld8k"]
+atlas = ExtResource("3_3byv1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sikn"]
+atlas = ExtResource("3_3byv1")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v6t5m"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6jvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r80o6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0lok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tld8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sikn")
+}],
+"loop": true,
+"name": &"portal_open",
+"speed": 5.0
+}]
+
+[node name="LevelPortal" type="Area2D"]
+visible = false
+collision_layer = 7
+script = ExtResource("1_rq6mp")
+
+[node name="PortalFrame" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("1_pbrv0")
+region_enabled = true
+region_rect = Rect2(464, 322, 48, 42)
+
+[node name="PortalShadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.411765)
+position = Vector2(0, 22)
+scale = Vector2(3.66667, 1)
+texture = ExtResource("2_nge3j")
+
+[node name="PortalInner" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-1, 8)
+sprite_frames = SubResource("SpriteFrames_v6t5m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = ExtResource("5_ebmow")
