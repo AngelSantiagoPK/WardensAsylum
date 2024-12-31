@@ -30,15 +30,15 @@ var friction: int
 var player_in_range: bool = false
 var player_in_sight: bool = false
 
-const MNSTR_1: AudioStream  = preload("res://assets/Sounds/Enemy/gutteral beast/mnstr1.wav")
-const MNSTR_2: AudioStream  = preload("res://assets/Sounds/Enemy/gutteral beast/mnstr2.wav")
-const MNSTR_3: AudioStream  = preload("res://assets/Sounds/Enemy/gutteral beast/mnstr3.wav")
-const MNSTR_4 = preload("res://assets/Sounds/Enemy/gutteral beast/mnstr4.wav")
-const MNSTR_5 = preload("res://assets/Sounds/Enemy/gutteral beast/mnstr5.wav")
-const MNSTR_6 = preload("res://assets/Sounds/Enemy/gutteral beast/mnstr6.wav")
-const MNSTR_7 = preload("res://assets/Sounds/Enemy/gutteral beast/mnstr7.wav")
-const MNSTR_8 = preload("res://assets/Sounds/Enemy/gutteral beast/mnstr8.wav")
-const MONSTER_GURGLES: Array[AudioStream] = [MNSTR_1, MNSTR_2, MNSTR_3, MNSTR_4, MNSTR_5, MNSTR_6, MNSTR_7, MNSTR_8]
+const SLIME_1 = preload("res://assets/Sounds/Enemy/slime/slime1.wav")
+const SLIME_2 = preload("res://assets/Sounds/Enemy/slime/slime2.wav")
+const SLIME_3 = preload("res://assets/Sounds/Enemy/slime/slime3.wav")
+const SLIME_4 = preload("res://assets/Sounds/Enemy/slime/slime4.wav")
+const SLIME_5 = preload("res://assets/Sounds/Enemy/slime/slime5.wav")
+const SLIME_6 = preload("res://assets/Sounds/Enemy/slime/slime6.wav")
+const SLIME_7 = preload("res://assets/Sounds/Enemy/slime/slime7.wav")
+const SLIME_8 = preload("res://assets/Sounds/Enemy/slime/slime8.wav")
+const MONSTER_GURGLES: Array[AudioStream] = [SLIME_1, SLIME_2, SLIME_3, SLIME_4, SLIME_5, SLIME_6, SLIME_7, SLIME_8]
 #endregion
 
 #region REFERENCES
@@ -59,7 +59,6 @@ const MONSTER_GURGLES: Array[AudioStream] = [MNSTR_1, MNSTR_2, MNSTR_3, MNSTR_4,
 
 @onready var timer: Timer = $Timer
 @onready var knockback_timer: Timer = $KnockbackTimer
-
 #endregion
 
 
@@ -71,6 +70,7 @@ signal damaged
 
 func init(_target: Player) -> void:
 	self.target = _target
+
 
 func config(config: EnemyConfig):
 	self.spritesheet = config.spritesheet

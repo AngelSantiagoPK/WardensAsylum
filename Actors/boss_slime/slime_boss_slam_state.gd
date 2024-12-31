@@ -27,7 +27,7 @@ func exit():
 	set_physics_process(false)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	await animator.animation_finished
 	audio.stream = preload("res://assets/Sounds/Game/Explosion.wav")
 	audio.play()

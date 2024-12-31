@@ -25,7 +25,7 @@ func exit():
 	set_physics_process(false)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	await animator.animation_finished
 	death_finished.emit()
 	pass

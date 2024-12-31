@@ -563,6 +563,12 @@ y_sort_enabled = true
 collision_layer = 32
 collision_mask = 7
 script = ExtResource("1_6ef3h")
+health = 150
+physical_attack = 15
+physical_defense = 5
+magical_attack = 5
+magical_defense = 10
+poise = 10
 damage_to_player = 20
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -577,6 +583,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_ja8ey")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
+unique_name_in_owner = true
 position = Vector2(0, -6)
 rotation = -1.5708
 shape = ExtResource("7_hdl1p")
@@ -646,6 +653,7 @@ health_system = NodePath("../HealthSystem")
 enemy_audio = NodePath("../NPCAudioStream")
 
 [node name="HurtBox" type="Area2D" parent="." groups=["Enemy"]]
+unique_name_in_owner = true
 collision_layer = 32
 
 [node name="IdleCollisionBox" type="CollisionShape2D" parent="HurtBox"]
@@ -654,6 +662,7 @@ rotation = -1.5708
 shape = ExtResource("12_vpg88")
 
 [node name="DetectionArea" type="Area2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]

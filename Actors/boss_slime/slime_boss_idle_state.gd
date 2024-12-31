@@ -22,7 +22,7 @@ func exit():
 	set_physics_process(false)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	await get_tree().create_timer(1.0).timeout
 	idle_timeout.emit()
 	pass
